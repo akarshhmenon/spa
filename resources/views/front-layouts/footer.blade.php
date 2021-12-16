@@ -41,17 +41,6 @@
                                 <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Nail Care</a>
                             </div>
                         </div>
-                        <div class="col-sm-12 mb-5">
-                            <h5 class="text-white text-uppercase mb-4">Newsletter</h5>
-                            <div class="w-100">
-                                <div class="input-group">
-                                    <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary px-4">Sign Up</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -61,7 +50,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
-                    <p class="m-0 text-white">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.</p>
+                    <p class="m-0 text-white">&copy; <a href="#">TEAM-19</a>. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-right">
                     <p class="m-0 text-white">Designed by <a href="#"> Team-19</a></p>
@@ -77,15 +66,15 @@
 
 
     <!-- JavaScript Libraries -->
-    {{--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    { <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>  --}}
+    <script src="{{ asset ('frontassets/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset ('frontassets/lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{ asset ('frontassets/lib/counterup/counterup.min.js')}}"></script> 
+    <script src="{{ asset ('frontassets/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset ('frontassets/lib/tempusdominus/js/moment.min.js')}}"></script>
+    <script src="{{ asset ('frontassets/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+    <script src="{{ asset ('frontassets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"><script>  
 
     <!-- Contact Javascript File -->
     {{--  <script src="mail/jqBootstrapValidation.min.js"></script>
