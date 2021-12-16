@@ -5,7 +5,7 @@
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>copyright &copy; {{ now()->year }} - developed by
-                <b><a href="#" target="_blank">Team Spark</a></b>
+                <b><a href="#" target="_blank">Team-19</a></b>
             </span>
         </div>
     </div>

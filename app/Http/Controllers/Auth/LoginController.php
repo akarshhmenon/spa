@@ -32,7 +32,7 @@ class LoginController extends Controller
 
     protected function redirectTo(){
             if(Auth()->user()->role == 1){
-                return route('superadmin.dashboard');
+                return route('admin.dashboard');
             }elseif(Auth()->user()->role == 2){
                 return route('admin.dashboard');
             }
@@ -62,7 +62,7 @@ class LoginController extends Controller
         if(Auth::attempt(['username' => $input['username'], 'password' => $input['password']], $remember_me )){
 
             if(auth()->user()->role==1){
-                return redirect()->route('superadmin.dashboard');
+                return redirect()->route('admin.dashboard');
 
             }
 
