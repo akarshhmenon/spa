@@ -1,5 +1,5 @@
-(function ($) {
-    "use strict";
+function myfunction ($){
+    'use strict';
     
     // Dropdown on mouse hover
     $(document).ready(function () {
@@ -108,5 +108,6 @@
         items: 1
     });
     
-})(jQuery);
+}
+(jQuery);
 
