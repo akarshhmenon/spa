@@ -10,7 +10,7 @@
     <!-- Favicon -->
     <link href=  {{asset('frontassets/favicon.ico')}} rel="icon">
 
-    <!-- Google Web Fonts -->
+    {{--  <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -20,7 +20,7 @@
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />  --}}
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href={{ asset('frontassets/css/style.css') }} rel="stylesheet">

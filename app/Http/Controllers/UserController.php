@@ -15,18 +15,8 @@ class userController extends Controller
     {
         return view('users.userhome');
     }
-    public function about()
-    {
-        return view('users.about');
-    }
-    public function services()
-    {
-        return view('users.services');
-    }
-    public function contact()
-    {
-        return view('users.contact');
-    }
+    
+    
 
     /**
      * Show the form for creating a new resource.

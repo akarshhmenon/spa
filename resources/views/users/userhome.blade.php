@@ -48,8 +48,79 @@
     </div>
 </div>
 <!-- Carousel End -->
-
-
+ <!-- Service Start -->
+ <div class="container-fluid px-0 py-5 my-5">
+    <div class="row mx-0 justify-content-center text-center">
+        <div class="col-lg-6">
+            <h6 class="d-inline-block bg-light text-primary text-uppercase py-1 px-2">Our Service</h6>
+            <h1>Spa & Beauty Services</h1>
+        </div>
+    </div>
+    <div class="owl-carousel service-carousel">
+        <div class="service-item position-relative">
+            <img class="img-fluid" img src="{{URL::asset('frontassets/img/service-1.jpg')}}" alt="">
+            <div class="service-text text-center">
+                <h4 class="text-white font-weight-medium px-3">Body Massage</h4>
+                <p class="text-white px-3 mb-3">Elitr labore sit dolor erat est lorem diam sea ipsum diam dolor duo sit ipsum</p>
+                <div class="w-100 bg-white text-center p-4" >
+                    <a class="btn btn-primary" href="">Make Order</a>
+                </div>
+            </div>
+        </div>
+        <div class="service-item position-relative">
+            <img class="img-fluid" img src="{{URL::asset('frontassets/img/service-2.jpg')}}"  alt=">
+            <div class="service-text text-center">
+                <h4 class="text-white font-weight-medium px-3">Stone Therapy</h4>
+                <p class="text-white px-3 mb-3">Elitr labore sit dolor erat est lorem diam sea ipsum diam dolor duo sit ipsum</p>
+                <div class="w-100 bg-white text-center p-4" >
+                    <a class="btn btn-primary" href="">Make Order</a>
+                </div>
+            </div>
+        </div>
+        <div class="service-item position-relative">
+            <img class="img-fluid" img src="{{URL::asset('frontassets/img/service-3.jpg')}}" alt="">
+            <div class="service-text text-center">
+                <h4 class="text-white font-weight-medium px-3">Facial Therapy</h4>
+                <p class="text-white px-3 mb-3">Elitr labore sit dolor erat est lorem diam sea ipsum diam dolor duo sit ipsum</p>
+                <div class="w-100 bg-white text-center p-4" >
+                    <a class="btn btn-primary" href="">Make Order</a>
+                </div>
+            </div>
+        </div>
+        <div class="service-item position-relative">
+            <img class="img-fluid" img src="{{URL::asset('frontassets/img/service-4.jpg')}}" alt="">
+            <div class="service-text text-center">
+                <h4 class="text-white font-weight-medium px-3">Skin Care</h4>
+                <p class="text-white px-3 mb-3">Elitr labore sit dolor erat est lorem diam sea ipsum diam dolor duo sit ipsum</p>
+                <div class="w-100 bg-white text-center p-4" >
+                    <a class="btn btn-primary" href="">Make Order</a>
+                </div>
+            </div>
+        </div>
+        <div class="service-item position-relative">
+            <img class="img-fluid" img src="{{URL::asset('frontassets/img/service-5.jpg')}}" alt="">
+            <div class="service-text text-center">
+                <h4 class="text-white font-weight-medium px-3">Stream Bath</h4>
+                <p class="text-white px-3 mb-3">Elitr labore sit dolor erat est lorem diam sea ipsum diam dolor duo sit ipsum</p>
+                <div class="w-100 bg-white text-center p-4" >
+                    <a class="btn btn-primary" href="">Make Order</a>
+                </div>
+            </div>
+        </div>
+        <div class="service-item position-relative">
+            <img class="img-fluid" img src="{{URL::asset('frontassets/img/service-6.jpg')}}" alt="">
+            <div class="service-text text-center">
+                <h4 class="text-white font-weight-medium px-3">Face Masking</h4>
+                <p class="text-white px-3 mb-3">Elitr labore sit dolor erat est lorem diam sea ipsum diam dolor duo sit ipsum</p>
+                <div class="w-100 bg-white text-center p-4" >
+                    <a class="btn btn-primary" href="">Make Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- Service End -->
 
     
 @endsection

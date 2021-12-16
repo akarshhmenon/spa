@@ -89,100 +89,100 @@ const Toast = Swal.mixin({
 window.Toast = Toast;
 
 const routes = [
-    { path: "/", component: require("./components/dashboard.vue").default },
+    // { path: "/", component: require("./components/dashboard.vue").default },
 
-    {
-        path: "/products",
-        component: require("./components/productsTable.vue").default,
-    },
-    {
-        path: "/customers",
-        component: require("./components/customersTable.vue").default,
+    // {
+    //     path: "/products",
+    //     component: require("./components/productsTable.vue").default,
+    // },
+    // {
+    //     path: "/customers",
+    //     component: require("./components/customersTable.vue").default,
 
-    },
-    {
-        path: "/sales",
-        component: require("./components/salesTable.vue").default,
-    },
-    {
-        path: "/purchase",
-        component: require("./components/purchaseTable.vue").default,
-    },
-    {
-        path: "/expense-categories",
-        component: require("./components/expenseCategoriesTable.vue").default,
+    // },
+    // {
+    //     path: "/sales",
+    //     component: require("./components/salesTable.vue").default,
+    // },
+    // {
+    //     path: "/purchase",
+    //     component: require("./components/purchaseTable.vue").default,
+    // },
+    // {
+    //     path: "/expense-categories",
+    //     component: require("./components/expenseCategoriesTable.vue").default,
 
-    },
-    {
-        path: "/income-categories",
-        component: require("./components/incomeCategoriesTable.vue").default,
+    // },
+    // {
+    //     path: "/income-categories",
+    //     component: require("./components/incomeCategoriesTable.vue").default,
 
-    },
+    // },
 
-    {
-        path: "/expenses",
-        component: require("./components/expenses.vue").default,
+    // {
+    //     path: "/expenses",
+    //     component: require("./components/expenses.vue").default,
 
-    },
+    // },
 
-    {
-        path: "/incomes",
-        component: require("./components/incomes.vue").default,
+    // {
+    //     path: "/incomes",
+    //     component: require("./components/incomes.vue").default,
 
-    },
+    // },
 
-    {
-        path: "/sales-report",
-        component: require("./components/salesReport.vue").default,
-    },
+    // {
+    //     path: "/sales-report",
+    //     component: require("./components/salesReport.vue").default,
+    // },
 
-    {
-        path: "/purchase-report",
-        component: require("./components/purchaseReport.vue").default,
-    },
-    {
-        path: "/credit-report",
-        component: require("./components/creditReport.vue").default,
-    },
-    {
-        path: "/stock-report",
-        component: require("./components/stockReport.vue").default,
-    },
-    {
-        path: "/payment-report",
-        component: require("./components/paymentReport.vue").default,
-    },
-    {
-        path: "/expense-report",
-        component: require("./components/expenseReport.vue").default,
-    },
-    {
-        path: "/income-report",
-        component: require("./components/incomeReport.vue").default,
-    },
-    {
-        path: "/item-report",
-        component: require("./components/itemReport.vue").default,
-    },
-    {
-        path: "/stock-adjustments",
-        component: require("./components/stockAdjustmentsTable.vue").default,
-    },
-    {
-        path: "/reward-sale",
-        component: require("./components/rewardSaleTable.vue").default,
-    },
+    // {
+    //     path: "/purchase-report",
+    //     component: require("./components/purchaseReport.vue").default,
+    // },
+    // {
+    //     path: "/credit-report",
+    //     component: require("./components/creditReport.vue").default,
+    // },
+    // {
+    //     path: "/stock-report",
+    //     component: require("./components/stockReport.vue").default,
+    // },
+    // {
+    //     path: "/payment-report",
+    //     component: require("./components/paymentReport.vue").default,
+    // },
+    // {
+    //     path: "/expense-report",
+    //     component: require("./components/expenseReport.vue").default,
+    // },
+    // {
+    //     path: "/income-report",
+    //     component: require("./components/incomeReport.vue").default,
+    // },
+    // {
+    //     path: "/item-report",
+    //     component: require("./components/itemReport.vue").default,
+    // },
+    // {
+    //     path: "/stock-adjustments",
+    //     component: require("./components/stockAdjustmentsTable.vue").default,
+    // },
+    // {
+    //     path: "/reward-sale",
+    //     component: require("./components/rewardSaleTable.vue").default,
+    // },
 
-    {
-        path: "/employees",
-        component: require("./components/employeeTable.vue").default,
-    },
+    // {
+    //     path: "/employees",
+    //     component: require("./components/employeeTable.vue").default,
+    // },
 
 
-    {
-        path: "/jobcard",
-        component: require("./components/jobcardTable.vue").default,
-    },
+    // {
+    //     path: "/jobcard",
+    //     component: require("./components/jobcardTable.vue").default,
+    // },
 ];
 
 const router = new VueRouter({
@@ -201,28 +201,28 @@ const router = new VueRouter({
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component("add-product", require("./components/addProduct.vue").default);
-Vue.component("add-customer", require("./components/addCustomer.vue").default);
-Vue.component("add-purchase", require("./components/addPurchase.vue").default);
-Vue.component("add-sale", require("./components/addSale.vue").default);
-Vue.component("add-adjustment", require("./components/addAdjustment.vue").default);
+// Vue.component("add-product", require("./components/addProduct.vue").default);
+// Vue.component("add-customer", require("./components/addCustomer.vue").default);
+// Vue.component("add-purchase", require("./components/addPurchase.vue").default);
+// Vue.component("add-sale", require("./components/addSale.vue").default);
+// Vue.component("add-adjustment", require("./components/addAdjustment.vue").default);
 
-Vue.component("add-expense-category", require("./components/addExpenseCategory.vue").default);
-Vue.component("add-income-category", require("./components/addIncomeCategory.vue").default);
-Vue.component("add-expense", require("./components/addExpense.vue").default);
-Vue.component("add-income", require("./components/addIncome.vue").default);
+// Vue.component("add-expense-category", require("./components/addExpenseCategory.vue").default);
+// Vue.component("add-income-category", require("./components/addIncomeCategory.vue").default);
+// Vue.component("add-expense", require("./components/addExpense.vue").default);
+// Vue.component("add-income", require("./components/addIncome.vue").default);
 
-Vue.component("view-transactions", require("./components/viewTransactionsTable.vue").default);
-Vue.component("add-payment", require("./components/addPayment.vue").default);
-Vue.component("add-reward-sale", require("./components/addRewardSale.vue").default);
+// Vue.component("view-transactions", require("./components/viewTransactionsTable.vue").default);
+// Vue.component("add-payment", require("./components/addPayment.vue").default);
+// Vue.component("add-reward-sale", require("./components/addRewardSale.vue").default);
 
-Vue.component("sales-invoice", require("./components/salesInvoice.vue").default);
-Vue.component("payment-receipt", require("./components/paymentReceipt.vue").default);
+// Vue.component("sales-invoice", require("./components/salesInvoice.vue").default);
+// Vue.component("payment-receipt", require("./components/paymentReceipt.vue").default);
 
 
-Vue.component("add-employee", require("./components/addEmployee.vue").default);
+// Vue.component("add-employee", require("./components/addEmployee.vue").default);
 
-Vue.component("add-jobcard", require("./components/addJobcard.vue").default);
+// Vue.component("add-jobcard", require("./components/addJobcard.vue").default);
 
 
 // Vue.component("invoice-test", require("./components/salesInvoiceTest.vue").default);
@@ -233,7 +233,7 @@ Vue.component("add-jobcard", require("./components/addJobcard.vue").default);
 
 
 
-Vue.component("add-test", require("./components/test.vue").default);
+// Vue.component("add-test", require("./components/test.vue").default);
 
 
 
@@ -242,9 +242,9 @@ Vue.component("add-test", require("./components/test.vue").default);
 
 
 
-Vue.component("change-password", require("./components/changePassword.vue").default);
+// Vue.component("change-password", require("./components/changePassword.vue").default);
 
-Vue.component("loader", require("./components/Loading.vue").default);
+// Vue.component("loader", require("./components/Loading.vue").default);
 
 
 

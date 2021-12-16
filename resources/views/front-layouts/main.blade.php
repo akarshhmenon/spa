@@ -5,6 +5,6 @@
 
 
 @yield('content')
-@yield('contact')
+
 
 @include('front-layouts.footer')
