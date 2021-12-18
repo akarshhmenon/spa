@@ -11,7 +11,7 @@ $user= Auth::user();
       {{-- <div class="sidebar-brand-icon">
         <img src="/assets/img/logo/logo.png">
       </div> --}}
-      <div class="sidebar-brand-text mx-3">S M S</div>
+      <div class="sidebar-brand-text mx-3">S P A</div>
     </router-link>
     <hr class="sidebar-divider my-0">
     <li class="nav-item active" href="">
@@ -31,11 +31,10 @@ $user= Auth::user();
       <div id="collapseMasters" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded" >
           <h6 class="collapse-header">Masters</h6>
-          <router-link class="collapse-item" to="/products">Products</router-link>
-          <router-link class="collapse-item" to="/customers">Customers</router-link>
-          <router-link class="collapse-item" to="/employees">Employees</router-link>
-          <router-link class="collapse-item" to="/expense-categories">ExpenseCategories</router-link>
-          <router-link class="collapse-item" to="/income-categories">IncomeCategories</router-link>
+          <router-link class="collapse-item" to="#1">Products</router-link>
+          <router-link class="collapse-item" to="#2">Customers</router-link>
+          <router-link class="collapse-item" to="#3">Employees</router-link>
+
           <!-- <a class="collapse-item" href="form_advanceds.html">Reward Settings</a> -->
         </div>
       </div>
@@ -50,15 +49,8 @@ $user= Auth::user();
       <div id="collapseOperations" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Operations</h6>
-          <router-link class="collapse-item" to="/sales">Add Sales</router-link>
-          <router-link class="collapse-item" to="/purchase">Add Purchases</router-link>
-          <router-link class="collapse-item" to="/expenses">Add Expense</router-link>
-          <router-link class="collapse-item" to="/incomes">Add Other Income</router-link>
-          <router-link class="collapse-item" to="/jobcard">Jobcards</router-link>
-         @if($user->reward)
-          <router-link class="collapse-item" to="/reward-sale">Redeem Points</router-link>
-          @endif
-          <router-link class="collapse-item" to="/stock-adjustments">Stock Adjustments</router-link>
+          <router-link class="collapse-item" to="#">Add Sales</router-link>
+      
         </div>
       </div>
     </li>
@@ -73,18 +65,8 @@ $user= Auth::user();
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Reports</h6>
 
-            <router-link class="collapse-item" to= "/purchase-report" >Purchase Report</router-link>
-            <router-link class="collapse-item" to= "/sales-report">Sales Report</router-link>
-            <router-link class="collapse-item" to= "/expense-report">Expense Report</router-link>
-            <router-link class="collapse-item" to= "/income-report">Income Report</router-link>
-            <router-link class="collapse-item" to="/credit-report">Credit Report</router-link>
-
-
-          <router-link class="collapse-item" to= "/stock-report">Stock Report</router-link>
-          <router-link class="collapse-item" to= "/payment-report">Payment Report</router-link>
-
-          <router-link class="collapse-item" to= "/item-report">Item Report</router-link>
-
+            <router-link class="collapse-item" to= "#" >Purchase Report</router-link>
+         
           </div>
         </div>
       </li>

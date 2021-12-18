@@ -9,8 +9,8 @@
                 <div class="text-center">
 <img src="/assets/img/logo/lo.png"  class="p-5" alt="" width="70%">
 <div class="pb-5 mb-3">
-                    <h2 class="text-primary font-weight-bolder">S M S</h2>
-                    <h5><span class="font-weight-bold">S</span>ale <span class="font-weight-bold ">M</span>anagement <span class="font-weight-bold ">S</span>ystem</h5>
+                    <h2 class="text-primary font-weight-bolder">S P A</h2>
+                    <h5><span class="font-weight-bold">S</span>pa <span class="font-weight-bold ">M</span>anagement <span class="font-weight-bold ">S</span>ystem</h5>
                 </div>
                 </div>
 
