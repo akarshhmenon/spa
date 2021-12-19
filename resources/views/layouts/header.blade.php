@@ -9,7 +9,7 @@
   <meta name="author" content="">
 
   {{-- <link href="assets/img/logo/logo.png" rel="icon"> --}}
-  <title>S M S -Sales Management System</title>
+  <title>SPA Management System</title>
 {{--  --}}
 
 
