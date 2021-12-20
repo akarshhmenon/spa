@@ -19,29 +19,26 @@ class DesignationController extends Controller
         ]);
 
 
-        if($request->id){
+        if ($request->id) {
 
-            $designation= Designation::find($request->id);
-        }else
+            $designation = Designation::find($request->id);
+        } else
 
-        $designation= new Designation;
+            $designation = new Designation;
         $designation->user_id = Auth::user()->id;
         $designation->name = strtoupper($request->name);
-        $designation->description=$request->description;
-        $designation->status=0; // 0= Active 1= Not Active;
+        $designation->description = $request->description;
+        $designation->status = 0; // 0= Active 1= Not Active;
         $designation->save();
 
-      return 'success';
-
+        return 'success';
     }
 
 
-public function getDesignation(){
+    public function getDesignation()
+    {
 
 
-    return Designation::all();
-}
-
-
-
+        return Designation::orderBy('id','desc')->get();
+    }
 }

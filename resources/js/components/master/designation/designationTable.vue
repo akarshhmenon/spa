@@ -2,8 +2,8 @@
   <div>
     <pre-loader v-if="preLoader"></pre-loader>
 
-    <div class="main-div" v-else>
-      <div class="col-lg-12 add-designation">
+    <div class="main-div">
+      <div class="col-lg-12 add-designation" v-show="showAddCard">
         <div class="card mb-4">
           <div
             class="
@@ -15,19 +15,23 @@
               justify-content-between
             "
           >
-            <h5 class="m-0 font-weight-bold text-dark">Add New Designation</h5>
+            <h5 class="m-0 font-weight-bold text-dark">{{ card_title }}</h5>
 
-            <button type="button" class="btn btn-primary rounded-pill">
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill"
+              @click="showTableComponent()"
+            >
               Designation Table<i class="fas fa-table fa-fw"></i>
             </button>
           </div>
           <!-- add designation component  -->
-          <add-designation :edit="this.edit"  :editData="this.editData">    </add-designation > 
+          <add-designation :edit="showEdit"> </add-designation>
           <!-- add designation component  end -->
         </div>
       </div>
 
-      <div class="col-lg-12">
+      <div class="col-lg-12" v-if="showTable">
         <div class="card mb-4">
           <div
             class="
@@ -41,7 +45,11 @@
           >
             <h5 class="m-0 font-weight-bold text-dark">Designations</h5>
 
-            <button type="button" class="btn btn-primary rounded-pill">
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill"
+              @click="showAddComponent()"
+            >
               Add Designation<i class="fas fa-plus-circle fa-fw"></i>
             </button>
           </div>
@@ -69,8 +77,11 @@
                 >
                   <td>{{ index + 1 }}</td>
                   <td>{{ designation.name }}</td>
-                  <td>{{ designation.Description }}</td>
-                  <td v-if="designation.status==0"><span class="text-success font-weight-bold"> Active </span></td>
+                  <td>{{ designation.description }}</td>
+                  <!-- 0 = Active 1= Not Active -->
+                  <td v-if="designation.status == 0">
+                    <span class="text-success font-weight-bold"> Active </span>
+                  </td>
 
                   <td>
                     <button
@@ -101,24 +112,29 @@
 </template>
 
 <script>
-import addDesignation from "./addDesignation.vue";
 export default {
-  components: { addDesignation },
   props: ["user"],
   data() {
     return {
       preLoader: false,
+      card_title: "",
       designation_details: {},
       errors: {},
-      edit:false,
-      editData:{},
+      edit: false,
+      showTable: true,
+      showEdit: true,
+      showAddCard: false,
     };
   },
   created() {
-
-this.getDesignations();
-
-
+    this.getDesignations();
+    var _this = this;
+    bus.$on("designation-added", function () {
+      _this.showAddCard = false;
+      _this.showTable = true;
+      _this.showEdit = true;
+      _this.getDesignations();
+    });
   },
 
   methods: {
@@ -152,7 +168,6 @@ this.getDesignations();
               id: designation.id,
             })
             .then((response) => {
-                
               if (response.data == "success") {
                 Toast.fire({
                   icon: "success",
@@ -182,9 +197,24 @@ this.getDesignations();
     },
 
     editDesignation(designation) {
+      this.card_title = "Edit Designation";
+      this.showAddCard = true;
+      this.showTable = false;
+      bus.$emit("edit-designation", designation);
+    },
+    showAddComponent() {
+      this.card_title = "Add Designation";
+      this.showAddCard = true;
+      this.showTable = false;
+      this.showEdit = false;
+    },
 
-        this.edit=true;
-         this.editData=designation;
+    showTableComponent() {
+      bus.$emit("clear-field");
+      this.card_title = "";
+      this.showAddCard = false;
+      this.showTable = true;
+      this.showEdit = true;
     },
   },
 
@@ -198,6 +228,7 @@ this.getDesignations();
             [10, 25, 50, -1],
             [10, 25, 50, "All"],
           ],
+          bSort: false,
         });
       });
     },
@@ -210,6 +241,7 @@ this.getDesignations();
         [10, 25, 50, -1],
         [10, 25, 50, "All"],
       ],
+      bSort: false,
     });
   },
 };

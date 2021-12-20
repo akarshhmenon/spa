@@ -54,10 +54,11 @@
 
 <script>
 export default {
-  props: ["edit", "editData"],
+  props: ["edit"],
   data() {
     return {
       loading: false,
+   
       button_title: "Add Designation",
       toastTitle: "Added successfully",
       designation: {
@@ -69,7 +70,36 @@ export default {
     };
   },
 
-  created() {},
+created() {
+
+
+var _this=this;
+bus.$on('clear-field',function(){
+
+_this.clear_form_data();
+});
+
+if(this.edit){
+
+var _this=this;
+bus.$on('edit-designation',function(designation){
+
+_this.designation.id=designation.id;
+_this.designation.name=designation.name;
+_this.designation.description=designation.description;
+_this.button_title='Update Designation';
+_this.toastTitle='Updated successfully';
+
+
+
+});
+
+
+}
+
+
+
+  },
 
   methods: {
     addDesignation() {
@@ -85,6 +115,7 @@ export default {
             });
 
             this.clear_form_data();
+            bus.$emit('designation-added');
           }
 
           if (response.data == "failed") {
@@ -120,18 +151,6 @@ export default {
     },
   },
 
-  watch: {
-    edit: function () {
-      if (this.edit == true) {
-        var _this = this;
-        _this.button_title = "Update Designation";
-        _this.toastTitle = "Updated successfully";
-        _this.designation.id = _this.editData.id;
-        _this.designation.name = _this.editData.name;
-        _this.designation.description = _this.editData.description;
-      }
-    },
-  },
 };
 </script>
 
