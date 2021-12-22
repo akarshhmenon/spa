@@ -141,7 +141,7 @@ export default {
     getDesignations() {
       this.preLoader = true; //the loading begin
       axios
-        .get("get-designation")
+        .get("get-designations")
         .then((res) => {
           this.designation_details = res.data;
           this.preLoader = false; //the loading end
@@ -164,7 +164,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .post("#", {
+            .post("delete-designation", {
               id: designation.id,
             })
             .then((response) => {

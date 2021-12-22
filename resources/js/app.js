@@ -90,7 +90,8 @@ window.Toast = Toast;
 
 const routes = [
     { path: "/", component: require("./components/dashboard/dashboard.vue").default },
-    { path: "/designation", component: require("./components/master/designation/designationTable.vue").default },
+    { path: "/designation", component: require("./components/master/designation/DesignationTable.vue").default },
+    { path: "/employee", component: require("./components/master/employee/EmployeeTable.vue").default },
 ];
 
 const router = new VueRouter({
@@ -127,8 +128,8 @@ Vue.component("change-password", require("./components/etc/changePassword.vue").
 
 Vue.component("pre-loader", require("./components/etc/Loading.vue").default);
 
-Vue.component("add-designation", require("./components/master/designation/addDesignation.vue").default);
-
+Vue.component("add-designation", require("./components/master/designation/Designation.vue").default);
+Vue.component("add-employee", require("./components/master/employee/Employee.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

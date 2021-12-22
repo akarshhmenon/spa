@@ -41,4 +41,16 @@ class DesignationController extends Controller
 
         return Designation::orderBy('id','desc')->get();
     }
+
+    public function deleteDesignation(Request $request)
+    {
+        if ($request->id) {
+            $designation = Designation::find($request->id);
+            $designation->delete();
+            return 'success';
+        } else {
+
+            return "failed";
+        }
+    }
 }
