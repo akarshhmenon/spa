@@ -90,6 +90,7 @@ window.Toast = Toast;
 
 const routes = [
     { path: "/", component: require("./components/dashboard/dashboard.vue").default },
+    { path: "/designation", component: require("./components/master/designation/designationTable.vue").default },
 ];
 
 const router = new VueRouter({
@@ -124,9 +125,9 @@ const router = new VueRouter({
 
 Vue.component("change-password", require("./components/etc/changePassword.vue").default);
 
-Vue.component("loader", require("./components/etc/Loading.vue").default);
+Vue.component("pre-loader", require("./components/etc/Loading.vue").default);
 
-
+Vue.component("add-designation", require("./components/master/designation/addDesignation.vue").default);
 
 
 /**

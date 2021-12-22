@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\PasswordChangeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +41,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'preventB
 
     //Change password
     Route::post('updatePassword', [PasswordChangeController::class, 'changePassword']);
+
+
+//designation
+
+Route::post('add-designation', [DesignationController::class, 'addDesignation']);
+Route::get('get-designation', [DesignationController::class, 'getDesignation']);
+Route::post('delete-designation', [DesignationController::class, 'deleteDesignation']);
+
+
+
 });
 
 
