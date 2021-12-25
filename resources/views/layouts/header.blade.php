@@ -9,11 +9,9 @@
   <meta name="author" content="">
 
   {{-- <link href="assets/img/logo/logo.png" rel="icon"> --}}
-<<<<<<< HEAD
-  <title>S M S -Spa Management System</title>
-=======
+
   <title>SPA Management System</title>
->>>>>>> 8f8ca99301f84a6def31d83fd8a9fc5e43bd0638
+
 {{--  --}}
 
 
