@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PasswordChangeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -46,10 +47,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'preventB
 //designation
 
 Route::post('add-designation', [DesignationController::class, 'addDesignation']);
-Route::get('get-designation', [DesignationController::class, 'getDesignation']);
+Route::get('get-designations', [DesignationController::class, 'getDesignation']);
 Route::post('delete-designation', [DesignationController::class, 'deleteDesignation']);
 
-
+// employee 
+Route::post('add-employee', [EmployeeController::class, 'addEmployee']);
+Route::get('get-employees', [EmployeeController::class, 'getEmployees']);
+Route::post('delete-employee', [EmployeeController::class, 'deleteEmployee']);
 
 });
 
