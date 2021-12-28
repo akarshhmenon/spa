@@ -48,12 +48,13 @@
     </div>
 </div>
 <!-- Carousel End -->
+
  <!-- About Start -->
  <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-lg-6 pb-5 pb-lg-0">
-                <img class="img-fluid w-100" img src="{{URL::asset('frontassets/img/about.jpg')}}" alt="">
+                <img class="img-fluid w-100"  src="{{URL::asset('frontassets/img/about.jpg')}}" alt="">
             </div>
             <div class="col-lg-6">
                 <h6 class="d-inline-block text-primary text-uppercase bg-light py-1 px-2">About Us</h6>
