@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <!--------------Add-Employee-Modal---------------->
+      <!--------------Add-Attendance-Modal---------------->
       <div
         id="addEmployeeAttendance"
         class="modal fade"
@@ -89,16 +89,16 @@
         aria-labelledby="myLargeModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <add-employee-attendance></add-employee-attendance>
           </div>
         </div>
       </div>
 
-      <!--------------Add-Employee-Modal---------------->
+      <!--------------Add-Attendance-Modal---------------->
 
-      <!--------------Edit-Employee-Modal---------------->
+      <!--------------Edit-Attendance-Modal---------------->
       <div
         id="editEmployeeAttendance"
         class="modal fade"
@@ -115,7 +115,7 @@
         </div>
       </div>
 
-      <!--------------Add-Employee-Modal---------------->
+      <!--------------Add-Attendance-Modal---------------->
     </div>
   </div>
 </template>
@@ -132,7 +132,7 @@ export default {
   },
   created() {
   
-    this.getEmployeesAttendance();
+  
     var _this = this;
     bus.$on("employee-attendance-added", function () {
       _this.getEmployeesAttendance();

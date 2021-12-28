@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PasswordChangeController;
@@ -55,6 +56,9 @@ Route::post('add-employee', [EmployeeController::class, 'addEmployee']);
 Route::get('get-employees', [EmployeeController::class, 'getEmployees']);
 Route::post('delete-employee', [EmployeeController::class, 'deleteEmployee']);
 
+
+// Attendance 
+Route::post('add-attendance', [AttendanceController::class, 'addAttendance']);
 });
 
 
