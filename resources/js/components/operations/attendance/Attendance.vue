@@ -213,10 +213,10 @@ export default {
           var employee_details = res.data;
 
           if(employee_details.length!=0){
-          for (let item in employee_details) {
+          for (let employee in employee_details) {
             this.attendance.employee_status.push({
-              id: employee_details[item].id,
-              name: employee_details[item].name,
+              employee_id: employee_details[employee].id,
+              name: employee_details[employee].name,
               status:"3",
             });
           }}
@@ -239,7 +239,7 @@ axios.post('add-attendance',this.attendance).then((response) =>{
             });
             bus.$emit("attendance-added");
             this.$refs.close_employee_attendance_modal.click();
-            this.clearFormData();
+        
           }
 
           if (response.data == "failed") {
@@ -248,9 +248,9 @@ axios.post('add-attendance',this.attendance).then((response) =>{
               title: "Some Error Occurred,Please Try Again Later",
             });
 
-            bus.$emit("attendance-added");
+         
             this.$refs.close_employee_attendance_modal.click();
-            this.clearFormData();
+           
           }
 
           this.loading = false;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,23 +19,33 @@ class AttendanceController extends Controller
         ]);
 
 
-
         if ($request->id) {
 
             $Attendance = Attendance::find($request->id);
         } else
 
-            $Attendance = new Attendance;
-        $Attendance->user_id = Auth::user()->id;
-        $Attendance->date = $request->date;
-        foreach ($request->employee_status as $status) {
             
-            $Attendance->employee_id = $status['id'];
-            $Attendance->status = $status['status'];
-        }
 
-        $Attendance->save();
+        foreach ($request->employee_status as $status) {
+            $Attendance = new Attendance;
+            $Attendance->user_id = Auth::user()->id;
+            $Attendance->date = $request->date;
+            $Attendance->employee_id = $status['employee_id'];
+            $Attendance->status = $status['status'];
+            $Attendance->save();
+        }
 
         return 'success';
     }
+
+
+public function getEmployeesAttendance(){
+
+return Attendance::with('employee')-> orderBy('id','desc')->get();
+
+}
+
+
+
+
 }

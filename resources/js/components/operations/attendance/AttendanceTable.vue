@@ -47,7 +47,7 @@
                 <th>Index</th>
                 <th>Name</th>
                 <th>Mobile</th>
-                <th>Designation</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </tfoot>
@@ -57,9 +57,21 @@
                 :key="employee.id"
               >
                 <td>{{ index + 1 }}</td>
-                <td>{{ employee.name }}</td>
-                <td>{{ employee.mobile }}</td>
-                <td>{{ employee.designations.name }}</td>
+                <td>{{ employee.employee.name }}</td>
+                <td>{{ employee.employee.mobile }}</td>
+                <td v-if="employee.status==0"><span>Leave
+                  </span></td>
+
+  <td v-if="employee.status==1"><span>Absent
+                  </span></td>
+                    <td v-if="employee.status==2"><span>Half Day
+                  </span></td>
+                    <td v-if="employee.status==3"><span>Present
+                  </span></td>
+
+
+
+
 
                 <td class="pl-3">
                   <button
@@ -132,7 +144,7 @@ export default {
   },
   created() {
   
-  
+  this.getEmployeesAttendance();
     var _this = this;
     bus.$on("employee-attendance-added", function () {
       _this.getEmployeesAttendance();
@@ -143,7 +155,7 @@ export default {
     getEmployeesAttendance() {
       this.preLoader = true; //the loading begin
       axios
-        .get("get-employees")
+        .get("get-employees-attendance")
         .then((res) => {
           this.employee_attendance_details = res.data;
           this.preLoader = false; //the loading end
