@@ -19,14 +19,13 @@
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset ('frontassets/lib/animate/animate.min.css') }}"rel="stylesheet">
-    
+    <link href="{{ asset ('frontassets/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset ('frontassets/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />  
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('frontassets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('frontassets/css/Home.css') }}" rel="stylesheet">
     <link href="{{ asset('frontassets/css/nicepage.css') }}" rel="stylesheet">
-    <link href="{{ asset ('frontassets/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 </head>
 
 <body>

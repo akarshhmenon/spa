@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-Class UserController extends Controller
+class userController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -76,7 +76,7 @@ Class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

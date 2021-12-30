@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section class="u-backlink u-clearfix u-grey-80">
+    <section class="u-backlink u-clearfix u-grey-80" style="color: salmon">
 
     </section>
 

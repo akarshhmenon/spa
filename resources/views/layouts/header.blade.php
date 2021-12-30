@@ -9,7 +9,9 @@
   <meta name="author" content="">
 
   {{-- <link href="assets/img/logo/logo.png" rel="icon"> --}}
+
   <title>SPA Management System</title>
+
 {{--  --}}
 
 
