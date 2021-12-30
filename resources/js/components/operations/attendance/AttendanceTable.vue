@@ -28,7 +28,7 @@
         </div>
         <div class="table-responsive p-3">
           <table
-            class="table align-items-center table-flush table-hover display"
+            class="table align-items-center table-flush table-hover display text-center"
             id="attendanceTable"
             ref="attendanceTable"
             data-order=""
@@ -36,27 +36,21 @@
             <thead class="thead-light">
               <tr>
                 <th>Index</th>
+                <th>Date</th>
                 <th>Name</th>
                 <th>Mobile</th>
                 <th>Designation</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tfoot>
-              <tr>
-                <th>Index</th>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </tfoot>
+            
             <tbody>
               <tr
                 v-for="(employee, index) in employee_attendance_details"
                 :key="employee.id"
               >
                 <td>{{ index + 1 }}</td>
+                <td>{{ employee.date|myDate }}</td>
                 <td>{{ employee.employee.name }}</td>
                 <td>{{ employee.employee.mobile }}</td>
                 <td v-if="employee.status==0"><span>Leave
