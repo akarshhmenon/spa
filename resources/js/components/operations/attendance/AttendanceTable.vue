@@ -28,44 +28,41 @@
         </div>
         <div class="table-responsive p-3">
           <table
-            class="table align-items-center table-flush table-hover display text-center"
+            class="
+              table
+              align-items-center
+              table-flush table-hover
+              display
+              text-center
+            "
             id="attendanceTable"
             ref="attendanceTable"
             data-order=""
           >
             <thead class="thead-light">
               <tr>
-                <th>Index</th>
+               
                 <th>Date</th>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Designation</th>
+                <th>Full Day</th>
+                <th>Half Day</th>
+                <th>Absent</th>
+                <th>Leave</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            
+
             <tbody>
               <tr
-                v-for="(employee, index) in employee_attendance_details"
+                v-for="(employee ) in employee_attendance_details"
                 :key="employee.id"
               >
-                <td>{{ index + 1 }}</td>
-                <td>{{ employee.date|myDate }}</td>
-                <td>{{ employee.employee.name }}</td>
-                <td>{{ employee.employee.mobile }}</td>
-                <td v-if="employee.status==0"><span>Leave
-                  </span></td>
+             
+                <td>{{ employee.date | myDate }}</td>
 
-  <td v-if="employee.status==1"><span>Absent
-                  </span></td>
-                    <td v-if="employee.status==2"><span>Half Day
-                  </span></td>
-                    <td v-if="employee.status==3"><span>Present
-                  </span></td>
-
-
-
-
+                <td>{{ employee.full_day }}</td>
+                <td>{{ employee.half_day }}</td>
+                <td>{{ employee.absent }}</td>
+                <td>{{ employee.leave }}</td>
 
                 <td class="pl-3">
                   <button
@@ -76,8 +73,6 @@
                   >
                     <i class="fas fa-edit fafw" title="Edit"></i>
                   </button>
-
-                
                 </td>
               </tr>
             </tbody>
@@ -131,14 +126,12 @@ export default {
   props: ["user"],
   data() {
     return {
-    
       preLoader: false,
-     employee_attendance_details: {},
+      employee_attendance_details: {},
     };
   },
   created() {
-  
-  this.getEmployeesAttendance();
+    this.getEmployeesAttendance();
     var _this = this;
     bus.$on("employee-attendance-added", function () {
       _this.getEmployeesAttendance();
@@ -159,8 +152,6 @@ export default {
           console.log(err);
         });
     },
-
-   
 
     editEmployeeAttendance(employee) {
       bus.$emit("edit-employee-attendance", employee);

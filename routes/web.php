@@ -62,6 +62,7 @@ Route::post('delete-employee', [EmployeeController::class, 'deleteEmployee']);
 // Attendance 
 Route::post('add-attendance', [AttendanceController::class, 'addAttendance']);
 Route::get('get-employees-attendance', [AttendanceController::class, 'getEmployeesAttendance']);
+Route::get('get-employees-attendance-report', [AttendanceController::class, 'getEmployeesAttendanceReport']);
 });
 
 
