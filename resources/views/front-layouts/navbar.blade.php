@@ -1,7 +1,7 @@
  <!-- Navbar Start -->
  <div class="container-fluid p-0">
     <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
-        <a href="index.html" class="navbar-brand ml-lg-3">
+        <a href="/" class="navbar-brand ml-lg-3">
             <h1 class="m-0 text-primary"><span class="text-dark">SPA</span> Center</h1>
         </a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -13,7 +13,7 @@
                 <a href="/services" class="nav-item nav-link">Services</a>
                 <a href="/contact" class="nav-item nav-link">Contact Us</a>
                 <a href="/about" class="nav-item nav-link">About Us</a>
-                <a href="about.html" class="nav-item nav-link">Products</a>
+                <a href="/products" class="nav-item nav-link">Products</a>
              
                 </div>
                 

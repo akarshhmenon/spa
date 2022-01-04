@@ -61,6 +61,7 @@ Route::post('delete-employee', [EmployeeController::class, 'deleteEmployee']);
 
 
 Route::get('/',[UserController::class,'index']);
+Route::get('/products',[Singleproductcontroller::class,'prod']);
 Route::get('/singleproduct',[Singleproductcontroller::class,'pro']);
 Route::get('/services',[ServiceController::class,'serv']);
 

@@ -17,4 +17,15 @@ class Singleproductcontroller extends Controller
         return view('users.singleproduct');
     }
     
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function prod()
+    {
+        return view('users.products');
+    }
+    
 }
