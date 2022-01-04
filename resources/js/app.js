@@ -93,6 +93,8 @@ const routes = [
     { path: "/designation", component: require("./components/masters/designation/DesignationTable.vue").default },
     { path: "/employee", component: require("./components/masters/employee/EmployeeTable.vue").default },
      { path: "/attendance", component: require("./components/operations/attendance/AttendanceTable.vue").default },
+     { path: "/attendance-report", component: require("./components/reports/AttendanceReport.vue").default },
+
 ];
 
 const router = new VueRouter({

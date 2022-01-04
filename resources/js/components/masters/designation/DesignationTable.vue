@@ -223,11 +223,11 @@ export default {
       this.dt.destroy();
       this.$nextTick(() => {
         this.dt = $(this.$refs.designationTable).DataTable({
-          pageLength: 10,
-          lengthMenu: [
-            [10, 25, 50, -1],
-            [10, 25, 50, "All"],
-          ],
+          pageLength: 5,
+      lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+      ],
           bSort: false,
         });
       });
@@ -236,10 +236,10 @@ export default {
 
   mounted() {
     this.dt = $(this.$refs.designationTable).DataTable({
-      pageLength: 10,
+    pageLength: 5,
       lengthMenu: [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"],
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
       ],
       bSort: false,
     });

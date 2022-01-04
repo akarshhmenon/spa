@@ -28,38 +28,41 @@
         </div>
         <div class="table-responsive p-3">
           <table
-            class="table align-items-center table-flush table-hover display"
+            class="
+              table
+              align-items-center
+              table-flush table-hover
+              display
+              text-center
+            "
             id="attendanceTable"
             ref="attendanceTable"
             data-order=""
           >
             <thead class="thead-light">
               <tr>
-                <th>Index</th>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Designation</th>
+               
+                <th>Date</th>
+                <th>Full Day</th>
+                <th>Half Day</th>
+                <th>Absent</th>
+                <th>Leave</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tfoot>
-              <tr>
-                <th>Index</th>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Designation</th>
-                <th>Actions</th>
-              </tr>
-            </tfoot>
+
             <tbody>
               <tr
-                v-for="(employee, index) in employee_attendance_details"
+                v-for="(employee ) in employee_attendance_details"
                 :key="employee.id"
               >
-                <td>{{ index + 1 }}</td>
-                <td>{{ employee.name }}</td>
-                <td>{{ employee.mobile }}</td>
-                <td>{{ employee.designations.name }}</td>
+             
+                <td>{{ employee.date | myDate }}</td>
+
+                <td>{{ employee.full_day }}</td>
+                <td>{{ employee.half_day }}</td>
+                <td>{{ employee.absent }}</td>
+                <td>{{ employee.leave }}</td>
 
                 <td class="pl-3">
                   <button
@@ -70,8 +73,6 @@
                   >
                     <i class="fas fa-edit fafw" title="Edit"></i>
                   </button>
-
-                
                 </td>
               </tr>
             </tbody>
@@ -79,7 +80,7 @@
         </div>
       </div>
 
-      <!--------------Add-Employee-Modal---------------->
+      <!--------------Add-Attendance-Modal---------------->
       <div
         id="addEmployeeAttendance"
         class="modal fade"
@@ -89,16 +90,16 @@
         aria-labelledby="myLargeModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <add-employee-attendance></add-employee-attendance>
           </div>
         </div>
       </div>
 
-      <!--------------Add-Employee-Modal---------------->
+      <!--------------Add-Attendance-Modal---------------->
 
-      <!--------------Edit-Employee-Modal---------------->
+      <!--------------Edit-Attendance-Modal---------------->
       <div
         id="editEmployeeAttendance"
         class="modal fade"
@@ -115,7 +116,7 @@
         </div>
       </div>
 
-      <!--------------Add-Employee-Modal---------------->
+      <!--------------Add-Attendance-Modal---------------->
     </div>
   </div>
 </template>
@@ -125,13 +126,11 @@ export default {
   props: ["user"],
   data() {
     return {
-    
       preLoader: false,
-     employee_attendance_details: {},
+      employee_attendance_details: {},
     };
   },
   created() {
-  
     this.getEmployeesAttendance();
     var _this = this;
     bus.$on("employee-attendance-added", function () {
@@ -143,7 +142,7 @@ export default {
     getEmployeesAttendance() {
       this.preLoader = true; //the loading begin
       axios
-        .get("get-employees")
+        .get("get-employees-attendance")
         .then((res) => {
           this.employee_attendance_details = res.data;
           this.preLoader = false; //the loading end
@@ -153,8 +152,6 @@ export default {
           console.log(err);
         });
     },
-
-   
 
     editEmployeeAttendance(employee) {
       bus.$emit("edit-employee-attendance", employee);
