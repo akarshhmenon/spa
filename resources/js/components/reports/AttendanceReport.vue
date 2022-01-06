@@ -172,11 +172,9 @@
         <div class="modal-content">
           <!-- **** -->
           <div class="modal-header bg-primary">
-            <h5
-              class="modal-title modal-title-custom"
-              id="addEmployeeLabel"
-
-            >  Attendance Card  </h5>
+            <h5 class="modal-title modal-title-custom" id="addEmployeeLabel">
+              Attendance Card
+            </h5>
             <button
               type="button"
               class="close"
@@ -189,95 +187,113 @@
           </div>
 
           <div class="modal-body">
-            <div class="card-body"> 
-
-
-
-<div class="row">
-  <div class="col">
-<div class="card mb-4" >
- 
-  <div class="card-body">
-  
-  <div class="row">
-    <div class="col">
-      <div>
-        <h3>{{employee_name}}</h3>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col">
-      <div>
-        <h5 class="text-success"> Full day</h5> <span> <strong> {{employee_full_day}} </strong> Days</span>
-      </div>
-    </div>
-    <div class="col">
-      <div>
-        <h5 class="text-info"> Half Day</h5> <span> <strong> {{employee_half_day}} </strong> Days</span>
-      </div>
-    </div>
-    <div class="col">
-      <div>
-        <h5 class="text-warning"> Absent</h5> <span> <strong> {{employee_absent}} </strong> Days</span>
-      </div>
-    </div>
-    <div class="col">
-      <div>
-        <h5 class="text-danger"> Leave</h5> <span> <strong> {{employee_leave}}  </strong> Days</span>
-      </div>
-    </div>
-  </div>
-
-  </div>
-</div>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    
-<div class="card" >
-              <div class="table-responsive p-3 ">
-                <table
-                  class="
-                    table
-                    align-items-center
-                    table-flush table-hover
-                    display
-                    text-center
-                  "
-                  id="employeeAttendanceTable"
-                  ref="employeeAttendanceTable"
-                  data-order=""
-                >
-                  <thead class="thead-light">
-                    <tr> <th>index</th>
-                      <th>Date</th>
-                      <th>Day</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr
-                      v-for="(employee,index) in view_only_attendance.slice().reverse()"
-                      :key="employee.id"
-                    ><td>{{ index + 1}}</td>
-                      <td>{{ employee.date | myDate }}</td>
-                      <td>{{ employee.date | formatDate }}</td>
-                      <td v-if=" employee.status==0"><span class="text-danger">Leave</span></td>
-                       <td v-if=" employee.status==1"><span class="text-warning">Absent</span></td>
-                        <td v-if=" employee.status==2"><span class="text-info">Half Day</span></td>
-                         <td v-if=" employee.status==3"><span class="text-success">Full Day</span></td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <div class="card mb-4">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <div>
+                            <h3>{{ employee_name }}</h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col">
+                          <div>
+                            <h5 class="text-success">Full day</h5>
+                            <span>
+                              <strong> {{ employee_full_day }} </strong>
+                              Days</span
+                            >
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div>
+                            <h5 class="text-info">Half Day</h5>
+                            <span>
+                              <strong> {{ employee_half_day }} </strong>
+                              Days</span
+                            >
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div>
+                            <h5 class="text-warning">Absent</h5>
+                            <span>
+                              <strong> {{ employee_absent }} </strong>
+                              Days</span
+                            >
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div>
+                            <h5 class="text-danger">Leave</h5>
+                            <span>
+                              <strong> {{ employee_leave }} </strong> Days</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-</div>
-  </div>
-</div>
+              <div class="row">
+                <div class="col">
+                  <div class="card">
+                    <div class="table-responsive p-3">
+                      <table
+                        class="
+                          table
+                          align-items-center
+                          table-flush table-hover
+                          display
+                          text-center
+                        "
+                        id="employeeAttendanceTable"
+                        ref="employeeAttendanceTable"
+                        data-order=""
+                      >
+                        <thead class="thead-light">
+                          <tr>
+                            <th>index</th>
+                            <th>Date</th>
+                            <th>Day</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
 
-
+                        <tbody>
+                          <tr
+                            v-for="(employee, index) in view_only_attendance
+                              .slice()
+                              .reverse()"
+                            :key="employee.id"
+                          >
+                            <td>{{ index + 1 }}</td>
+                            <td>{{ employee.date | myDate }}</td>
+                            <td>{{ employee.date | formatDate }}</td>
+                            <td v-if="employee.status == 0">
+                              <span class="text-danger">Leave</span>
+                            </td>
+                            <td v-if="employee.status == 1">
+                              <span class="text-warning">Absent</span>
+                            </td>
+                            <td v-if="employee.status == 2">
+                              <span class="text-info">Half Day</span>
+                            </td>
+                            <td v-if="employee.status == 3">
+                              <span class="text-success">Full Day</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <!-- **** -->
@@ -299,13 +315,13 @@ export default {
       from_date: "",
       to_date: "",
       search: false,
-      view_only_attendance:[],
+      view_only_attendance: [],
 
-employee_name:'',
-employee_full_day:'',
-employee_half_day:'',
-employee_absent:'',
-employee_leave:'',
+      employee_name: "",
+      employee_full_day: "",
+      employee_half_day: "",
+      employee_absent: "",
+      employee_leave: "",
     };
   },
 
@@ -346,18 +362,14 @@ employee_leave:'',
     showFilter() {
       this.search = true;
     },
-viewOnly(employee){
-
-
-this.employee_name=employee.name;
-this.employee_full_day=employee.full_day;
-this.employee_half_day=employee.half_day;
-this.employee_absent=employee.absent;
-this.employee_leave=employee.leave;
-this.view_only_attendance=employee.group_by_attendance;
-
-}
-  
+    viewOnly(employee) {
+      this.employee_name = employee.name;
+      this.employee_full_day = employee.full_day;
+      this.employee_half_day = employee.half_day;
+      this.employee_absent = employee.absent;
+      this.employee_leave = employee.leave;
+      this.view_only_attendance = employee.group_by_attendance;
+    },
   },
 
   watch: {
@@ -407,7 +419,6 @@ this.view_only_attendance=employee.group_by_attendance;
       });
     },
 
-
     view_only_attendance(val) {
       this.ds.destroy();
       this.$nextTick(() => {
@@ -456,9 +467,6 @@ this.view_only_attendance=employee.group_by_attendance;
   },
 
   mounted() {
-
-
-
     this.dt = $(this.$refs.AttendanceTable).DataTable({
       pageLength: 5,
 
@@ -501,9 +509,7 @@ this.view_only_attendance=employee.group_by_attendance;
       bSort: false,
     });
 
-
-
- this.ds = $(this.$refs.employeeAttendanceTable).DataTable({
+    this.ds = $(this.$refs.employeeAttendanceTable).DataTable({
       pageLength: 5,
 
       dom: "lBfrtip",
@@ -544,13 +550,7 @@ this.view_only_attendance=employee.group_by_attendance;
       ],
       bSort: false,
     });
-    
   },
-
-
-
-
-  
 };
 </script>
 

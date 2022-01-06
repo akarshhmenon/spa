@@ -109,7 +109,7 @@ class AttendanceController extends Controller
                         'half_day' => $group->where('status', '2')->count(),
                         'absent' => $group->where('status', '1')->count(),
                         'leave' => $group->where('status', '0')->count(),
-                        'group_by_attendance'=>$group
+                        'group_by_attendance' => $group
 
                     ]
                 ];
