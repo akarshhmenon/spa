@@ -64,7 +64,9 @@ Vue.filter("myDate", function (dateFormatted) {
     return moment(dateFormatted).format("DD - MM - YYYY");
 });
 
-
+Vue.filter('formatDate', function(value) {
+    return moment(value).format("dddd");
+});
 
 import 'vue-search-select/dist/VueSearchSelect.css'
 

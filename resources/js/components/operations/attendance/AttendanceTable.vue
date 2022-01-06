@@ -41,8 +41,8 @@
           >
             <thead class="thead-light">
               <tr>
-               
                 <th>Date</th>
+                <th>Number of Employees</th>
                 <th>Full Day</th>
                 <th>Half Day</th>
                 <th>Absent</th>
@@ -53,12 +53,11 @@
 
             <tbody>
               <tr
-                v-for="(employee ) in employee_attendance_details"
+                v-for="employee in employee_attendance_details"
                 :key="employee.id"
               >
-             
                 <td>{{ employee.date | myDate }}</td>
-
+                <td>{{ employee.count }}</td>
                 <td>{{ employee.full_day }}</td>
                 <td>{{ employee.half_day }}</td>
                 <td>{{ employee.absent }}</td>
@@ -68,7 +67,7 @@
                   <button
                     class="btn btn-primary btn-sm"
                     data-toggle="modal"
-                    data-target="#editEmployee"
+                    data-target="#editEmployeeAttendance"
                     @click="editEmployeeAttendance(employee)"
                   >
                     <i class="fas fa-edit fafw" title="Edit"></i>
@@ -109,7 +108,7 @@
         aria-labelledby="myLargeModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <add-employee-attendance :edit="true"></add-employee-attendance>
           </div>
@@ -133,7 +132,7 @@ export default {
   created() {
     this.getEmployeesAttendance();
     var _this = this;
-    bus.$on("employee-attendance-added", function () {
+    bus.$on("attendance-added", function () {
       _this.getEmployeesAttendance();
     });
   },
