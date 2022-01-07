@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PasswordChangeController;
@@ -54,6 +55,13 @@ Route::post('delete-designation', [DesignationController::class, 'deleteDesignat
 Route::post('add-employee', [EmployeeController::class, 'addEmployee']);
 Route::get('get-employees', [EmployeeController::class, 'getEmployees']);
 Route::post('delete-employee', [EmployeeController::class, 'deleteEmployee']);
+
+//customer
+Route::post('add-customer', [CustomerController::class, 'addCustomer']);
+Route::get('get-customers', [CustomerController::class, 'getCustomers']);
+Route::post('delete-customer', [CustomerController::class, 'deleteCustomer']);
+
+
 
 });
 
