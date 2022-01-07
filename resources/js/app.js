@@ -67,7 +67,9 @@ Vue.filter("myDate", function (dateFormatted) {
     return moment(dateFormatted).format("DD - MM - YYYY");
 });
 
-
+Vue.filter('formatDate', function(value) {
+    return moment(value).format("dddd");
+});
 
 import 'vue-search-select/dist/VueSearchSelect.css'
 
@@ -99,6 +101,8 @@ const routes = [
     { path: "/employee", component: require("./components/masters/employee/EmployeeTable.vue").default },
     
      { path: "/attendance", component: require("./components/operations/attendance/AttendanceTable.vue").default },
+     { path: "/attendance-report", component: require("./components/reports/AttendanceReport.vue").default },
+
 ];
 
 const router = new VueRouter({

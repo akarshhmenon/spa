@@ -24,6 +24,13 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('frontassets/css/style.css') }}" rel="stylesheet">
+
+    <!-- service -->
+    <link href="{{ asset('frontassets/css/Home.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontassets/css/nicepage.css') }}" rel="stylesheet">
+    <!-- product -->
+    <link href="{{ asset('frontassets/css/single/product.css') }}" rel="stylesheet">
+
 </head>
 
 <body>

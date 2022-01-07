@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DesignationController;
-use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PasswordChangeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\singleproductcontroller;
+use App\Http\Controllers\serviceController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -67,3 +70,7 @@ Route::post('delete-customer', [CustomerController::class, 'deleteCustomer']);
 
 
 Route::get('/',[UserController::class,'index']);
+Route::get('/products',[Singleproductcontroller::class,'prod']);
+Route::get('/singleproduct',[Singleproductcontroller::class,'pro']);
+Route::get('/services',[ServiceController::class,'serv']);
+
