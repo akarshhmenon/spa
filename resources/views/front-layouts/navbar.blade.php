@@ -10,10 +10,10 @@
         <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
             <div class="navbar-nav m-auto py-0">
                 <a href="/" class="nav-item nav-link active">Home</a>
-                <a href="/services" class="nav-item nav-link">Services</a>
-                <a href="/contact" class="nav-item nav-link">Contact Us</a>
-                <a href="/about" class="nav-item nav-link">About Us</a>
-                <a href="/products" class="nav-item nav-link">Products</a>
+                <a href="/#services" class="nav-item nav-link">services</a>
+                <a href="/#about" class="nav-item nav-link">About Us</a>
+                <a href="/#products" class="nav-item nav-link">Products</a>
+                <a href="/#contact" class="nav-item nav-link">Contact Us</a>
              
                 </div>
                 

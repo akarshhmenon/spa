@@ -31,10 +31,11 @@ $user= Auth::user();
       <div id="collapseMasters" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded" >
           <h6 class="collapse-header">Masters</h6>
+          <router-link class="collapse-item" to="/customer">Customer</router-link>
           <router-link class="collapse-item" to="#1">Products</router-link>
-          <router-link class="collapse-item" to="#2">Customers</router-link>
           <router-link class="collapse-item" to="/employee">Employees</router-link>
           <router-link class="collapse-item" to="/designation">Designation</router-link>
+          
           <!-- <a class="collapse-item" href="form_advanceds.html">Reward Settings</a> -->
         </div>
       </div>

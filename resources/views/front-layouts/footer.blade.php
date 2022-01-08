@@ -9,7 +9,7 @@
                         <h1 class="mb-3 text-white"><span class="text-primary">SPA</span> Center</h1>
                     </a>
                     <p>Aliquyam sed elitr elitr erat sed diam ipsum eirmod eos lorem nonumy. Tempor sea ipsum diam  sed clita dolore eos dolores magna erat dolore sed stet justo et dolor.</p>
-                    <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>kakanad,Kochi,Kerala</p>
                     <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
                     <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
                     <div class="d-flex justify-content-start mt-4">
@@ -24,11 +24,12 @@
                         <div class="col-sm-6 mb-5">
                             <h5 class="text-white text-uppercase mb-4">Quick Links</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                                <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
-                                <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Pricing Plan</a>
-                                <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                                <a class="text-white-50 mb-2" href="#home"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                                <a class="text-white-50 mb-2" href="#about"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                                <a class="text-white-50 mb-2" href="#services"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+                             
+                                <a class="text-white-50 mb-2" href="#products"><i class="fa fa-angle-right mr-2"></i>Products</a>
+                                <a class="text-white-50" href="#contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
                         <div class="col-sm-6 mb-5">

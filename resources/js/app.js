@@ -37,11 +37,14 @@ import 'datatables.net-buttons/js/buttons.colVis.js'
 
 
 
+
 //for-excel
 window.JSZip = jsZip;
 
 
-
+//multiple image upload
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload)
 
 
 // This line was the one missing
@@ -92,8 +95,11 @@ window.Toast = Toast;
 
 const routes = [
     { path: "/", component: require("./components/dashboard/dashboard.vue").default },
+    { path: "/customer", component: require("./components/masters/customer/CustomerTable.vue").default },
+   
     { path: "/designation", component: require("./components/masters/designation/DesignationTable.vue").default },
     { path: "/employee", component: require("./components/masters/employee/EmployeeTable.vue").default },
+    
      { path: "/attendance", component: require("./components/operations/attendance/AttendanceTable.vue").default },
      { path: "/attendance-report", component: require("./components/reports/AttendanceReport.vue").default },
 
@@ -134,7 +140,10 @@ Vue.component("change-password", require("./components/etc/changePassword.vue").
 Vue.component("pre-loader", require("./components/etc/Loading.vue").default);
 
 Vue.component("add-designation", require("./components/masters/designation/Designation.vue").default);
+
 Vue.component("add-employee", require("./components/masters/employee/Employee.vue").default);
+Vue.component("add-customer", require("./components/masters/customer/Customer.vue").default);
+
 Vue.component("add-employee-attendance", require("./components/operations/attendance/Attendance.vue").default);
 
 /**
