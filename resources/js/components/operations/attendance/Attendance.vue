@@ -27,6 +27,7 @@
                 class="form-control"
                 name="date"
                 v-model="attendance.date"
+                disabled
               />
             </div>
 
@@ -84,7 +85,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        :name="'attendanceRadioButton' + employee.id"
+                        :name="'attendanceRadioButton' + employee.employee_id"
                         v-model="employee.status"
                         value="3"
                         :checked="employee.status == 3"
@@ -102,7 +103,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        :name="'attendanceRadioButton' + employee.id"
+                        :name="'attendanceRadioButton' + employee.employee_id"
                         v-model="employee.status"
                         value="2"
                       />
@@ -119,7 +120,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        :name="'attendanceRadioButton' + employee.id"
+                        :name="'attendanceRadioButton' + employee.employee_id"
                         v-model="employee.status"
                         value="1"
                       />
@@ -136,7 +137,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        :name="'attendanceRadioButton' + employee.id"
+                        :name="'attendanceRadioButton' + employee.employee_id"
                         v-model="employee.status"
                         value="0"
                       />
@@ -170,6 +171,7 @@
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
   props: ["edit"],
 
@@ -183,7 +185,7 @@ export default {
 
       attendance: {
         id: "",
-        date: "",
+        date: moment().format("YYYY-MM-DD"),
         employee_status: [],
       },
     };

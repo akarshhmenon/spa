@@ -13,32 +13,39 @@ class AttendanceController extends Controller
     public function addAttendance(Request $request)
     {
 
-        $request->validate([
-
-            'date' => "required",
-
-        ]);
 
 
 
 
+        if ($request->employee_status) {
+
+            foreach ($request->employee_status as $status) {
+                if ($status['id']) {
+
+                    $Attendance = Attendance::find($status['id']);
+                } else
+
+                    $Attendance = new Attendance;
+                $Attendance->user_id = Auth::user()->id;
+
+                if ($request->date) {
+                    $Attendance->date = $request->date;
+                } else {
+                    $Attendance->date = Carbon::now();
+                }
 
 
-        foreach ($request->employee_status as $status) {
-            if ($status['id']) {
 
-                $Attendance = Attendance::find($status['id']);
-            } else
+                $Attendance->employee_id = $status['employee_id'];
+                $Attendance->status = $status['status'];
+                $Attendance->save();
+            }
 
-                $Attendance = new Attendance;
-            $Attendance->user_id = Auth::user()->id;
-            $Attendance->date = $request->date;
-            $Attendance->employee_id = $status['employee_id'];
-            $Attendance->status = $status['status'];
-            $Attendance->save();
+            return 'success';
+        } else {
+
+            return 'faild';
         }
-
-        return 'success';
     }
 
 
