@@ -17,7 +17,7 @@
         >
           <h5 class="m-0 font-weight-bold text-dark">Employees Attendance</h5>
 
-          <button
+          <button v-if="this.date_check==true"
             type="button"
             class="btn rounded-pill btn-primary"
             data-toggle="modal"
@@ -41,8 +41,8 @@
           >
             <thead class="thead-light">
               <tr>
-               
                 <th>Date</th>
+                <th>Number of Employees</th>
                 <th>Full Day</th>
                 <th>Half Day</th>
                 <th>Absent</th>
@@ -53,12 +53,11 @@
 
             <tbody>
               <tr
-                v-for="(employee ) in employee_attendance_details"
+                v-for="employee in employee_attendance_details"
                 :key="employee.id"
               >
-             
-                <td>{{ employee.date | myDate }}</td>
-
+                <td >{{ employee.date | myDate }}</td>
+                <td>{{ employee.count }}</td>
                 <td>{{ employee.full_day }}</td>
                 <td>{{ employee.half_day }}</td>
                 <td>{{ employee.absent }}</td>
@@ -68,7 +67,7 @@
                   <button
                     class="btn btn-primary btn-sm"
                     data-toggle="modal"
-                    data-target="#editEmployee"
+                    data-target="#editEmployeeAttendance"
                     @click="editEmployeeAttendance(employee)"
                   >
                     <i class="fas fa-edit fafw" title="Edit"></i>
@@ -109,7 +108,7 @@
         aria-labelledby="myLargeModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <add-employee-attendance :edit="true"></add-employee-attendance>
           </div>
@@ -122,29 +121,51 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   props: ["user"],
   data() {
     return {
       preLoader: false,
-      employee_attendance_details: {},
+      employee_attendance_details: [],
+date_check:true,
+today_date:moment().format("YYYY-MM-DD"),
     };
   },
   created() {
     this.getEmployeesAttendance();
     var _this = this;
-    bus.$on("employee-attendance-added", function () {
+    bus.$on("attendance-added", function () {
       _this.getEmployeesAttendance();
     });
+
+
+
   },
 
   methods: {
+
+
     getEmployeesAttendance() {
       this.preLoader = true; //the loading begin
       axios
         .get("get-employees-attendance")
         .then((res) => {
           this.employee_attendance_details = res.data;
+
+if(this.employee_attendance_details.length!=0){
+ for(let date in this.employee_attendance_details ){
+
+   if(this.employee_attendance_details[date].date==this.today_date){
+
+
+this.date_check=false;
+   }
+
+ }
+
+}
+
           this.preLoader = false; //the loading end
         })
         .catch((err) => {

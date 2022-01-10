@@ -69,7 +69,6 @@
         >
           <thead class="thead-light">
             <tr>
-           
               <th>Name</th>
               <th>Full Day</th>
               <th>Half Day</th>
@@ -81,8 +80,7 @@
           </thead>
 
           <tbody>
-            <tr v-for="(employee) in Attendance_list" :key="employee.employee_id">
-             
+            <tr v-for="employee in Attendance_list" :key="employee.employee_id">
               <td>{{ employee.name }}</td>
               <td>{{ employee.full_day }}</td>
               <td>{{ employee.half_day }}</td>
@@ -101,11 +99,11 @@
                   class="btn btn-outline-primary btn-sm"
                   data-toggle="modal"
                   data-target="#viewOnly"
-                  @click="viewSale(sale)"
+                  @click="viewOnly(employee)"
                 >
                   <i class="fa fa-eye fa-fw" title="view"></i>
                 </button>
-<!-- 
+                <!-- 
                 <button
                   class="btn btn-success btn-sm"
                   data-toggle="modal"
@@ -173,6 +171,132 @@
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <!-- **** -->
+          <div class="modal-header bg-primary">
+            <h5 class="modal-title modal-title-custom" id="addEmployeeLabel">
+              Attendance Card
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              ref="close_employee_attendance_modal"
+            >
+              <span aria-hidden="true" class="modal-title-custom">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <div class="card mb-4">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <div>
+                            <h3>{{ employee_name }}</h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col">
+                          <div>
+                            <h5 class="text-success">Full day</h5>
+                            <span>
+                              <strong> {{ employee_full_day }} </strong>
+                              Days</span
+                            >
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div>
+                            <h5 class="text-info">Half Day</h5>
+                            <span>
+                              <strong> {{ employee_half_day }} </strong>
+                              Days</span
+                            >
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div>
+                            <h5 class="text-warning">Absent</h5>
+                            <span>
+                              <strong> {{ employee_absent }} </strong>
+                              Days</span
+                            >
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div>
+                            <h5 class="text-danger">Leave</h5>
+                            <span>
+                              <strong> {{ employee_leave }} </strong> Days</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="card">
+                    <div class="table-responsive p-3">
+                      <table
+                        class="
+                          table
+                          align-items-center
+                          table-flush table-hover
+                          display
+                          text-center
+                        "
+                        id="employeeAttendanceTable"
+                        ref="employeeAttendanceTable"
+                        data-order=""
+                      >
+                        <thead class="thead-light">
+                          <tr>
+                            <th>index</th>
+                            <th>Date</th>
+                            <th>Day</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr
+                            v-for="(employee, index) in view_only_attendance
+                              .slice()
+                              .reverse()"
+                            :key="employee.id"
+                          >
+                            <td>{{ index + 1 }}</td>
+                            <td>{{ employee.date | myDate }}</td>
+                            <td>{{ employee.date | formatDate }}</td>
+                            <td v-if="employee.status == 0">
+                              <span class="text-danger">Leave</span>
+                            </td>
+                            <td v-if="employee.status == 1">
+                              <span class="text-warning">Absent</span>
+                            </td>
+                            <td v-if="employee.status == 2">
+                              <span class="text-info">Half Day</span>
+                            </td>
+                            <td v-if="employee.status == 3">
+                              <span class="text-success">Full Day</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- **** -->
         </div>
       </div>
     </div>
@@ -191,6 +315,13 @@ export default {
       from_date: "",
       to_date: "",
       search: false,
+      view_only_attendance: [],
+
+      employee_name: "",
+      employee_full_day: "",
+      employee_half_day: "",
+      employee_absent: "",
+      employee_leave: "",
     };
   },
 
@@ -221,12 +352,6 @@ export default {
         });
     },
 
-    editAttendance(sale) {
-      bus.$emit("edit-sale", sale);
-    },
-    viewAttendance(sale) {
-      bus.$emit("view-sale", sale);
-    },
     clearSearch() {
       this.from_date = "";
       this.to_date = "";
@@ -237,9 +362,13 @@ export default {
     showFilter() {
       this.search = true;
     },
-
-    AttendanceReportInvoice(sale) {
-      bus.$emit("sale-invoice", sale);
+    viewOnly(employee) {
+      this.employee_name = employee.name;
+      this.employee_full_day = employee.full_day;
+      this.employee_half_day = employee.half_day;
+      this.employee_absent = employee.absent;
+      this.employee_leave = employee.leave;
+      this.view_only_attendance = employee.group_by_attendance;
     },
   },
 
@@ -255,21 +384,67 @@ export default {
               extend: "copy",
               title: "Attendance Report",
               exportOptions: {
-                 columns: ":visible:not(:eq(5))",
+                columns: ":visible:not(:eq(5))",
               },
             },
             {
               extend: "excel",
               title: "Attendance Report",
               exportOptions: {
-                 columns: ":visible:not(:eq(5))",
+                columns: ":visible:not(:eq(5))",
               },
             },
             {
               extend: "pdf",
               title: "Attendance Report",
               exportOptions: {
-                 columns: ":visible:not(:eq(5))",
+                columns: ":visible:not(:eq(5))",
+              },
+            },
+            {
+              extend: "print",
+              title: "Attendance Report",
+              exportOptions: {
+                columns: ":visible:not(:eq(5))",
+              },
+            },
+          ],
+
+          lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+          ],
+          bSort: false,
+        });
+      });
+    },
+
+    view_only_attendance(val) {
+      this.ds.destroy();
+      this.$nextTick(() => {
+        this.ds = $(this.$refs.employeeAttendanceTable).DataTable({
+          pageLength: 5,
+          dom: "lBfrtip",
+          buttons: [
+            {
+              extend: "copy",
+              title: "Attendance Report",
+              exportOptions: {
+                columns: ":visible:not(:eq(5))",
+              },
+            },
+            {
+              extend: "excel",
+              title: "Attendance Report",
+              exportOptions: {
+                columns: ":visible:not(:eq(5))",
+              },
+            },
+            {
+              extend: "pdf",
+              title: "Attendance Report",
+              exportOptions: {
+                columns: ":visible:not(:eq(5))",
               },
             },
             {
@@ -301,28 +476,70 @@ export default {
           extend: "copy",
           title: "Attendance Report",
           exportOptions: {
-             columns: ":visible:not(:eq(5))",
+            columns: ":visible:not(:eq(5))",
           },
         },
         {
           extend: "excel",
           title: "Attendance Report",
           exportOptions: {
-             columns: ":visible:not(:eq(5))",
+            columns: ":visible:not(:eq(5))",
           },
         },
         {
           extend: "pdf",
           title: "Attendance Report",
           exportOptions: {
-             columns: ":visible:not(:eq(5))",
+            columns: ":visible:not(:eq(5))",
           },
         },
         {
           extend: "print",
           title: "Attendance Report",
           exportOptions: {
-           columns: ":visible:not(:eq(5))",
+            columns: ":visible:not(:eq(5))",
+          },
+        },
+      ],
+
+      lengthMenu: [
+        [10, 25, 50, -1],
+        [10, 25, 50, "All"],
+      ],
+      bSort: false,
+    });
+
+    this.ds = $(this.$refs.employeeAttendanceTable).DataTable({
+      pageLength: 5,
+
+      dom: "lBfrtip",
+      buttons: [
+        {
+          extend: "copy",
+          title: "Attendance Report",
+          exportOptions: {
+            columns: ":visible:not(:eq(5))",
+          },
+        },
+        {
+          extend: "excel",
+          title: "Attendance Report",
+          exportOptions: {
+            columns: ":visible:not(:eq(5))",
+          },
+        },
+        {
+          extend: "pdf",
+          title: "Attendance Report",
+          exportOptions: {
+            columns: ":visible:not(:eq(5))",
+          },
+        },
+        {
+          extend: "print",
+          title: "Attendance Report",
+          exportOptions: {
+            columns: ":visible:not(:eq(5))",
           },
         },
       ],

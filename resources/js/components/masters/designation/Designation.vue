@@ -13,9 +13,7 @@
           />
         </div>
 
-        <small class="text-danger" v-if="errors.name">
-          {{ errors.name[0] }}</small
-        >
+        <small class="text-danger" v-if="errors.name"> {{ errors.name[0] }}</small>
       </div>
 
       <div class="col">
@@ -58,7 +56,7 @@ export default {
   data() {
     return {
       loading: false,
-   
+
       button_title: "Add Designation",
       toastTitle: "Added successfully",
       designation: {
@@ -70,36 +68,24 @@ export default {
     };
   },
 
-created() {
+  created() {
+    var _this = this;
+    bus.$on("clear-field", function () {
+      _this.clear_form_data();
+    });
 
-
-var _this=this;
-bus.$on('clear-field',function(){
-
-_this.clear_form_data();
-});
-
-if(this.edit){
-
-var _this=this;
-bus.$on('edit-designation',function(designation){
-
-_this.designation.id=designation.id;
-_this.designation.name=designation.name;
-_this.designation.description=designation.description;
-_this.button_title='Update Designation';
-_this.toastTitle='Updated successfully';
-
-
-
-});
-
-
-}
-
-
-
+    if (this.edit) {
+      var _this = this;
+      bus.$on("edit-designation", function (designation) {
+        _this.designation.id = designation.id;
+        _this.designation.name = designation.name;
+        _this.designation.description = designation.description;
+        _this.button_title = "Update Designation";
+        _this.toastTitle = "Updated successfully";
+      });
+    }
   },
+
 
   methods: {
     addDesignation() {
@@ -115,7 +101,7 @@ _this.toastTitle='Updated successfully';
             });
 
             this.clear_form_data();
-            bus.$emit('designation-added');
+            bus.$emit("designation-added");
           }
 
           if (response.data == "failed") {
@@ -150,9 +136,7 @@ _this.toastTitle='Updated successfully';
       this.toastTitle = "Added successfully";
     },
   },
-
 };
 </script>
 
-<style>
-</style>
+<style></style>

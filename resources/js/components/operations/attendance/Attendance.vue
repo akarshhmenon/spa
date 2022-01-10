@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <div class="modal-header bg-primary">
       <h5 class="modal-title modal-title-custom" id="addEmployeeLabel">
         {{ title }}
@@ -28,6 +27,7 @@
                 class="form-control"
                 name="date"
                 v-model="attendance.date"
+                disabled
               />
             </div>
 
@@ -69,7 +69,7 @@
               <tbody class="text-center">
                 <tr
                   v-for="(employee, index) in attendance.employee_status"
-                  :key="employee.id"
+                  :key="employee.employee_id"
                 >
                   <td>
                     {{ index + 1 }}
@@ -78,17 +78,17 @@
                     {{ employee.name }}
                   </td>
                   <td>
-                    {{ employee.id }}
+                    {{ employee.employee_id }}
                   </td>
                   <td>
                     <div class="form-check">
                       <input
                         class="form-check-input"
                         type="radio"
-                        :name="'attendanceRadioButton'+employee.id"
+                        :name="'attendanceRadioButton' + employee.employee_id"
                         v-model="employee.status"
                         value="3"
-                       :checked="employee.status ==3"
+                        :checked="employee.status == 3"
                       />
                       <label
                         class="form-check-label"
@@ -103,7 +103,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        :name="'attendanceRadioButton'+employee.id"
+                        :name="'attendanceRadioButton' + employee.employee_id"
                         v-model="employee.status"
                         value="2"
                       />
@@ -120,7 +120,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        :name="'attendanceRadioButton'+employee.id"
+                        :name="'attendanceRadioButton' + employee.employee_id"
                         v-model="employee.status"
                         value="1"
                       />
@@ -137,7 +137,7 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        :name="'attendanceRadioButton'+employee.id"
+                        :name="'attendanceRadioButton' + employee.employee_id"
                         v-model="employee.status"
                         value="0"
                       />
@@ -163,7 +163,6 @@
         class="btn btn-primary rounded-pill"
         :disabled="loading"
         @click="addAttendance()"
-
       >
         {{ button_title }}
         <i class="fas fa-spinner fa-spin fa-fw" v-if="loading == true"></i>
@@ -172,6 +171,7 @@
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
   props: ["edit"],
 
@@ -185,7 +185,7 @@ export default {
 
       attendance: {
         id: "",
-        date: "",
+        date: moment().format("YYYY-MM-DD"),
         employee_status: [],
       },
     };
@@ -202,6 +202,26 @@ export default {
   },
   created() {
     this.getEmployees();
+
+    if (this.edit) {
+      var _this = this;
+
+      bus.$on("edit-employee-attendance", function (attendance) {
+        _this.attendance.employee_status = [];
+        for (let employee in attendance.attendance) {
+          _this.attendance.date = attendance.date;
+          _this.attendance.employee_status.push({
+            id: attendance.attendance[employee].id,
+            employee_id: attendance.attendance[employee].employee_id,
+            name: attendance.attendance[employee].employee.name,
+            status: attendance.attendance[employee].status,
+          });
+        }
+
+        _this.title = "Update Attendace";
+        _this.toastTitle = "Updated successfully";
+      });
+    }
   },
 
   methods: {
@@ -212,14 +232,16 @@ export default {
         .then((res) => {
           var employee_details = res.data;
 
-          if(employee_details.length!=0){
-          for (let employee in employee_details) {
-            this.attendance.employee_status.push({
-              employee_id: employee_details[employee].id,
-              name: employee_details[employee].name,
-              status:"3",
-            });
-          }}
+          if (employee_details.length != 0) {
+            for (let employee in employee_details) {
+              this.attendance.employee_status.push({
+                id: "",
+                employee_id: employee_details[employee].id,
+                name: employee_details[employee].name,
+                status: "3",
+              });
+            }
+          }
 
           this.preLoader = false; //the loading end
         })
@@ -228,10 +250,11 @@ export default {
           console.log(err);
         });
     },
-    addAttendance(){
-
-this.loading = true;
-axios.post('add-attendance',this.attendance).then((response) =>{
+    addAttendance() {
+      this.loading = true;
+      axios
+        .post("add-attendance", this.attendance)
+        .then((response) => {
           if (response.data == "success") {
             Toast.fire({
               icon: "success",
@@ -239,7 +262,6 @@ axios.post('add-attendance',this.attendance).then((response) =>{
             });
             bus.$emit("attendance-added");
             this.$refs.close_employee_attendance_modal.click();
-        
           }
 
           if (response.data == "failed") {
@@ -248,9 +270,7 @@ axios.post('add-attendance',this.attendance).then((response) =>{
               title: "Some Error Occurred,Please Try Again Later",
             });
 
-         
             this.$refs.close_employee_attendance_modal.click();
-           
           }
 
           this.loading = false;
@@ -260,14 +280,12 @@ axios.post('add-attendance',this.attendance).then((response) =>{
           this.errors = error.response.data.errors;
           console.log("errors");
         });
-
-
     },
 
     clearFormData() {
-   this.attendance.id='';
-   this.attendance.date='';
-this.attendance.employee_status=[];
+      this.attendance.id = "";
+      this.attendance.date = "";
+      this.attendance.employee_status = [];
       this.errors = {};
       this.getEmployees();
     },
