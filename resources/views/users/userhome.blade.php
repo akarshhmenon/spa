@@ -99,7 +99,7 @@
                                                     <p class="card-text">Just like the morning, let yourself shine with
                                                         tender skin exfoliation.</p>
                                                     <div class="w-100 bg-white text-center p-4">
-                                                        <a class="btn btn-primary" href="">Book Now</a>
+                                                        <a class="btn btn-primary" href={{ url('/services') }}>View All</a>
                                                     </div>
                                                 </div>
 
@@ -114,7 +114,7 @@
                                                     <p class="card-text">used to help you relax and ease tense muscles
                                                         and damaged soft tissues</p>
                                                     <div class="w-100 bg-white text-center p-4">
-                                                        <a class="btn btn-primary" href="">Book Now</a>
+                                                        <a class="btn btn-primary" href={{ url('/services') }}>View All</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,7 +128,7 @@
                                                     <p class="card-text">Rhythmical sequence of double facial cleanse,
                                                         exfoliation, skin stimulating.</p>
                                                     <div class="w-100 bg-white text-center p-4">
-                                                        <a class="btn btn-primary" href="">Book Now</a>
+                                                        <a class="btn btn-primary" href={{ url('/services') }}>View All</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,7 +148,7 @@
                                                     <p class="card-text">The deep cleansing and exfoliation keeps your
                                                         skin clear and smooth.</p>
                                                     <div class="w-100 bg-white text-center p-4">
-                                                        <a class="btn btn-primary" href="">Book Now</a>
+                                                        <a class="btn btn-primary" href={{ url('/services') }}>View All</a>
                                                     </div>
                                                 </div>
 
@@ -163,7 +163,7 @@
                                                     <p class="card-text">A steam bath is beneficial and therapeutic for
                                                         your body.</p>
                                                     <div class="w-100 bg-white text-center p-4">
-                                                        <a class="btn btn-primary" href="">Book Now</a>
+                                                        <a class="btn btn-primary" href={{ url('/services') }}>View All</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -177,7 +177,7 @@
                                                     <p class="card-text">Hydrate skin, remove excess oils & improve the
                                                         appearance of pores.</p>
                                                     <div class="w-100 bg-white text-center p-4">
-                                                        <a class="btn btn-primary" href="">Book Now</a>
+                                                        <a class="btn btn-primary" href={{ url('/services') }}>View All</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -232,24 +232,24 @@
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0 shadow-sm p-3 mb-5 bg-white rounded"
                     data-aos="zoom-in" data-aos-delay="200">
-                    <div class="icon-box"> <a href="/pro">
+                    <div class="icon-box"> <a href={{ url('/singleproduct') }}>
                             <img src="{{ URL::asset('frontassets/img/product-2.jpg') }}" style="object-fit: cover;">
 
-                            <h4><a href="/pro">Olay Total Effects</a></h4>
+                            <h4><a href={{ url('/singleproduct') }}>Olay Total Effects</a></h4>
                             <p>Olay Total Effects 7 In One Touch Of Foundation BB Cream Day SPF 15</p>
                             <h3><i class="fa fa-rupee"> ₹ 1100</i></h3>
-                            <a class="btn btn-primary" href="/pro">View Details</a>
+                            <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
                     </div>
                 </div></a>
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0 shadow-sm p-3 mb-5 bg-white rounded"
                     data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box"><a href="/washing">
+                    <div class="icon-box"><a href={{ url('/singleproduct') }}>
                             <img src="{{ URL::asset('frontassets/img/product-3.jpg') }}" style="object-fit: cover;">
-                            <h4><a href="/washing">Skeyndor</a></h4>
+                            <h4><a href={{ url('/singleproduct') }}>Skeyndor</a></h4>
                             <p>Skeyndor Timeless Prodigy–For middle aged & mature skins, dry and very dry skin.</p>
                             <h3><i class="fa fa-rupee"> ₹ 11020</i></h3>
-                            <a class="btn btn-primary" href="">View Details</a>
+                            <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
                     </div>
                 </div></a>
             </div>
@@ -261,38 +261,38 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch shadow-sm p-3 mb-5 bg-white rounded"
                     data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon-box">
+                    <div class="icon-box"> <a href={{ url('/singleproduct') }}>
                         <img src="{{ URL::asset('frontassets/img/product-4.jpg') }}" style="object-fit: cover;">
 
-                        <h4><a href="/accessories"> SkinKraft</a></h4>
+                        <h4><a href={{ url('/singleproduct') }}> SkinKraft</a></h4>
                         <p>SkinKraft Customized Skincare Regimen - Face Cleanser, Face Moisturizer & Active</p>
                         <h3><i class="fa fa-rupee"> ₹ 999</i></h3>
-                        <a class="btn btn-primary" href="">View Details</a>
+                        <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
                     </div>
                 </div>
         </a>
 
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0 shadow-sm p-3 mb-5 bg-white rounded"
             data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box"> <a href="/livemechanic">
+            <div class="icon-box"> <a href={{ url('/singleproduct') }}>
                     <img src="{{ URL::asset('frontassets/img/product-5.jpg') }}" style="object-fit: cover;">
 
-                    <h4><a href="/livemechanic">Wow Skin Science</a></h4>
+                    <h4><a href={{ url('/singleproduct') }}>Wow Skin Science</a></h4>
                     <p>Onion Hair Oil Ultimate Hair Care Combo Kit (Shampoo + Hair Conditioner + Hair Oil)</p>
                     <h3><i class="fa fa-rupee"> ₹ 1099</i></h3>
-                    <a class="btn btn-primary" href="">View Details</a>
+                    <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
             </div>
         </div></a>
 
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0 shadow-sm p-3 mb-5 bg-white rounded"
             data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box"><a href="/washing">
+            <div class="icon-box"><a href={{ url('/singleproduct') }}>
                     <img src="{{ URL::asset('frontassets/img/product-6.jpg') }}" style="object-fit: cover;">
 
-                    <h4><a href="/washing">L'Oreal Paris 6 Oil</a></h4>
+                    <h4><a href={{ url('/singleproduct') }}>L'Oreal Paris 6 Oil</a></h4>
                     <p> Provide complete nourishment to your hair from root to tip with six micro oils</p>
                     <h3><i class="fa fa-rupee"> ₹ 65</i></h3>
-                    <a class="btn btn-primary" href="">View Details</a>
+                    <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
             </div>
         </div></a>
 
