@@ -96,8 +96,9 @@ window.Toast = Toast;
 const routes = [
     { path: "/", component: require("./components/dashboard/dashboard.vue").default },
     { path: "/customer", component: require("./components/masters/customer/CustomerTable.vue").default },
-   
+    { path: "/category", component: require("./components/masters/category/CategoryTable.vue").default },
     { path: "/designation", component: require("./components/masters/designation/DesignationTable.vue").default },
+    { path: "/service", component: require("./components/masters/service/ServiceTable.vue").default },
     { path: "/employee", component: require("./components/masters/employee/EmployeeTable.vue").default },
     
      { path: "/attendance", component: require("./components/operations/attendance/AttendanceTable.vue").default },
@@ -138,9 +139,9 @@ const router = new VueRouter({
 Vue.component("change-password", require("./components/etc/changePassword.vue").default);
 
 Vue.component("pre-loader", require("./components/etc/Loading.vue").default);
-
+Vue.component("add-category", require("./components/masters/category/Category.vue").default);
 Vue.component("add-designation", require("./components/masters/designation/Designation.vue").default);
-
+Vue.component("add-service", require("./components/masters/service/Service.vue").default);
 Vue.component("add-employee", require("./components/masters/employee/Employee.vue").default);
 Vue.component("add-customer", require("./components/masters/customer/Customer.vue").default);
 

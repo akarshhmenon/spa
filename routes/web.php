@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\singleproductcontroller;
 use App\Http\Controllers\serviceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,10 +58,22 @@ Route::post('add-designation', [DesignationController::class, 'addDesignation'])
 Route::get('get-designations', [DesignationController::class, 'getDesignation']);
 Route::post('delete-designation', [DesignationController::class, 'deleteDesignation']);
 
+//category
+
+Route::post('add-category', [CategoryController::class, 'addCategory']);
+Route::get('get-categories', [CategoryController::class, 'getCategory']);
+Route::post('delete-category', [CategoryController::class, 'deleteCategory']);
+
 // employee 
 Route::post('add-employee', [EmployeeController::class, 'addEmployee']);
 Route::get('get-employees', [EmployeeController::class, 'getEmployees']);
 Route::post('delete-employee', [EmployeeController::class, 'deleteEmployee']);
+
+//service
+Route::post('add-service', [ServiceController::class, 'addService']);
+Route::get('get-service', [ServiceController::class, 'getService']);
+Route::post('delete-service', [ServiceController::class, 'deleteService']);
+
 
 // Attendance 
 Route::post('add-attendance', [AttendanceController::class, 'addAttendance']);
