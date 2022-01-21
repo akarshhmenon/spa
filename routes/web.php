@@ -11,6 +11,7 @@ use App\Http\Controllers\serviceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductAndServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -71,9 +72,15 @@ Route::get('get-employees', [EmployeeController::class, 'getEmployees']);
 Route::post('delete-employee', [EmployeeController::class, 'deleteEmployee']);
 
 //service
-Route::post('add-service', [ServiceController::class, 'addService']);
-Route::get('get-service', [ServiceController::class, 'getService']);
-Route::post('delete-service', [ServiceController::class, 'deleteService']);
+Route::post('add-service', [ProductAndServiceController::class, 'addService']);
+Route::get('get-service', [ProductAndServiceController::class, 'getService']);
+Route::post('delete-service', [ProductAndServiceController::class, 'deleteService']);
+
+
+//product
+Route::post('add-product', [ProductAndServiceController::class, 'addProduct']);
+Route::get('get-product', [ProductAndServiceController::class, 'getProduct']);
+Route::post('delete-product', [ProductAndServiceController::class, 'deleteProduct']);
 
 
 // Attendance 
@@ -88,6 +95,10 @@ Route::post('delete-customer', [CustomerController::class, 'deleteCustomer']);
 
 // images
 Route::post('add-image', [ImageController::class, 'addImage']);
+Route::get('get-product-service', [ProductAndServiceController::class, 'getProductAndService']);
+Route::get('get-images', [ImageController::class, 'getImages']);
+Route::post('delete-image', [ImageController::class, 'DeleteImage']);
+
 });
 
 

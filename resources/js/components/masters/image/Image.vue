@@ -30,6 +30,7 @@
                     type="file"
                     ref="chooseImage"
                     class="hideInputFile"
+                    name="image"
                     @change="selectImage($event)"
                   />
                   <button
@@ -43,7 +44,7 @@
               </div>
 
               <div class="text-center">
-                <span class="text-danger"> {{image_errors}} </span>
+                <span class="text-danger"> {{ image_errors }} </span>
               </div>
             </div>
           </div>
@@ -53,7 +54,7 @@
         <button
           type="submit"
           class="btn btn-primary rounded-pill"
-          :disabled="loading || image_errors!=''"
+          :disabled="loading || image_errors != ''"
           @click="addImage()"
         >
           {{ button_title }}
@@ -78,12 +79,12 @@ export default {
       errors: {},
       url: "/images/nofilechoosen.png",
       loading: false,
-      image_errors:'',
-
+      image_errors: "",
 upload:{
-    image:'',
-}
-
+      item_id: "",
+      type: "",
+      image: "",
+      }
     };
   },
 
@@ -96,20 +97,26 @@ upload:{
       }
     },
   },
-  created() {},
+  created() {
+    var _this = this;
+
+    bus.$on("add-image", function (item) {
+      _this.upload.item_id = item.item_id;
+      _this.upload.type = item.type;
+    });
+  },
 
   methods: {
     chooseImage() {
       this.$refs.chooseImage.click();
-      this.image_errors='';
+      this.image_errors = "";
     },
     selectImage(e) {
       const file = e.target.files[0];
       this.url = URL.createObjectURL(file);
 
+      var vm = this;
 
- var vm = this;
-   
       vm.image_errors = "";
 
       var reader = new FileReader();
@@ -146,20 +153,28 @@ upload:{
       };
     },
 
-addImage(){
+    addImage() {
+      if (this.upload.image == "") {
+        this.image_errors = "this field required";
+        return false;
+      }
 
- 
- 
+      let upload = new FormData();
+      upload.append("image", this.upload.image);
+      upload.append("item_id", this.upload.item_id);
+      upload.append("type", this.upload.type);
+
       this.loading = true;
+
       axios
-        .post("add-image", this.upload)
+        .post("add-image", upload)
         .then((response) => {
           if (response.data == "success") {
             Toast.fire({
               icon: "success",
               title: this.toastTitle,
             });
-            bus.$emit("employee-added");
+            bus.$emit("image-added");
             this.$refs.close_image_modal.click();
             this.clearFormData();
           }
@@ -170,7 +185,7 @@ addImage(){
               title: "Some Error Occurred,Please Try Again Later",
             });
 
-            bus.$emit("employee-added");
+            bus.$emit("image-added");
             this.$refs.close_image_modal.click();
             this.clearFormData();
           }
@@ -182,16 +197,14 @@ addImage(){
           this.errors = error.response.data.errors;
           console.log("errors");
         });
-    
+    },
 
-
-},
-
-clearFormData(){
-    this.upload.image='';
-}
-
-
+    clearFormData() {
+      this.upload.image = "";
+      this.upload.item_id = "";
+      this.upload.type = "";
+      this.url = "/images/nofilechoosen.png";
+    },
   },
 };
 </script>

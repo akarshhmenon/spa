@@ -32,9 +32,9 @@ $user= Auth::user();
         <div class="bg-white py-2 collapse-inner rounded" >
           <h6 class="collapse-header">Masters</h6>
           <router-link class="collapse-item" to="/customer">Customer</router-link>
-          <router-link class="collapse-item" to="#1">Products</router-link>
+          <router-link class="collapse-item" to="/product">Product</router-link>
           <router-link class="collapse-item" to="/service">Service</router-link>
-          <router-link class="collapse-item" to="/employee">Employees</router-link>
+          <router-link class="collapse-item" to="/employee">Employee</router-link>
           <router-link class="collapse-item" to="/category">Category</router-link>
           <router-link class="collapse-item" to="/designation">Designation</router-link>
           <router-link class="collapse-item" to="/images">Images</router-link>
