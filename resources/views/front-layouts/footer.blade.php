@@ -1,5 +1,5 @@
 
-</section>
+
     <!-- Footer Start -->
     <div class="footer container-fluid position-relative bg-dark py-5" style="margin-top: 90px;">
         <div class="container pt-5">
@@ -61,13 +61,16 @@
     </div>
     <!-- Footer End -->
 
-
+</section>
+</div>
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
+    <script src="{{ mix('/js/app.js') }}" ></script>
 
+    
     <!-- JavaScript Libraries -->
-    { <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset ('frontassets/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset ('frontassets/lib/waypoints/waypoints.min.js')}}"></script>
@@ -77,11 +80,13 @@
     <script src="{{ asset ('frontassets/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
     <script src="{{ asset ('frontassets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"><script>  
 
+
+
     <!-- Contact Javascript File -->
     {{--  <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>  --}}
 
-    <script src="{{ mix('/js/app.js') }}"></script>
+   
     <!-- Template Javascript -->
     <script src="{{ asset('frontassets/js/main.js') }}"></script>
 

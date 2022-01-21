@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\singleproductcontroller;
 use App\Http\Controllers\serviceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -72,13 +73,13 @@ Route::post('add-customer', [CustomerController::class, 'addCustomer']);
 Route::get('get-customers', [CustomerController::class, 'getCustomers']);
 Route::post('delete-customer', [CustomerController::class, 'deleteCustomer']);
 
-
-
+// images
+Route::post('add-image', [ImageController::class, 'addImage']);
 });
 
 
 Route::get('/',[UserController::class,'index']);
-Route::get('/products',[Singleproductcontroller::class,'prod']);
-Route::get('/singleproduct',[Singleproductcontroller::class,'pro']);
-Route::get('/services',[ServiceController::class,'serv']);
+Route::get('/products',[Singleproductcontroller::class,'productPage']);
+Route::get('/singleproduct',[Singleproductcontroller::class,'singleProductPage']);
+Route::get('/services',[ServiceController::class,'servicePage']);
 

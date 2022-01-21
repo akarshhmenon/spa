@@ -11,7 +11,7 @@ class serviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function serv()
+    public function servicePage()
     {
     return view('users.services');
     }
