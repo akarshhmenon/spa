@@ -9,6 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\singleproductcontroller;
 use App\Http\Controllers\serviceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductAndServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +67,12 @@ Route::post('add-category', [CategoryController::class, 'addCategory']);
 Route::get('get-categories', [CategoryController::class, 'getCategory']);
 Route::post('delete-category', [CategoryController::class, 'deleteCategory']);
 
+//category
+
+Route::post('add-category', [CategoryController::class, 'addCategory']);
+Route::get('get-categories', [CategoryController::class, 'getCategory']);
+Route::post('delete-category', [CategoryController::class, 'deleteCategory']);
+
 // employee 
 Route::post('add-employee', [EmployeeController::class, 'addEmployee']);
 Route::get('get-employees', [EmployeeController::class, 'getEmployees']);
@@ -73,18 +82,39 @@ Route::post('add-attendance',[AttendanceController::class,'addAttendance']);
 Route::get('get-employees-attendance',[AttendanceController::class,'getEmployeesAttendance']);
 Route::get('get-employees-attendance-report',[AttendanceController::class,'getEmployeesAttendanceReport']);
 
+//service
+Route::post('add-service', [ProductAndServiceController::class, 'addService']);
+Route::get('get-service', [ProductAndServiceController::class, 'getService']);
+Route::post('delete-service', [ProductAndServiceController::class, 'deleteService']);
+
+
+//product
+Route::post('add-product', [ProductAndServiceController::class, 'addProduct']);
+Route::get('get-product', [ProductAndServiceController::class, 'getProduct']);
+Route::post('delete-product', [ProductAndServiceController::class, 'deleteProduct']);
+
+
+// Attendance 
+Route::post('add-attendance', [AttendanceController::class, 'addAttendance']);
+Route::get('get-employees-attendance', [AttendanceController::class, 'getEmployeesAttendance']);
+Route::get('get-employees-attendance-report', [AttendanceController::class, 'getEmployeesAttendanceReport']);
+
 //customer
 Route::post('add-customer', [CustomerController::class, 'addCustomer']);
 Route::get('get-customers', [CustomerController::class, 'getCustomers']);
 Route::post('delete-customer', [CustomerController::class, 'deleteCustomer']);
 
-
+// images
+Route::post('add-image', [ImageController::class, 'addImage']);
+Route::get('get-product-service', [ProductAndServiceController::class, 'getProductAndService']);
+Route::get('get-images', [ImageController::class, 'getImages']);
+Route::post('delete-image', [ImageController::class, 'DeleteImage']);
 
 });
 
 
 Route::get('/',[UserController::class,'index']);
-Route::get('/products',[Singleproductcontroller::class,'prod']);
-Route::get('/singleproduct',[Singleproductcontroller::class,'pro']);
-Route::get('/services',[ServiceController::class,'serv']);
+Route::get('/products',[Singleproductcontroller::class,'productPage']);
+Route::get('/singleproduct',[Singleproductcontroller::class,'singleProductPage']);
+Route::get('/services',[ServiceController::class,'servicePage']);
 

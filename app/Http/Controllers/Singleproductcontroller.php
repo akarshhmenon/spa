@@ -12,7 +12,7 @@ class Singleproductcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function pro()
+    public function singleProductPage()
     {
         return view('users.singleproduct');
     }
@@ -23,7 +23,7 @@ class Singleproductcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function prod()
+    public function productPage()
     {
         return view('users.products');
     }
