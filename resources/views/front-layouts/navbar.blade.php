@@ -18,10 +18,10 @@
                 </div>
                 
             </div>
-            <a href="" class="btn btn-primary d-none d-lg-block">Book Now</a>
+            <a href="{{ url('/booking') }}" class="btn btn-primary d-none d-lg-block">Book Now</a>
         </div>
     </nav>
-</div>
+
 <!-- Navbar End -->
 
     

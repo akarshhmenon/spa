@@ -77,7 +77,6 @@ import 'vue-search-select/dist/VueSearchSelect.css'
 
 
 
-
 Vue.use(VueRouter);
 
 import Swal from "sweetalert2";
@@ -102,6 +101,7 @@ const routes = [
     
      { path: "/attendance", component: require("./components/operations/attendance/AttendanceTable.vue").default },
      { path: "/attendance-report", component: require("./components/reports/AttendanceReport.vue").default },
+
 
 ];
 
@@ -140,9 +140,9 @@ Vue.component("change-password", require("./components/etc/changePassword.vue").
 Vue.component("pre-loader", require("./components/etc/Loading.vue").default);
 
 Vue.component("add-designation", require("./components/masters/designation/Designation.vue").default);
-
 Vue.component("add-employee", require("./components/masters/employee/Employee.vue").default);
 Vue.component("add-customer", require("./components/masters/customer/Customer.vue").default);
+Vue.component("add-booking", require("./components/booking/Booking.vue").default);
 
 Vue.component("add-employee-attendance", require("./components/operations/attendance/Attendance.vue").default);
 
