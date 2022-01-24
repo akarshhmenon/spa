@@ -21,8 +21,12 @@
                       class="form-control bg-transparent p-4"
                       placeholder="Your Name"
                       required="required"
+                      v-model="booking.name"
                     />
                   </div>
+                   <small class="text-danger" v-if="errors.name">{{
+                  errors.name[0]
+                }}</small>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
@@ -31,8 +35,11 @@
                       class="form-control bg-transparent p-4"
                       placeholder="Your Email"
                       required="required"
+                      v-model="booking.email"
                     />
                   </div>
+                   <small class="text-danger" v-if="errors.email">{{
+                  errors.email[0]}}</small>
                 </div>
               </div>
               <div class="form-row">
@@ -43,8 +50,12 @@
                       class="form-control bg-transparent p-4"
                       placeholder="Your Mobile"
                       required="required"
+                      v-model="booking.mobile"
+                      
                     />
                   </div>
+                  <small class="text-danger" v-if="errors.mobile">{{
+                  errors.mobile[0]}}</small>
                 </div>
 
                 <div class="col-sm-6">
@@ -52,12 +63,20 @@
                     <select
                       class="custom-select bg-transparent px-4"
                       style="height: 47px"
+                      name="service_id"
+                      v-model="booking.service_id"
                     >
-                      <option selected>Select A Service</option>
-                      <option value="1">Service 1</option>
-                      <option value="2">Service 1</option>
-                      <option value="3">Service 1</option>
+                      <option value="">Select Service</option>
+                      <option
+                        v-for="service in services"
+                        :key="service.id"
+                        v-bind:value="service.id"
+                      >
+                        {{ service.name }}
+                      </option>
                     </select>
+                    <small class="text-danger" v-if="errors.service_id">{{
+                  errors.service_id[0]}}</small>
                   </div>
                 </div>
               </div>
@@ -69,112 +88,127 @@
                       class="form-control bg-transparent p-4"
                       placeholder="date"
                       required="required"
+                      v-model="booking.date"
                     />
                   </div>
+                  <small class="text-danger" v-if="errors.date">{{
+                  errors.date[0]}}</small>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <select
                       class="custom-select bg-transparent px-4"
                       style="height: 47px"
+                      name="employee_id"
+                      v-model="booking.employee_id"
                     >
-                      <option selected>Select Employ</option>
-                      <option value="1">Employ -1</option>
-                      <option value="2">Employ-2</option>
-                      <option value="3">employ-3</option>
+                      <option value="">Select Employee</option>
+                      <option
+                        v-for="employee in employees"
+                        :key="employee.id"
+                        v-bind:value="employee.id"
+                      >
+                        {{ employee.name }}
+                      </option>
                     </select>
+                    <small class="text-danger" v-if="errors.employee_id">{{
+                  errors.employee_id[0]}}</small>
                   </div>
                 </div>
               </div>
               <div class="form-row">
-                 <label class="btn btn-outline-primary  control-label" for="options"> 10:00 am</label>
+                <label class="btn btn-outline-primary" for="ten">10:00 am</label>
                 <input
                   type="radio"
                   class="btn btn-check"
-                  name="option"
-                  id="options"
+                  name="10:00am"
+                  id="ten"
+                  value="10:00am"
+                  v-model="booking.time"
                   autocomplete="off"
-                  
                 />
-                <label class="btn btn-outline-primary" for="option">11:00 am</label>
-                 <input
-                  type="radio"
-                  class="btn btn-check"
-                  name="options"
-                  id="option"
-                  autocomplete="off"
-                  
-                />
-                <label class="btn btn-outline-primary" for="option">12:00 pm</label>
-                 <input
-                  type="radio"
-                  class="btn btn-check"
-                  name="options"
-                  id="option"
-                  autocomplete="off"
-                  
-                />
-                <label class="btn btn-outline-primary" for="option1">13:00 pm</label>
-                 <input
-                  type="radio"
-                  class="btn btn-check"
-                  name="options"
-                  id="option1"
-                  autocomplete="off"
-                  
-                />
-               
-              </div>
-            <div class="form-row">
-                 <label class="btn btn-outline-primary" for="option1">14:00 pm</label>
+                <label class="btn btn-outline-primary" for="11">11:00 am</label>
                 <input
                   type="radio"
                   class="btn btn-check"
-                  name="options"
-                  id="option1"
+                  name="11.00"
+                  id="11"
+                  value="11:00am"
+                  v-model="booking.time"
                   autocomplete="off"
-                  
                 />
-                <label class="btn btn-outline-primary" for="option1">15:00 pm</label>
-                 <input
+                <label class="btn btn-outline-primary" for="12">12:00 pm</label>
+                <input
                   type="radio"
                   class="btn btn-check"
-                  name="options"
-                  id="option1"
+                  name="12.00"
+                  id="12"
+                  value="12"
+                  v-model="booking.time"
                   autocomplete="off"
-                  
                 />
-                <label class="btn btn-outline-primary" for="option1">16:00 pm</label>
-                 <input
+                <label class="btn btn-outline-primary" for="13">13:00 pm</label>
+                <input
                   type="radio"
                   class="btn btn-check"
-                  name="options"
-                  id="option1"
+                  name="13"
+                  v-model="booking.time"
+                  id="13"
+                  value="13"
                   autocomplete="off"
-                  
                 />
-                <label class="btn btn-outline-primary" for="option1">17:00pm</label>
-                 <input
-                  type="radio"
-                  class="btn btn-check"
-                  name="options"
-                  id="option1"
-                  autocomplete="off"
-                  
-                />
-               
               </div>
-
+              <div class="form-row">
+                <label class="btn btn-outline-primary" for="14">14:00 pm</label>
+                <input
+                  type="radio"
+                  class="btn btn-check"
+                  name="14"
+                  v-model="booking.time"
+                  id="14"
+                  value="14"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-primary" for="15">15:00 pm</label>
+                <input
+                  type="radio"
+                  class="btn btn-check"
+                  name="15"
+                  v-model="booking.time"
+                  id="15"
+                  value="15"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-primary" for="16">16:00 pm</label>
+                <input
+                  type="radio"
+                  class="btn btn-check"
+                  name="16"
+                  v-model="booking.time"
+                  id="16"
+                  value="16"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-primary" for="17">17:00pm</label>
+                <input
+                  type="radio"
+                  class="btn btn-check"
+                  name="17"
+                  v-model="booking.time"
+                  id="17"
+                  value="17"
+                  autocomplete="off"
+                />
+              </div>
 
               <div class="col-sm-6">
                 <button
                   class="btn btn-primary btn-block"
-                  type="submit"
+                  @click="newBooking()"
                   style="height: 47px; width: 200px; margin-left: 120px; margin-top: 30px"
                 >
                   Make Appointment
                 </button>
-                
               </div>
             </form>
           </div>
@@ -185,34 +219,70 @@
 </template>
 
 <script>
-export default {};
-     
+export default {
+  data() {
+    return {
+      services: {},
+      employees: {},
+      errors: {},
+      booking: {
+        id: "",
+        name: "",
+        email: "",
+        mobile: "",
+        service_id: "",
+        employee_id: "",
+        date: "",
+        time: [],
+      },
+    };
+  },
+  created() {
+  this.getService();
+    this.getEmployees();
+  },
+  methods: {
+    getService() {
+      axios.get("get-service").then((response)=>{
+        this.services=response.data
+        
+      });
+    },
+    getEmployees() {
+      axios.get("get-employees").then((response)=>
+      {this.employees=response.data});
+    },
+    newBooking() {
+
+      this.loading = true;
+      axios.post("new-booking", this.booking).then((response)=>{
+        console.log('success');
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
-.btn-outline-primary{
- 
-  color:white;
+.btn-outline-primary {
+  color: white;
 }
-.btn-outline-primary{
-  background-color: #F9A392;
+.btn-outline-primary {
+  background-color: #f9a392;
 }
 
 .btn-check {
- opacity: 0;
-    
-
-   
+  opacity: 1;
 }
 
 /* input:checked {
    background-color:rgb(34, 94, 224); 
 } */
 
-input:focus + label
-{
-    background-color: #d82626;
-    color:white;
-}
+/* 
+input:focus + label {
+  background-color: #d82626;
+  color: white;
+} */
 
 </style>
