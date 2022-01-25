@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,19 +22,21 @@ class BookingController extends Controller
     public function addBooking(Request $request)
     
          {
-            //  return $request->all();
+             
                
             $request->validate([
 
             'name' => "required|min:3|max:255",
             'email' => "required|email",
+            'date' => "required",
+            'service_id' => "required",
             'mobile' => "required|min:10|max:10"
 
         ]);
-        // if ($request->id){
+        if ($request->id){
 
-        //     $booking = Booking::findOrFail($request->id);
-        // } else
+            $booking = Booking::find($request->id);
+        } else
 
             $booking = new Booking;
        
@@ -47,6 +50,22 @@ class BookingController extends Controller
        
        
         $booking->save();
+
+if(Customer::where('email','=', $request->email )->exists()){
+
+
+$customer = Customer::where('email','=',$request->email)->first();
+
+}else
+
+$customer =new Customer;
+
+$customer->name=strtoupper($request->name);
+$customer->email=$request->email;
+$customer->mobile=$request->mobile;
+$customer->save();
+
+
 
         return 'success';
     }

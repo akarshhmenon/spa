@@ -8,7 +8,8 @@
                     <a href="index.html" class="navbar-brand">
                         <h1 class="mb-3 text-white"><span class="text-primary">SPA</span> Center</h1>
                     </a>
-                    <p>Aliquyam sed elitr elitr erat sed diam ipsum eirmod eos lorem nonumy. Tempor sea ipsum diam  sed clita dolore eos dolores magna erat dolore sed stet justo et dolor.</p>
+                    <p>We believe that in the hustle and bustle of urban life, a few moments of self care, woven into your daily regimen, 
+                                have the potential to help you unwind and reconnect with yourself. Bring the Spa like serenity & tranquility in your daily lives.</p>
                     <p><i class="fa fa-map-marker-alt mr-2"></i>kakanad,Kochi,Kerala</p>
                     <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
                     <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>

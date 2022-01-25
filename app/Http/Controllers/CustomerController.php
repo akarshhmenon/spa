@@ -43,7 +43,7 @@ class CustomerController extends Controller
         return Customer::orderBy('id','desc')->get();
     }
    
-    }
+   
 
     public function deleteCustomer(Request $request)
     {
