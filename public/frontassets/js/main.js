@@ -47,7 +47,7 @@ function myfunction ($){
     $('#time').datetimepicker({
         format: 'LT'
     });
-
+	
 
     // Service carousel
     $(".service-carousel").owlCarousel({
@@ -352,11 +352,9 @@ $(document).ready(function()
 		}
 	}
 
-	/* 
 
-	7. Init Isotope
 
-	*/
+
 
 
 });

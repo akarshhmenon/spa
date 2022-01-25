@@ -237,7 +237,7 @@ export default {
         image.onload = function () {
           var height = this.height;
           var width = this.width;
-          if (height < 320 || (height > 350 && width < 520) || width > 550) {
+          if (height < 320 || height > 350 && width < 520 || width > 550) {
             vm.image_error = "Image has invalid image dimension";
 
             return false;

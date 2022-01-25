@@ -42,9 +42,6 @@ import 'datatables.net-buttons/js/buttons.colVis.js'
 window.JSZip = jsZip;
 
 
-//multiple image upload
-import VueLazyload from 'vue-lazyload'
-Vue.use(VueLazyload)
 
 
 // This line was the one missing
@@ -72,7 +69,6 @@ Vue.filter('formatDate', function(value) {
 });
 
 import 'vue-search-select/dist/VueSearchSelect.css'
-
 
 
 
@@ -148,6 +144,7 @@ Vue.component("add-service", require("./components/masters/service/Service.vue")
 Vue.component("add-product", require("./components/masters/product/Product.vue").default);
 Vue.component("add-employee", require("./components/masters/employee/Employee.vue").default);
 Vue.component("add-customer", require("./components/masters/customer/Customer.vue").default);
+Vue.component("add-booking", require("./components/booking/Booking.vue").default);
 
 Vue.component("add-employee-attendance", require("./components/operations/attendance/Attendance.vue").default);
 Vue.component("add-image", require("./components/masters/image/Image.vue").default);
