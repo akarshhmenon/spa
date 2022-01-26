@@ -100,9 +100,10 @@ const routes = [
     { path: "/service", component: require("./components/masters/service/ServiceTable.vue").default },
     { path: "/product", component: require("./components/masters/product/ProductTable.vue").default },
     { path: "/employee", component: require("./components/masters/employee/EmployeeTable.vue").default },
-    
+    { path: "/vendor", component: require("./components/masters/vendor/VendorTable.vue").default },
      { path: "/attendance", component: require("./components/operations/attendance/AttendanceTable.vue").default },
      { path: "/attendance-report", component: require("./components/reports/AttendanceReport.vue").default },
+     { path: "/purchase", component: require("./components/operations/purchase/PurchaseTable.vue").default },
 
      { path: "/images", component: require("./components/masters/image/ImageTable.vue").default },
 
@@ -146,10 +147,12 @@ Vue.component("add-designation", require("./components/masters/designation/Desig
 Vue.component("add-service", require("./components/masters/service/Service.vue").default);
 Vue.component("add-product", require("./components/masters/product/Product.vue").default);
 Vue.component("add-employee", require("./components/masters/employee/Employee.vue").default);
+Vue.component("add-vendor", require("./components/masters/vendor/Vendor.vue").default);
 Vue.component("add-customer", require("./components/masters/customer/Customer.vue").default);
 Vue.component("add-booking", require("./components/booking/Booking.vue").default);
 
 Vue.component("add-employee-attendance", require("./components/operations/attendance/Attendance.vue").default);
+Vue.component("add-purchase", require("./components/operations/purchase/Purchase.vue").default);
 Vue.component("add-image", require("./components/masters/image/Image.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to

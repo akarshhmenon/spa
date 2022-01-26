@@ -39,11 +39,10 @@ class CustomerController extends Controller
     public function getCustomers()
     {
 
-
-        return Customer::orderBy('id','desc')->get();
+     return Customer::orderBy('id','desc')->get();
     }
    
-    }
+    
 
     public function deleteCustomer(Request $request)
     {
@@ -58,3 +57,5 @@ class CustomerController extends Controller
     }
 
 }
+
+

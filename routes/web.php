@@ -9,8 +9,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\singleproductcontroller;
 use App\Http\Controllers\serviceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductAndServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -66,12 +66,10 @@ Route::post('delete-designation', [DesignationController::class, 'deleteDesignat
 Route::post('add-category', [CategoryController::class, 'addCategory']);
 Route::get('get-categories', [CategoryController::class, 'getCategory']);
 Route::post('delete-category', [CategoryController::class, 'deleteCategory']);
-
-//category
-
-Route::post('add-category', [CategoryController::class, 'addCategory']);
-Route::get('get-categories', [CategoryController::class, 'getCategory']);
-Route::post('delete-category', [CategoryController::class, 'deleteCategory']);
+// vendor 
+Route::post('add-vendor', [VendorController::class, 'addVendor']);
+Route::get('get-vendors', [VendorController::class, 'getVendors']);
+Route::post('delete-vendor', [VendorController::class, 'deleteVendor']);
 
 // employee 
 Route::post('add-employee', [EmployeeController::class, 'addEmployee']);
