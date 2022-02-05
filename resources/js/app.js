@@ -102,7 +102,7 @@ const routes = [
      { path: "/attendance-report", component: require("./components/reports/AttendanceReport.vue").default },
 
      { path: "/images", component: require("./components/masters/image/ImageTable.vue").default },
-
+     { path: "/booking", component: require("./components/booking/BookingTable.vue").default },
 ];
 
 const router = new VueRouter({
@@ -138,6 +138,9 @@ const router = new VueRouter({
 Vue.component("change-password", require("./components/etc/changePassword.vue").default);
 
 Vue.component("pre-loader", require("./components/etc/Loading.vue").default);
+
+Vue.component("front-loader", require("./components/etc/Loader.vue").default);
+
 Vue.component("add-category", require("./components/masters/category/Category.vue").default);
 Vue.component("add-designation", require("./components/masters/designation/Designation.vue").default);
 Vue.component("add-service", require("./components/masters/service/Service.vue").default);
@@ -145,6 +148,8 @@ Vue.component("add-product", require("./components/masters/product/Product.vue")
 Vue.component("add-employee", require("./components/masters/employee/Employee.vue").default);
 Vue.component("add-customer", require("./components/masters/customer/Customer.vue").default);
 Vue.component("add-booking", require("./components/booking/Booking.vue").default);
+Vue.component("add-payment", require("./components/booking/BookingPayment.vue").default);
+
 
 Vue.component("add-employee-attendance", require("./components/operations/attendance/Attendance.vue").default);
 Vue.component("add-image", require("./components/masters/image/Image.vue").default);

@@ -102,8 +102,10 @@ Route::get('get-product-service', [ProductAndServiceController::class, 'getProdu
 Route::get('get-images', [ImageController::class, 'getImages']);
 Route::post('delete-image', [ImageController::class, 'DeleteImage']);
 
+// booking admin side 
 
-
+Route::get('get-bookings', [BookingController::class, 'getBookings']);
+Route::post('delete-booking', [BookingController::class, 'deleteBooking']);
 });
 
 
@@ -113,6 +115,7 @@ Route::get('/singleproduct',[Singleproductcontroller::class,'singleProductPage']
 Route::get('/services',[ServiceController::class,'servicePage']);
 
 //boooking
+Route::post('get-otp', [BookingController::class,'sendOtp']);
 Route::post('new-booking', [BookingController::class,'addBooking']);
 Route::get('get-service', [ProductAndServiceController::class, 'getService']);
 Route::get('get-employees', [EmployeeController::class, 'getEmployees']);
