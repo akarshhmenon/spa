@@ -173,7 +173,7 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label>GST</label>
+                <label>Product Category</label>
                 <select
                   class="form-control"
                   name="category_id"
@@ -193,6 +193,29 @@
                 }}</small>
               </div>
             </div>
+
+
+     <div class="col">
+              <div class="form-group">
+                <label>Quantity In Stock</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Quantity"
+                  name="opening_quantity"
+                  v-model="product.opening_quantity"
+                />
+                <small class="text-danger" v-if="errors.opening_quantity">{{
+                  errors.opening_quantity[0]
+                }}</small>
+              </div>
+            </div>
+
+
+
+
+
+
 
             <div class="col" v-if="!this.edit">
               <div class="form-group">
@@ -258,6 +281,7 @@ export default {
         rack_no: "",
         gst: "",
         image: "",
+        opening_quantity:'',
       },
     };
   },
@@ -293,6 +317,7 @@ export default {
         _this.product.mrp = product.mrp;
         _this.product.rack_no = product.rack_no;
         _this.product.gst = product.gst;
+_this.product.opening_quantity = product.opening_quantity;
       });
     }
   },
@@ -366,6 +391,7 @@ export default {
       upload.append("gst", this.product.gst);
       upload.append("category_id", this.product.category_id);
       upload.append("type", this.product.type);
+       upload.append("opening_quantity", this.product.opening_quantity);
       upload.append("image", this.product.image);
       if (this.product.image == "" && !this.edit) {
         this.image_error = "this field required";

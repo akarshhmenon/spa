@@ -26,10 +26,11 @@ class CreateProductAndServicesTable extends Migration
             $table->string('exp_date')->nullable();
             $table->string('gst')->nullable();
             $table->text('description')->nullable();
-            $table->string('mrp')->nullable();
+            $table->float('mrp')->nullable();
             $table->string('rack_number')->nullable();
             $table->string('time')->nullable();
-            
+            $table->string('quantity');
+            $table->string('opening_quantity');
             $table->bigInteger('categories_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
 

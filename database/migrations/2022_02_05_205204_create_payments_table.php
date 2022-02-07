@@ -17,8 +17,8 @@ class CreatePaymentsTable extends Migration
             $table->id();
 
             $table->bigInteger('customer_id')->unsigned();
-            $table->bigInteger('sale_id')->unsigned();
-            $table->bigInteger('bookeditem_id')->unsigned();
+           $table->bigInteger('sale_id')->unsigned()->nullable();
+            $table->bigInteger('booking_id')->unsigned()->nullable();
             $table->float('total_price');
             $table->float('total_discount')->default(0);
             $table->float('payable_amount');
