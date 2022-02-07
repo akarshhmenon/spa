@@ -63,6 +63,8 @@
                   type="number"
                   class="form-control"
                   name="mrp"
+                   min="1"
+                              oninput="validity.valid||(value='');"
                   placeholder="Enter mrp "
                   v-model="product.mrp"
                 />
@@ -202,6 +204,8 @@
                   type="text"
                   class="form-control"
                   placeholder="Enter Quantity"
+                   min="1"
+                              oninput="validity.valid||(value='');"
                   name="opening_quantity"
                   v-model="product.opening_quantity"
                 />
@@ -402,6 +406,7 @@ _this.product.opening_quantity = product.opening_quantity;
       axios
         .post("add-product", upload)
         .then((response) => {
+          
           this.loading = false;
           if (response.data == "success") {
             Toast.fire({

@@ -64,6 +64,8 @@
                   type="number"
                   class="form-control"
                   name="rate"
+                   min="1"
+                              oninput="validity.valid||(value='');"
                   placeholder="Enter Rate "
                   v-model="service.rate"
                 />

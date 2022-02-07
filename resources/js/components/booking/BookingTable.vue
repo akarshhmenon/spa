@@ -89,8 +89,8 @@
           <tbody>
             <tr v-for="(booking, index) in booking_details" :key="booking.id">
               <td>{{ index + 1 }}</td>
-              <td>{{ booking.name }}</td>
-              <td>{{ booking.mobile }}</td>
+              <td>{{ booking.customer.name }}</td>
+              <td>{{ booking.customer.mobile }}</td>
               <td>{{ booking.date|myDate }}</td>
               <td>{{ booking.service.name }}</td>
               <td>{{ booking.time }}:00</td>

@@ -12,7 +12,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductAndServiceController;
 use App\Http\Controllers\BookingController;
-
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -106,6 +106,13 @@ Route::post('delete-image', [ImageController::class, 'DeleteImage']);
 
 Route::get('get-bookings', [BookingController::class, 'getBookings']);
 Route::post('delete-booking', [BookingController::class, 'deleteBooking']);
+
+
+// payment
+
+Route::post('booking-payment', [PaymentController::class, 'addBookingPayment']);
+
+
 });
 
 

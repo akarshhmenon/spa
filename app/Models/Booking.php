@@ -12,6 +12,20 @@ class Booking extends Model
     {
         return $this->belongsTo(ProductAndService::class, 'service_id', 'id');
     }
+
+ 
+    public function booked_items()
+    {
+        return $this->hasMany(BookedItem::class, 'booking_id', 'id');
+    }
+
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+
+    
     // public function employee()
     // {
     //     return $this->belongsTo(Employee::class, 'employee_id', 'id');

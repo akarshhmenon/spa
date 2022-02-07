@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\BookingCancelled;
 use App\Mail\BookingOTP;
-
+use App\Models\BookedItem;
 use App\Models\Booking;
 use App\Models\Customer;
+use App\Models\ProductAndService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -94,25 +95,13 @@ class BookingController extends Controller
 
         $otp = Session::get($request->email);
 
+
+
+
+
+
         if ($request->otp == $otp) {
 
-            if ($request->id) {
-
-                $booking = Booking::find($request->id);
-            } else
-
-                $booking = new Booking;
-
-            $booking->name = strtoupper($request->name);
-            $booking->mobile = $request->mobile;
-            $booking->email = $request->email;
-            $booking->service_id = $request->service_id;
-            $booking->employee_id = $request->employee_id;
-            $booking->date = $request->date;
-            $booking->time = $request->time;
-
-
-            $booking->save();
 
             if (Customer::where('email', '=', $request->email)->exists()) {
 
@@ -128,63 +117,101 @@ class BookingController extends Controller
             $customer->save();
 
 
-            Session::forget($request->email);
+           
 
+
+
+
+
+
+
+            if ($request->id) {
+
+                $booking = Booking::find($request->id);
+            } else
+
+                $booking = new Booking;
+
+                $booking->customer_id=  $customer ->id;
+            $booking->service_id = $request->service_id;
+            $booking->employee_id = $request->employee_id;
+            $booking->date = $request->date;
+            $booking->time = $request->time;
+
+
+            $booking->save();
+
+
+            if ($request->service_id) {
+
+
+                $service = ProductAndService::where('id', '=', $request->service_id)->first();
+
+                $booked_item = new BookedItem;
+                $booked_item->booking_id = $booking->id;
+
+                $booked_item->product_service_id = $request->service_id;
+                $booked_item->type = 'service';
+                $booked_item->quantity = 1;
+                $booked_item->rate = $service->mrp;
+                $booked_item->total_amount = $service->mrp * 1;
+
+                $booked_item->save();
+            }
+
+
+            Session::forget($request->email);
             return 'success';
         } else {
             return 'wrongOtp';
         }
     }
 
-public function getBookings(Request $request){
+    public function getBookings(Request $request)
+    {
 
 
-   
-    $booking= Booking::with('service')->orderBy('time','ASC');
 
-    if ($request->from_date) {
+        $booking = Booking::with('customer','service', 'booked_items.product_and_service') ->where('status','=',0)->orderBy('time', 'ASC');
 
-        $booking->where('date', '>=', $request->from_date);
+        if ($request->from_date) {
+
+            $booking->where('date', '>=', $request->from_date);
+        }
+        if ($request->to_date) {
+
+            $booking->where('date', '<=', $request->to_date);
+        }
+        if (!$request->from_date && !$request->to_date) {
+            $booking->where('date', '=', Carbon::now()->toDateString());
+        }
+
+        return  $booking->get();
     }
-    if ($request->to_date) {
 
-        $booking->where('date', '<=', $request->to_date);
+
+    public function deleteBooking(Request $request)
+    {
+        if ($request->id && $request->email) {
+            $booking = Booking::find($request->id);
+            $booking->delete();
+
+            $delete_booking_details = [
+
+
+                'name' => $request->name,
+
+                'message' => ' We Apologize For the Inconvenience',
+
+
+            ];
+
+
+            Mail::to($request->email)->send(new BookingCancelled($delete_booking_details));
+            return 'success';
+        } else {
+
+            return "failed";
+        }
     }
-    if (!$request->from_date && !$request->to_date) {
-        $booking->where('date', '=',Carbon::now()->toDateString());
-    }
-
-    return  $booking->get();
-
-}
-
-
-public function deleteBooking(Request $request)
-{
-    if ($request->id && $request->email) {
-        $booking = Booking::find($request->id);
-        $booking->delete();
-
-        $delete_booking_details = [
-
-
-            'name' => $request->name,
-        
-            'message' => ' We Apologize For the Inconvenience',
-
-
-        ];
-
-
-        Mail::to($request->email)->send(new BookingCancelled($delete_booking_details));
-        return 'success';
-    } else {
-
-        return "failed";
-    }
-}
-
-
-
-
 }

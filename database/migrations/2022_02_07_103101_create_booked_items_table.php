@@ -17,7 +17,7 @@ class CreateBookedItemsTable extends Migration
             $table->id();
 
             $table->bigInteger('booking_id')->unsigned();
-            $table->bigInteger('service_id')->unsigned();
+        
             $table->bigInteger('product_service_id')->unsigned();
             $table->string('type'); //service or product
             $table->string('quantity');
