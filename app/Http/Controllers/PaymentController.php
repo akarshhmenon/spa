@@ -41,23 +41,44 @@ class PaymentController extends Controller
         $payment->save();
 
 
-$booking =Booking::where('id','=',$request->booking_id)->first();
-$booking->status=1;
-$booking->save();
+        $booking = Booking::where('id', '=', $request->booking_id)->first();
+        $booking->status = 1;
+        $booking->save();
 
 
 
-$message=[
+        $message = [
 
-    'message' => 'success',
-    'id'=> $payment->id,
+            'message' => 'success',
+            'id' => $payment->id,
 
-];
+        ];
 
 
-return [
-    'return' => $message,
- ];
+        return [
+            'return' => $message,
+        ];
+    }
+
+
+    public function getPaymentReport(Request $request)
+    {
+
+        $payments = Payment::with('customer','bookedItem.product_and_service')->orderBy('id', 'desc');
+
+        if ($request->from_date) {
+
+            $payments->where('date', '>=', $request->from_date);
+        }
+        if ($request->to_date) {
+
+            $payments->where('date', '<=', $request->to_date);
+        }
+        if (!$request->from_date && !$request->to_date) {
+            $payments->where('date',  Carbon::now()->toDateString());
+        }
+
+        return $payments->get();
 
     }
 }

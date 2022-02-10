@@ -1,11 +1,23 @@
 <template>
   <div>
      
-<div class="page-content container">
+<div class="page-content container" id="print-area">
 
 
-    <div class="container px-0" id="print-area">
-        <div class="row mt-4">
+    <div class="container px-2" >
+
+<div class="row">
+
+<div class="col" >
+    <div class="text-center">
+ <h3> S P A</h3>
+    </div>
+   
+</div>
+
+</div>
+
+        <div class="row">
             <div class="col-12 col-lg-12">
               
                 <!-- .row -->
@@ -190,7 +202,7 @@ methods:{
       var element = document.getElementById("print-area");
 
       var opt = {
-        margin: 1,
+        margin: 0.25,
         filename: "reciept.pdf",
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2 },

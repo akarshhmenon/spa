@@ -112,6 +112,7 @@ Route::post('delete-booking', [BookingController::class, 'deleteBooking']);
 // payment
 
 Route::post('booking-payment', [PaymentController::class, 'addBookingPayment']);
+Route::get('get-payment-report',[PaymentController::class,'getPaymentReport']);
 
 // Dashboard 
 Route::get('get-dashboard', [DashboardController::class, 'getDashboard']);

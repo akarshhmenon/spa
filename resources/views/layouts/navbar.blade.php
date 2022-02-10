@@ -70,7 +70,7 @@ $user= Auth::user();
             <h6 class="collapse-header">Reports</h6>
 
             <router-link class="collapse-item" to= "attendance-report" >Attendance Report</router-link>
-         
+         <router-link class="collapse-item" to= "/payment-report" >Payment Report</router-link>
           </div>
         </div>
       </li>
