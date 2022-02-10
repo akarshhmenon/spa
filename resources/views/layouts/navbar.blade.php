@@ -38,7 +38,7 @@ $user= Auth::user();
           <router-link class="collapse-item" to="/category">Category</router-link>
           <router-link class="collapse-item" to="/designation">Designation</router-link>
           <router-link class="collapse-item" to="/images">Images</router-link>
-          <router-link class="collapse-item" to="/booking">Booking</router-link>
+          
           <!-- <a class="collapse-item" href="form_advanceds.html">Reward Settings</a> -->
         </div>
       </div>

@@ -11,7 +11,7 @@ class BookedItem extends Model
 
     public function product_and_service()
     {
-        return $this->belongsTo(ProductAndService::class, 'booking_id', 'id');
+        return $this->belongsTo(ProductAndService::class, 'product_service_id', 'id');
     }
     
 }

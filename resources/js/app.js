@@ -150,6 +150,7 @@ Vue.component("add-customer", require("./components/masters/customer/Customer.vu
 Vue.component("add-booking", require("./components/booking/Booking.vue").default);
 Vue.component("add-payment", require("./components/booking/BookingPayment.vue").default);
 
+Vue.component("booking-receipt", require("./components/receipts/BookingPaymentReceipt.vue").default);
 
 Vue.component("add-employee-attendance", require("./components/operations/attendance/Attendance.vue").default);
 Vue.component("add-image", require("./components/masters/image/Image.vue").default);

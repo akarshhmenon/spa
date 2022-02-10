@@ -1,8 +1,11 @@
 <template>
   <div>
+   
+
+   
     <div class="modal-header bg-primary">
       <h5 class="modal-title modal-title-custom" id="addcustomerLabel">
-        {{ title }}
+        {{ card_title }}
       </h5>
       <button
         type="button"
@@ -15,9 +18,12 @@
         <span aria-hidden="true" class="modal-title-custom">&times;</span>
       </button>
     </div>
-
+<div class="payment-page" v-if="payment_page">
     <div class="modal-body">
       <div class="card-body">
+
+
+
         <div class="row">
           <div class="col">
             <address>
@@ -125,6 +131,11 @@
             </table>
           </div>
         </div>
+
+
+
+
+
       </div>
     </div>
     <div class="modal-footer">
@@ -138,16 +149,32 @@
         }}<i class="fas fa-spinner fa-spin fa-fw" v-if="loading == true"></i>
       </button>
     </div>
+</div>
+
+<!-- print  -->
+<div id="canvas_div_pdf" v-else>
+
+<booking-receipt :billDetails='bill_details' :items='item_list' > </booking-receipt>
+
+</div>
+
+<!-- print  -->
+
+
   </div>
 </template>
 
 <script>
+
+import moment from "moment";
 export default {
   data() {
     return {
-      title: "Add Payment",
+    
       toastTitle: "Payment Added Successfully!",
       loading: false,
+      payment_page:true,
+      bill_details:[],
       item_list: [],
       customer_name: "",
       customer_mobile: "",
@@ -187,8 +214,6 @@ export default {
 
   methods: {
     addPayment() {
-      console.log(this.net_total_amount);
-
       if (this.payment.pay_type == "") {
         this.pay_type_error = "This field required";
 
@@ -204,13 +229,29 @@ export default {
         .post("booking-payment", this.payment)
         .then((response) => {
           this.loading = false;
-          if (response.data == "success") {
+console.log(response.data.return.message);
+          if (response.data.return.message == "success") {
             Toast.fire({
               icon: "success",
               title: this.toastTitle,
             });
-            bus.$emit("payment-added");
-            this.$refs.close_payment_modal.click();
+           
+
+
+
+this.bill_details.push({
+
+name:this.customer_name,
+mobile:this.customer_mobile,
+discount:this.payment.total_discount,
+invoice:response.data.return.id,
+date:moment().format("DD/MM/YYYY"),
+});
+
+
+           this.payment_page=false;
+
+
           }
 
           if (response.data == "failed") {
@@ -229,7 +270,15 @@ export default {
         });
     },
 
+
+
+
+
+
+
     clear_form_data() {
+
+
       for (let item in this.payment) {
         this.payment[item] = "";
       }
@@ -241,6 +290,9 @@ export default {
       this.customer_name = "";
       this.customer_mobile = "";
       this.pay_type_error = "";
+       this.payment_page=true;
+
+        bus.$emit("payment-added");
     },
   },
   computed: {
@@ -261,6 +313,16 @@ export default {
         return "Pay Now";
       }
     },
+
+  card_title() {
+      if (this.payment_page == true) {
+        return "Add Payment  ";
+      } else {
+        return "Print Receipt";
+      }
+    },
+
+
   },
 };
 </script>

@@ -159,9 +159,9 @@ class BookingController extends Controller
                 $booked_item->save();
             }
 
-
+       
             Session::forget($request->email);
-            return 'success';
+            return 'success' ;
         } else {
             return 'wrongOtp';
         }

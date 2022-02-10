@@ -66,378 +66,110 @@
       </div>
     </div>
     <div>
-      <!---------------------------------DASHBOARD PRINT SECTION START--------------------------------------------->
-      <div style="display: none">
-        <div class="container-fluid" id="dashboard_print">
-          <h6 class="font-weight-bold">DATE: {{ print_date }}</h6>
-          <table
-            id="receipt_table"
-            class="table table-bordered"
-            style="width: 100%; color: black"
-            cellspacing="0"
-            cellpadding="1"
-          >
-            <thead>
-              <tr class="">
-                <th colspan="3">SUMMARY</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td width="40%">Total Amount Received</td>
-                <td width="40%">
-                  {{ categoryChartlabel[0] }} : {{ parseFloat(categoryChartData[0]).toFixed(2) }}
-                  <br />
-                  {{ categoryChartlabel[1] }} : {{ parseFloat(categoryChartData[1]).toFixed(2) }}
-                  <br />
-                  {{ categoryChartlabel[2] }} : {{ parseFloat(categoryChartData[2]).toFixed(2) }}
-                </td>
-                <td width="20%">
-                  <b>{{ parseFloat(total_payments_received).toFixed(2) }}</b>
-                </td>
-              </tr>
-
-              <tr>
-                <td width="40%">Total Expense Amount</td>
-                <td width="40%">
-                  {{ "Bank :" }}{{ parseFloat(total_bank_expenses_received).toFixed(2) }} <br />
-                  {{ "Cash :" }}{{ parseFloat(total_cash_expenses_received).toFixed(2) }} &nbsp;
-                </td>
-                <td width="20%">
-                  <b>{{
-                    parseFloat(total_expenses_received_amnt).toFixed(2)
-                  }}</b>
-                </td>
-              </tr>
-
-              <tr>
-                <td width="40%">Total Profit</td>
-                <td width="40%">
-                  {{ "Bank : " }} {{ parseFloat(proftChartValues[0]).toFixed(2) }} <br />
-                  {{ "Cash : " }} {{ parseFloat(proftChartValues[1]).toFixed(2) }}
-                </td>
-                <td width="20%">
-                  <b>{{ parseFloat(total_profit).toFixed(2) }}</b>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-
-
-
-          <!-- sale-details
-          <table
-            id="receipt_table"
-            class="table table-bordered"
-            style="width: 100%; color: black"
-            cellspacing="0"
-            cellpadding="1"
-          >
-            <thead>
-              <tr class="">
-                <th colspan="2">SALE DETAILS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td width="80%">Number Of Sales</td>
-                <td width="20%">
-                  <b>{{ total_sales_count }}</b>
-                </td>
-              </tr>
-
-              <tr>
-                <td width="80%">Total Sale Amount</td>
-                <td width="20%">
-                  <b>{{ parseFloat(total_sale_amount).toFixed(2) }}</b>
-                </td>
-              </tr>
-
-              <tr>
-                <td width="">Credit Sale Amount</td>
-                <td width="">
-                  <b>{{ parseFloat(credit_sales).toFixed(2) }}</b>
-                </td>
-              </tr>
-            </tbody>
-          </table> -->
-        <!--transaction-details-->
-          <table
-            id="receipt_table"
-            class="table table-bordered"
-            style="width: 100%; color: black"
-            cellspacing="0"
-            cellpadding="1"
-          >
-            <thead>
-              <tr class="">
-                <th colspan="3">Balance Sheet </th>
-              </tr>
-              <tr class="">
-                <th width="15%">Date </th>
-                 <th width="40%">Description </th>
-                  <th width="15%">Credit </th>
-                   <th width="15%">Debit </th>
-                    <th width="15%">Payment Type </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="transaction in transaction_list" :key="transaction.id">
-                <td width="15%">{{ transaction.date}}</td>
-                <td width="40%">
-                  {{ transaction.description }}
-                </td>
-                <td width="15%">
-                  <b>{{ transaction.credit }}</b>
-                </td>
-                <td width="15%">
-                  <b>{{ transaction.debit }}</b>
-                </td>
-                <td width="15%">
-                  <b>{{ transaction.paytype }}</b>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2"><b>Total Payments Received</b></td>
-                <td colspan="1">
-                  <b>{{
-                    parseFloat(total_payments_received).toFixed(2)
-                  }}</b> 
-                  <br> <br>Cash - {{parseFloat(total_cash_payments_received).toFixed(2)}} <br> Bank - {{parseFloat(total_bank_payments_received).toFixed(2)}}
-                </td>
-                <td colspan="2"></td>
-              </tr>
-              <tr>
-                <td colspan="3"><b>Total Expenses</b></td>
-                <td>
-                  <b>{{
-                    parseFloat(total_expenses_received_amnt).toFixed(2)
-                  }}</b>
-                  <br> <br>Cash - {{parseFloat(total_cash_expenses_received).toFixed(2)}} <br> Bank - {{parseFloat(total_bank_expenses_received).toFixed(2)}}
-                </td>
-                <td colspan="1"></td>
-              </tr>
-               <tr>
-                <td colspan="4"><b>Total Balance</b></td>
-                <td>
-                  <b>{{
-                    parseFloat(total_profit).toFixed(2)
-                  }}</b>
-                  <br> <br>Cash - {{parseFloat(proftChartValues[1]).toFixed(2)}} <br> Bank - {{parseFloat(proftChartValues[0]).toFixed(2)}}
-                </td>
-                
-              </tr>
-              
-            </tbody>
-          </table>
-
-            <!-- Credit Sale List-->
-            <table
-            id="receipt_table"
-            class="table table-bordered"
-            style="width: 100%; color: black"
-            cellspacing="0"
-            cellpadding="1"
-          >
-            <thead>
-              <tr class="">
-                <th colspan="3">CREDIT SALE DETAILS</th>
-              </tr>
-               <tr>
-                <th  width="20%"> Date</th>
-                <th width="40%">Customer Name</th>
-                <th width="20%">Invoice No</th>
-                <th width="20%">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="credit_sale in credit_sale_list" :key="credit_sale.id">
-                <td width="20%">{{ getformatteddate(credit_sale.invoice_date) }}</td>
-                <td width="40%">{{ credit_sale.customer.name }}</td>
-                <td width="20%">
-                  {{ credit_sale.invoice_no }}
-                </td>
-                <td width="20%">
-                  <b>{{ credit_sale.pay_amount }}</b>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3"><b>Total Credit Given</b></td>
-                <td>
-                  <b>{{
-                    parseFloat(credit_sales).toFixed(2)
-                  }}</b>
-                </td>
-              </tr>
-            </tbody>
-             </table>
-
-           <!-- sale-details-->
-            <table
-            id="receipt_table"
-            class="table table-bordered"
-            style="width: 100%; color: black"
-            cellspacing="0"
-            cellpadding="1"
-          >
-            <thead>
-              <tr class="">
-                <th colspan="3">SALE DETAILS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in item_group" :key="item.id">
-                <td width="60%">{{ item.product_name }}</td>
-                <td width="20%">
-                  {{ item.quantity }}
-                </td>
-                <td width="20%">
-                  <b>{{ item.amount }}</b>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2"><b>Total Sale Amount</b></td>
-                <td>
-                  <b>{{
-                    parseFloat(total_sale_amount).toFixed(2)
-                  }}</b>
-                </td>
-              </tr>
-            </tbody>
-             </table>
-
-          <!-- expense-details
-          <table
-            id="receipt_table"
-            class="table table-bordered"
-            style="width: 100%; color: black"
-            cellspacing="0"
-            cellpadding="1"
-          >
-            <thead>
-              <tr class="">
-                <th colspan="3">EXPENSE DETAILS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="expense in expense_list" :key="expense.id">
-                <td width="40%">{{ expense.expensecategory.name }}</td>
-                <td width="40%">
-                  {{ expense.pay_type }}
-                </td>
-                <td width="20%">
-                  <b>{{ expense.amount }}</b>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2"><b>Total Expenses</b></td>
-                <td>
-                  <b>{{
-                    parseFloat(total_expenses_received_amnt).toFixed(2)
-                  }}</b>
-                </td>
-              </tr>
-            </tbody>
-          </table> -->
-
-          <!--sale item -details-->
-          <!-- <table
-            id="receipt_table"
-            class="table table-bordered"
-            style="width: 100%; color: black"
-            cellspacing="0"
-            cellpadding="1"
-          >
-            <thead>
-              <tr class="">
-                <th colspan="4">SALE ITEM DETAILS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Product Name</th>
-                <th>Rate</th>
-                <th>Quantity</th>
-                <th>Amount</th>
-              </tr>
-              <tr v-for="saleItem in sale_item_details" :key="saleItem.id">
-                <td width="40%">{{ saleItem.product.name }}</td>
-                <td width="20%">
-                  {{ saleItem.rate }}
-                </td>
-
-                <td width="20%">
-                  {{ parseFloat(saleItem.quantity) }}
-                </td>
-
-                <td width="20%">
-                  {{ saleItem.total_rate }}
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3"><b>Total</b></td>
-                <td>
-                  <b>{{ parseFloat(total_itemsale_amount).toFixed(2) }}</b>
-                </td>
-              </tr>
-            </tbody>
-          </table> -->
-
-          <!--service item -details-->
-          <!-- <table
-            id="receipt_table"
-            class="table table-bordered"
-            style="width: 100%; color: black"
-            cellspacing="0"
-            cellpadding="1"
-          >
-            <thead>
-              <tr class="">
-                <th colspan="4">SERVICE ITEM DETAILS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Service Name</th>
-                <th>Rate</th>
-                <th>Quantity</th>
-                <th>Gross Amount</th>
-              </tr>
-              <tr
-                v-for="serviceItem in service_item_details"
-                :key="serviceItem.id"
-              >
-                <td width="40%">{{ serviceItem.product.name }}</td>
-                <td width="20%">
-                  {{ serviceItem.rate }}
-                </td>
-
-                <td width="20%">
-                  {{ parseFloat(serviceItem.quantity) }}
-                </td>
-
-                <td width="20%">
-                  {{ serviceItem.total_rate }}
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3"><b>Total</b></td>
-                <td>
-                  <b>{{ parseFloat(total_servicesale_amount).toFixed(2) }}</b>
-                </td>
-              </tr>
-            </tbody>
-          </table>-->
-        </div>
-      </div>
-
-      <!---------------------------------DASHBOARD PRINT SECTION END----------------------------------------------->
+     
 
       <div class="container-fluid px-0">
         <!----------DASHBOARD-NEW-STYLE-TEST-START-------------------------------------------------------------------->
 
-        <!----3diffrent cards section-start------------------------->
+    <div class="card mb-3">
+          <div
+            class="
+              card-header
+              pt-3
+              d-flex
+              flex-row
+              align-items-center
+              justify-content-between
+            "
+          >
+            <h6 class="m-0 font-weight-bold text-primary">Booking Details</h6>
+          </div>
+          <div class="card-body">
+
+
+            <div class="row mb-3">
+              
+              <div class="col-md-4 col-lg-4 mb-4">
+
+             <router-link class="collapse-item text-decoration-none " to="/booking"> <div class="card h-100">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-uppercase mb-1 text-dark"
+                        >
+                         Booking
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                          {{todays_booking}} 
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="far fa-address-book fa-2x text-warning"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div></router-link>
+
+
+              </div>
+
+          
+              <div class="col-md-4 col-lg-4 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-uppercase mb-1"
+                        >
+                          Completed Booking
+                        </div>
+                        <div
+                          class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
+                        >
+                     
+                          {{ completed_booking }}
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-check fa-2x text-success"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+       
+              <div class="col-md-4 col-lg-4 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div
+                          class="text-xs font-weight-bold text-uppercase mb-1"
+                        >
+                          Cancelled Booking
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        
+                          {{ cancelled_booking }}
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-times  fa-2x text-danger"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+
+<!-- 
         <div class="row">
           <div class="col-md-4 col-lg-4">
             <div class="card mb-3 pb-4">
@@ -453,8 +185,9 @@
               ></div>
 
               <div class="card-body">
+
                 <div class="row mb-2">
-                  <!-- New User Card Example -->
+                
                   <div class="col-12">
                     <div class="card h-100">
                       <div class="card-body">
@@ -480,7 +213,7 @@
                               "
                             >
                               <i class="fas fa-rupee-sign fa-fw"></i>
-                              {{ parseFloat(total_payments_received).toFixed(2) }}
+                              {{ parseFloat().toFixed(2) }}
                             </div>
                           </div>
                           <div class="col-auto">
@@ -528,9 +261,7 @@
             </div>
           </div>
 
-          <!------------------------>
 
-          <!-----2-rd------------------->
           <div class="col-md-4 col-lg-4">
             <div class="card mb-3 pb-3">
               <div
@@ -544,8 +275,11 @@
                 "
               ></div>
               <div class="card-body">
+         
+
+
                 <div class="row mb-0">
-                  <!-- New User Card Example -->
+                 
                   <div class="col-12">
                     <div class="card h-100">
                       <div class="card-body">
@@ -571,7 +305,7 @@
                               "
                             >
                               <i class="fas fa-rupee-sign fa-fw"></i>
-                              {{ parseFloat(total_expenses_received_amnt).toFixed(2) }}
+                              {{ parseFloat().toFixed(2) }}
                             </div>
                           </div>
                           <div class="col-auto">
@@ -606,6 +340,8 @@
                     ></bar-chart>
                   </div>
                 </div>
+
+
                 <div class="row barchart-exp mt-4">
                   <div class="col">
                     <div
@@ -629,11 +365,12 @@
                     </div>
                   </div>
                 </div>
+
+
               </div>
             </div>
           </div>
-          <!-----2-end------------------>
-          <!-----3rd-------------->
+    
           <div class="col-md-4 col-lg-4">
             <div class="card mb-3 pb-4">
               <div
@@ -647,8 +384,11 @@
                 "
               ></div>
               <div class="card-body">
+
+
+
                 <div class="row mb-3">
-                  <!-- New User Card Example -->
+                 
                   <div class="col-12">
                     <div class="card h-100">
                       <div class="card-body">
@@ -698,6 +438,8 @@
                     ></pie-chart>
                   </div>
                 </div>
+
+
               </div>
 
               <div class="px-2 values text-center mb-4">
@@ -715,10 +457,15 @@
                   </span>
                 </h6>
               </div>
+
+
             </div>
           </div>
-          <!-----3rd end--->
-        </div>
+
+        </div> -->
+
+
+        
         <!---3diffrentcards sectionend------------------------------>
 
         <!----------DASHBOARD-NEW-STYLE-TEST-END--------------------------------------------------------------->
@@ -737,8 +484,10 @@
             <h6 class="m-0 font-weight-bold text-primary">Sales Details</h6>
           </div>
           <div class="card-body">
+
+
             <div class="row mb-3">
-              <!-- Earnings (Monthly) Card Example -->
+              
               <div class="col-md-4 col-lg-4 mb-4">
                 <div class="card h-100">
                   <div class="card-body">
@@ -750,7 +499,7 @@
                           Number Of Sales
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          {{ total_sales_count }}
+                          {{  }}
                         </div>
                       </div>
                       <div class="col-auto">
@@ -761,7 +510,7 @@
                 </div>
               </div>
 
-              <!-- New User Card Example -->
+          
               <div class="col-md-4 col-lg-4 mb-4">
                 <div class="card h-100">
                   <div class="card-body">
@@ -776,7 +525,7 @@
                           class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
                         >
                           <i class="fas fa-rupee-sign fa-fw"></i>
-                          {{ parseFloat(total_sale_amount).toFixed(2) }}
+                          {{ parseFloat().toFixed(2) }}
                         </div>
                       </div>
                       <div class="col-auto">
@@ -786,7 +535,7 @@
                   </div>
                 </div>
               </div>
-              <!-- Earnings (Annual) Card Example -->
+       
               <div class="col-md-4 col-lg-4 mb-4">
                 <div class="card h-100">
                   <div class="card-body">
@@ -799,7 +548,7 @@
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                           <i class="fas fa-rupee-sign fa-fw"></i>
-                          {{ parseFloat(credit_sales).toFixed(2) }}
+                          {{ parseFloat().toFixed(2) }}
                         </div>
                       </div>
                       <div class="col-auto">
@@ -810,6 +559,8 @@
                 </div>
               </div>
             </div>
+
+
           </div>
         </div>
 
@@ -862,32 +613,27 @@ export default {
       to_date: "",
       print_date: "",
 
-      total_sales_count: "",
-      credit_sales: "",
-      total_sale_amount: "",
-      total_payments_received: "",
-      total_bank_payments_received: "",
-      total_cash_payments_received: "",
-      total_expenses_received_amnt: "",
-      total_profit: "",
-
-      total_bank_expenses_received: "",
-      total_cash_expenses_received: "",
-
-      total_itemsale_amount: "",
-      total_servicesale_amount: "",
-
-      expense_list: [],
-       transaction_list: [],
-      item_group:[],
-      credit_sale_list:[],
-      customerCredits: [],
-
-      lowStock: [],
+     
 
       dashBoardData: {},
+
+todays_booking:'',
+completed_booking:'',
+cancelled_booking:'',
+
+
+
     };
   },
+
+
+created(){
+
+this.getDashboard();
+
+},
+
+
   mounted() {
     this.dt = $(this.$refs.creditTableDash).DataTable({
       bInfo: false,
@@ -911,87 +657,31 @@ export default {
 
   methods: {
 
+
+   getDashboard(){
+this.preLoader=true;
+axios.get('get-dashboard').then((response) => {
+  
+this.dashBoardData=response.data;
+this.todays_booking=response.data[0].todays_booking;
+this.completed_booking=response.data[0].completed_booking;
+this.cancelled_booking=response.data[0].cancelled_booking;
+
+this.preLoader=false;
+}).catch((err) => {
+  this.preLoader=false;
+  console.log(err);
+});
+
+
+   },
+
+
+
     getformatteddate(date) {
       return moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
     },
 
-    getDashboard() {
-      this.preLoader = true; //the loading begin
-      axios
-        .post("get-dashboard", {
-          from_date: this.from_date,
-          to_date: this.to_date,
-        })
-        .then((res) => {
-          this.total_sales_count = res.data[0].total_sales;
-          this.credit_sales = res.data[0].total_sale_credit_amount;
-          this.total_sale_amount = res.data[0].total_sale_amount;
-          this.total_payments_received = res.data[0].total_payments_received;
-          this.total_bank_payments_received =
-            res.data[0].total_bank_payments_received;
-          this.total_cash_payments_received =
-            res.data[0].total_cash_payments_received;
-
-          this.total_expenses_received_amnt =
-            res.data[0].total_expenses_received;
-          this.total_profit = res.data[0].total_profit;
-
-          this.total_bank_expenses_received =
-            res.data[0].total_bank_expenses_received;
-          this.total_cash_expenses_received =
-            res.data[0].total_cash_expenses_received;
-
-          this.expense_list = res.data[0].expense_list;
-           this.transaction_list = res.data[0].transactions;
-           this.credit_sale_list = res.data[0].credit_sale_list;
-          this.item_group = res.data[0].item_group;
-          this.print_date = res.data[0].print_date;
-
-          this.total_itemsale_amount = res.data[0].total_itemsale_amount;
-          this.total_servicesale_amount = res.data[0].total_servicesale_amount;
-
-          this.proftChartValues = [];
-          this.proftChartLabel = [];
-          this.proftChartValues.push(
-            res.data[0].total_bank_profit,
-            res.data[0].total_cash_profit
-          );
-          this.proftChartLabel.push("Bank", "Cash");
-
-          //inside-main-custumer-with-credits-array
-          this.customerCredits = res.data[0].customer_with_credits;
-          this.lowStock = res.data[0].low_stock_items;
-
-          this.dashBoardData = res.data;
-
-          if (res.data) {
-            this.chartlabel = res.data[0].low_stock_item_names;
-            this.chartData = res.data[0].low_stock_item_quantities;
-
-            this.paymentChartData = res.data[0].piechart_income_payment_values;
-
-            this.paymentChartlabel = res.data[0].piechart_income_payment_names;
-
-            this.expenseCategoryLabel =
-              res.data[0].piechart_expense_category_name;
-            this.expenseCategoryData =
-              res.data[0].piechart_expense_category_amount;
-
-            this.categoryChartData =
-              res.data[0].piechart_income_category_values;
-
-            this.categoryChartlabel =
-              res.data[0].piechart_income_category_names;
-            this.sale_item_details = res.data[0].sale_item_details;
-            this.service_item_details = res.data[0].service_item_details;
-          }
-          this.preLoader = false;
-        })
-        .catch((err) => {
-          this.preLoader = false;
-          console.log(err);
-        });
-    },
 
     dateFilter(event) {
       //value-0 =Today
@@ -1079,9 +769,7 @@ export default {
     },
   },
 
-  created() {
-   
-  },
+
 };
 </script>
 

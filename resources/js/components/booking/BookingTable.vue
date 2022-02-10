@@ -15,7 +15,7 @@
       >
         <h5 class="m-0 font-weight-bold text-dark">bookings</h5>
 
-      <!--FilterButton-->
+        <!--FilterButton-->
 
         <div class="col-md-2 ml-auto">
           <button
@@ -37,7 +37,7 @@
         <!--FilterButton end-->
       </div>
 
-<!-------------------------->
+      <!-------------------------->
       <div class="" v-if="search">
         <div class="row justify-content-center">
           <div class="" style="">
@@ -62,9 +62,6 @@
         </div>
       </div>
       <!-------------------------->
-
-
-
 
       <div class="table-responsive p-3">
         <table
@@ -91,13 +88,11 @@
               <td>{{ index + 1 }}</td>
               <td>{{ booking.customer.name }}</td>
               <td>{{ booking.customer.mobile }}</td>
-              <td>{{ booking.date|myDate }}</td>
+              <td>{{ booking.date | myDate }}</td>
               <td>{{ booking.service.name }}</td>
               <td>{{ booking.time }}:00</td>
               <td>
-
-
- <button
+                <button
                   type="button"
                   class="btn btn-sm btn-primary"
                   data-toggle="modal"
@@ -107,7 +102,6 @@
                 >
                   <i class="fas fa-hand-holding-usd"></i>
                 </button>
-
 
                 <button
                   type="button"
@@ -148,13 +142,14 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   props: ["user"],
   data() {
     return {
-      from_date:'',
-      to_date:'',
-      search :false,
+      from_date: "",
+      to_date: "",
+      search: false,
       preLoader: false,
       booking_details: {},
     };
@@ -163,6 +158,9 @@ export default {
     this.getBookings();
     var _this = this;
     bus.$on("booking-added", function () {
+      _this.getBookings();
+    });
+       bus.$on("payment-added", function () {
       _this.getBookings();
     });
   },
@@ -187,7 +185,6 @@ export default {
         });
     },
 
-
     clearSearch() {
       this.from_date = "";
       this.to_date = "";
@@ -198,10 +195,9 @@ export default {
     showFilter() {
       this.search = true;
     },
-addPayment(booking){
- bus.$emit("add-payment", booking);
-
-},
+    addPayment(booking) {
+      bus.$emit("add-payment", booking);
+    },
 
     deleteBooking(booking) {
       Swal.fire({
@@ -216,8 +212,8 @@ addPayment(booking){
           axios
             .post("delete-booking", {
               id: booking.id,
-              name:booking.name,
-              email:booking.email,
+              name: booking.name,
+              email: booking.email,
             })
             .then((response) => {
               if (response.data == "success") {
@@ -242,6 +238,7 @@ addPayment(booking){
     },
   },
 
+
   watch: {
     booking_details(val) {
       this.dt.destroy();
@@ -252,7 +249,7 @@ addPayment(booking){
             [10, 25, 50, -1],
             [10, 25, 50, "All"],
           ],
-          "bSort": false,
+          bSort: false,
         });
       });
     },
@@ -265,7 +262,7 @@ addPayment(booking){
         [10, 25, 50, -1],
         [10, 25, 50, "All"],
       ],
-      "bSort": false,
+      bSort: false,
     });
   },
 };

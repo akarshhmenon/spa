@@ -12,6 +12,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductAndServiceController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -112,7 +113,8 @@ Route::post('delete-booking', [BookingController::class, 'deleteBooking']);
 
 Route::post('booking-payment', [PaymentController::class, 'addBookingPayment']);
 
-
+// Dashboard 
+Route::get('get-dashboard', [DashboardController::class, 'getDashboard']);
 });
 
 
