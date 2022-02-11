@@ -330,10 +330,10 @@ export default {
     },
         remaincharCount() {
       var remainCharacters =
-        this.mincharecter - this.product.description.length;
-      if (this.product.description.length > this.maxcharacter) {
+        this.mincharecter - this.service.description.length;
+      if (this.service.description.length > this.maxcharacter) {
         this.remaincharactersText = " Exceeded limit. ";
-      } else if (this.product.description.length < this.mincharecter) {
+      } else if (this.service.description.length < this.mincharecter) {
         this.remaincharactersText = remainCharacters + " characters needed. ";
       } else {
         this.remaincharactersText = "Max 200 charecters";

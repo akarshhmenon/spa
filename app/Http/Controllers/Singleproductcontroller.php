@@ -13,9 +13,14 @@ class Singleproductcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function singleProductPage()
+    public function singleProductPage($id)
     {
-        return view('users.singleproduct');
+
+
+
+        $product=ProductAndService::with('images')->where('id','=',$id)->first();
+
+        return view('users.singleproduct',compact('product'));
     }
     
     
