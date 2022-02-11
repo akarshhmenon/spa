@@ -14,4 +14,10 @@ class ProductAndService extends Model
         return $this->belongsTo(Category::class, 'categories_id', 'id');
     }
 
+    public function images(){
+
+        return $this->hasMany(Image::class, 'item_id', 'id');
+    }
+
+
 }

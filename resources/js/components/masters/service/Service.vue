@@ -42,14 +42,19 @@
             </div>
             <div class="col">
               <div class="form-group">
-                <label for="description" class="">description</label>
-                <input
-                  type="textarea"
-                  class="form-control"
+                <label for="description" class="">description</label><small>{{ remaincharactersText }} </small>
+
+
+
+
+                <textarea
+                  class="form-control form-height item shadow-sm"
                   name="description"
-                  placeholder="Enter description "
                   v-model="service.description"
-                />
+                  @keyup="remaincharCount()"
+                >
+                </textarea>
+
                 <small class="text-danger" v-if="errors.description">{{
                   errors.description[0]
                 }}</small>
@@ -166,7 +171,9 @@ export default {
 
       loading: false,
       category: {},
-
+ maxcharacter: 200,
+      mincharecter: 150,
+      remaincharactersText: "Min 150 characters.",
       service: {
         id: "",
         name: "",
@@ -239,8 +246,8 @@ export default {
         image.onload = function () {
           var height = this.height;
           var width = this.width;
-          if (height < 320 || height > 350 && width < 520 || width > 550) {
-            vm.image_error = "Image has invalid image dimension";
+          if (height < 598 || height > 602 && width < 498 || width > 502) {
+            vm.image_error = "Invalid image dimension! recomended(500*600)";
 
             return false;
           } else {
@@ -321,9 +328,23 @@ export default {
       this.errors = {};
       this.image_error = "";
     },
+        remaincharCount() {
+      var remainCharacters =
+        this.mincharecter - this.product.description.length;
+      if (this.product.description.length > this.maxcharacter) {
+        this.remaincharactersText = " Exceeded limit. ";
+      } else if (this.product.description.length < this.mincharecter) {
+        this.remaincharactersText = remainCharacters + " characters needed. ";
+      } else {
+        this.remaincharactersText = "Max 200 charecters";
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+.form-height {
+  height: 43px;
+}
 </style>
