@@ -27,7 +27,7 @@
                                     <img src="{{ URL::asset('uploads/' . $product['images'][0]->image_name) }}"
                                         style="object-fit: cover;">
                                     <h4><a href={{ url('/singleproduct') }}>{{ $product->name }}</a></h4>
-                                    <p> {{ $product->description }} </p>
+                                    <p>  {{ Str::limit($product->description, 40) }}.. </p>
                                     <h3><i class="fa fa-rupee"> ₹ {{ $product->mrp }} </i></h3>
                                     <a class="btn btn-primary" href={{ url('/singleproduct/'.$product->id) }}>View Details</a>
                             </div>

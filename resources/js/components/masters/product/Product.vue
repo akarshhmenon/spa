@@ -267,9 +267,9 @@ export default {
       loading: false,
       category: {},
 
-      maxcharacter: 200,
-      mincharecter: 150,
-      remaincharactersText: "Min 150 characters.",
+      maxcharacter: 420,
+      mincharecter: 210,
+      remaincharactersText: "Min 210 characters.",
 
       product: {
         id: "",
@@ -455,7 +455,7 @@ export default {
       } else if (this.product.description.length < this.mincharecter) {
         this.remaincharactersText = remainCharacters + " characters needed. ";
       } else {
-        this.remaincharactersText = "Max 200 charecters";
+        this.remaincharactersText = "Max 420 charecters";
       }
     },
   },
