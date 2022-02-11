@@ -3,6 +3,7 @@
 @section('content')
 
     <!-- product Start -->
+    
     <div class="container-fluid px-0 py-5 my-5">
         <div class="row mx-0 justify-content-center text-center">
             <div class="col-lg-6">
@@ -11,11 +12,16 @@
             </div>
         </div>
         <section id="services" class="services">
+
+            
+
             <div class="container" data-aos="fade-up">
 
 
                 <a href="/accessories">
+                    @foreach ($products as $Product)
                     <div class="row">
+                        @foreach ($products as $Product)
 
                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0 shadow-sm p-3 mb-5 bg-white rounded"
                             data-aos="zoom-in" data-aos-delay="300">
@@ -23,40 +29,22 @@
 
                                     <img src="{{ URL::asset('frontassets/img/product-1.jpg') }}"
                                         style="object-fit: cover;">
-                                    <h4><a href={{ url('/singleproduct') }}>TRESemme</a></h4>
-                                    <p> Nourish Shampoo has been created to provide complete nourishment to your hair.</p>
-                                    <h3><i class="fa fa-rupee"> ₹ 503.40</i></h3>
+                                    <h4><a href={{ url('/singleproduct') }}>{{$Product->name}}</a></h4>
+                                    <p> {{$Product->description}}</p>
+                                    <h3><i class="fa fa-rupee"> ₹ {{$Product->mrp}}</i></h3>
                                     <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
                             </div>
 
                         </div>
+                        @endforeach
                 </a>
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0 shadow-sm p-3 mb-5 bg-white rounded"
-                    data-aos="zoom-in" data-aos-delay="200">
-                    <div class="icon-box"> <a href="/pro">
-                            <img src="{{ URL::asset('frontassets/img/product-2.jpg') }}" style="object-fit: cover;">
-
-                            <h4><a href="/pro">Olay Total Effects</a></h4>
-                            <p>Olay Total Effects 7 In One Touch Of Foundation BB Cream Day SPF 15</p>
-                            <h3><i class="fa fa-rupee"> ₹ 1100</i></h3>
-                            <a class="btn btn-primary" href="/pro">View Details</a>
-                    </div>
-                </div></a>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0 shadow-sm p-3 mb-5 bg-white rounded"
-                    data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box"><a href="/washing">
-                            <img src="{{ URL::asset('frontassets/img/product-3.jpg') }}" style="object-fit: cover;">
-                            <h4><a href="/washing">Skeyndor</a></h4>
-                            <p>Skeyndor Timeless Prodigy–For middle aged & mature skins, dry and very dry skin.</p>
-                            <h3><i class="fa fa-rupee"> ₹ 11020</i></h3>
-                            <a class="btn btn-primary" href="">View Details</a>
-                    </div>
-                </div></a>
+                
             </div>
+            @endforeach
     </div>
-    <div class="container" data-aos="fade-up">
+    
+    {{-- <div class="container" data-aos="fade-up">
 
 
         <a href="/accessories">
@@ -100,9 +88,8 @@
 
 
 
-    </div>
-
-    </div>
+    </div> 
+ </div> --}}
 
     </section>
     </div>

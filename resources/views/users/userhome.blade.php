@@ -262,44 +262,52 @@
             </div>
             
 
-        <a href="/accessories">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch shadow-sm p-3 mb-5 bg-white rounded"
-                    data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon-box"> <a href={{ url('/singleproduct') }}>
-                        <img src="{{ URL::asset('frontassets/img/product-4.jpg') }}" style="object-fit: cover;">
+            <div class="container" data-aos="fade-up">
 
-                        <h4><a href={{ url('/singleproduct') }}> SkinKraft</a></h4>
-                        <p>SkinKraft Customized Skincare Regimen - Face Cleanser, Face Moisturizer & Active</p>
-                        <h3><i class="fa fa-rupee"> ₹ 999</i></h3>
-                        <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
+
+                <a href="/accessories">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch shadow-sm p-3 mb-5 bg-white rounded"
+                            data-aos="zoom-in" data-aos-delay="100">
+                            <div class="icon-box">
+                                <img src="{{ URL::asset('frontassets/img/product-4.jpg') }}" style="object-fit: cover;">
+        
+                                <h4><a href="/accessories"> SkinKraft</a></h4>
+                                <p>SkinKraft Customized Skincare Regimen - Face Cleanser, Face Moisturizer & Active</p>
+                                <h3><i class="fa fa-rupee"> ₹ 999</i></h3>
+                                <a class="btn btn-primary" href="">View Details</a>
+                            </div>
+                        </div>
+                </a>
+        
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0 shadow-sm p-3 mb-5 bg-white rounded"
+                    data-aos="zoom-in" data-aos-delay="200">
+                    <div class="icon-box"> <a href="/livemechanic">
+                            <img src="{{ URL::asset('frontassets/img/product-5.jpg') }}" style="object-fit: cover;">
+        
+                            <h4><a href="/livemechanic">Wow Skin Science</a></h4>
+                            <p>Onion Hair Oil Ultimate Hair Care Combo Kit (Shampoo + Hair Conditioner + Hair Oil)</p>
+                            <h3><i class="fa fa-rupee"> ₹ 1099</i></h3>
+                            <a class="btn btn-primary" href="">View Details</a>
                     </div>
-                </div>
-        </a>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0 shadow-sm p-3 mb-5 bg-white rounded"
-            data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box"> <a href={{ url('/singleproduct') }}>
-                    <img src="{{ URL::asset('frontassets/img/product-5.jpg') }}" style="object-fit: cover;">
-
-                    <h4><a href={{ url('/singleproduct') }}>Wow Skin Science</a></h4>
-                    <p>Onion Hair Oil Ultimate Hair Care Combo Kit (Shampoo + Hair Conditioner + Hair Oil)</p>
-                    <h3><i class="fa fa-rupee"> ₹ 1099</i></h3>
-                    <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
+                </div></a>
+        
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0 shadow-sm p-3 mb-5 bg-white rounded"
+                    data-aos="zoom-in" data-aos-delay="300">
+                    <div class="icon-box"><a href="/washing">
+                            <img src="{{ URL::asset('frontassets/img/product-6.jpg') }}" style="object-fit: cover;">
+        
+                            <h4><a href="/washing">L'Oreal Paris 6 Oil</a></h4>
+                            <p> Provide complete nourishment to your hair from root to tip with six micro oils</p>
+                            <h3><i class="fa fa-rupee"> ₹ 65</i></h3>
+                            <a class="btn btn-primary" href="">View Details</a>
+                    </div>
+                </div></a>
             </div>
-        </div></a>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0 shadow-sm p-3 mb-5 bg-white rounded"
-            data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box"><a href={{ url('/singleproduct') }}>
-                    <img src="{{ URL::asset('frontassets/img/product-6.jpg') }}" style="object-fit: cover;">
-
-                    <h4><a href={{ url('/singleproduct') }}>L'Oreal Paris 6 Oil</a></h4>
-                    <p> Provide complete nourishment to your hair from root to tip with six micro oils</p>
-                    <h3><i class="fa fa-rupee"> ₹ 65</i></h3>
-                    <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
+        
+        
+        
             </div>
-
         </section>
         </div>
         <!-- product End -->

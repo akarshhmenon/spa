@@ -357,7 +357,7 @@ _this.product.opening_quantity = product.opening_quantity;
         image.onload = function () {
           var height = this.height;
           var width = this.width;
-          if (height < 320 || (height > 350 && width < 520) || width > 550) {
+          if (height < 240 || (height > 260 && width < 240) || width > 260) {
             vm.image_error = "Image has invalid image dimension";
 
             return false;
