@@ -33,7 +33,7 @@ class CreateProductAndServicesTable extends Migration
             $table->string('opening_quantity');
             $table->bigInteger('categories_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-
+$table->string('add_to_home')->default(0);
 
             $table->timestamps();
         });
