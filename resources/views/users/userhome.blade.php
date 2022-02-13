@@ -20,8 +20,8 @@
                             <h6 class="text-white text-uppercase mb-3 animate__animated animate__fadeInDown"
                                 style="letter-spacing: 3px;">Spa & Beauty Center</h6>
                             <h3 class="display-3 text-capitalize text-white mb-3">Massage Treatment</h3>
-                            <p class="mx-md-5 px-5">Lorem rebum magna dolore amet lorem eirmod magna erat diam stet.
-                                Sadips duo stet amet amet ndiam elitr ipsum labore diam</p>
+                            <p class="mx-md-5 px-5">We provide a trained, certified medical professional (massage therapist)
+                                manipulates the soft tissues of your body — muscle, connective tissue, tendons, ligaments and skin.</p>
                             <a class="btn btn-outline-light py-3 px-4 mt-3 animate__animated animate__fadeInUp"
                                 href="#">Make Appointment</a>
                         </div>
@@ -35,8 +35,8 @@
                             <h6 class="text-white text-uppercase mb-3 animate__animated animate__fadeInDown"
                                 style="letter-spacing: 3px;">Spa & Beauty Center</h6>
                             <h3 class="display-3 text-capitalize text-white mb-3">Facial Treatment</h3>
-                            <p class="mx-md-5 px-5">Lorem rebum magna dolore amet lorem eirmod magna erat diam stet.
-                                Sadips duo stet amet amet ndiam elitr ipsum labore diam</p>
+                            <p class="mx-md-5 px-5">A facial is a beautifying skin treatment that cleanses pores, 
+                                exfoliates dead skin cells, hydrates and moisturises the skin, and treats common skin concerns with a custom regime.</p>
                             <a class="btn btn-outline-light py-3 px-4 mt-3 animate__animated animate__fadeInUp"
                                 href="#">Make Appointment</a>
                         </div>
@@ -50,8 +50,8 @@
                             <h6 class="text-white text-uppercase mb-3 animate__animated animate__fadeInDown"
                                 style="letter-spacing: 3px;">Spa & Beauty Center</h6>
                             <h3 class="display-3 text-capitalize text-white mb-3">Cellulite Treatment</h3>
-                            <p class="mx-md-5 px-5">Lorem rebum magna dolore amet lorem eirmod magna erat diam stet.
-                                Sadips duo stet amet amet ndiam elitr ipsum labore diam</p>
+                            <p class="mx-md-5 px-5">During one minimally invasive laser treatment called Cellulaze™, 
+                                a tiny laser fiber is inserted beneath your skin.</p>
                             <a class="btn btn-outline-light py-3 px-4 mt-3 animate__animated animate__fadeInUp"
                                 href="#">Make Appointment</a>
                         </div>
@@ -236,70 +236,31 @@
 
                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0 shadow-sm p-3 mb-5 bg-white rounded"
                             data-aos="zoom-in" data-aos-delay="200">
-                            <div class="icon-box"> <a href="/pro">
+                            <div class="icon-box"> <a href={{ url('/singleproduct') }}>
                                     <img src="{{ URL::asset('frontassets/img/product-2.jpg') }}"
                                         style="object-fit: cover;">
 
-                                    <h4><a href="/pro">Olay Total Effects</a></h4>
+                                    <h4><a href={{ url('/singleproduct') }}>Olay Total Effects</a></h4>
                                     <p>Olay Total Effects 7 In One Touch Of Foundation BB Cream Day SPF 15</p>
                                     <h3><i class="fa fa-rupee"> ₹ 1100</i></h3>
-                                    <a class="btn btn-primary" href="/pro">View Details</a>
+                                    <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
                             </div>
                         </div></a>
 
                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0 shadow-sm p-3 mb-5 bg-white rounded"
                             data-aos="zoom-in" data-aos-delay="300">
-                            <div class="icon-box"><a href="/washing">
+                            <div class="icon-box"><a href={{ url('/singleproduct') }}>
                                     <img src="{{ URL::asset('frontassets/img/product-3.jpg') }}"
                                         style="object-fit: cover;">
-                                    <h4><a href="/washing">Skeyndor</a></h4>
+                                    <h4><a href={{ url('/singleproduct') }}>Skeyndor</a></h4>
                                     <p>Skeyndor Timeless Prodigy–For middle aged & mature skins, dry and very dry skin.</p>
                                     <h3><i class="fa fa-rupee"> ₹ 11020</i></h3>
-                                    <a class="btn btn-primary" href="">View Details</a>
+                                    <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
                             </div>
                         </div></a>
                     </div>
             </div>
-            <div class="container" data-aos="fade-up">
-
-
-                <a href="/accessories">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch shadow-sm p-3 mb-5 bg-white rounded"
-                            data-aos="zoom-in" data-aos-delay="100">
-                            <div class="icon-box">
-                                <img src="{{ URL::asset('frontassets/img/product-4.jpg') }}" style="object-fit: cover;">
-
-                                <h4><a href="/accessories"> SkinKraft</a></h4>
-                                <p>SkinKraft Customized Skincare Regimen - Face Cleanser, Face Moisturizer & Active</p>
-                                <h3><i class="fa fa-rupee"> ₹ 999</i></h3>
-                                <a class="btn btn-primary" href="">View Details</a>
-                            </div>
-                        </div>
-                </a>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0 shadow-sm p-3 mb-5 bg-white rounded"
-                    data-aos="zoom-in" data-aos-delay="200">
-                    <div class="icon-box"> <a href={{ url('/singleproduct') }}>
-                            <img src="{{ URL::asset('frontassets/img/product-2.jpg') }}" style="object-fit: cover;">
-
-                            <h4><a href={{ url('/singleproduct') }}>Olay Total Effects</a></h4>
-                            <p>Olay Total Effects 7 In One Touch Of Foundation BB Cream Day SPF 15</p>
-                            <h3><i class="fa fa-rupee"> ₹ 1100</i></h3>
-                            <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
-                    </div>
-                </div></a>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0 shadow-sm p-3 mb-5 bg-white rounded"
-                    data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box"><a href={{ url('/singleproduct') }}>
-                            <img src="{{ URL::asset('frontassets/img/product-3.jpg') }}" style="object-fit: cover;">
-                            <h4><a href={{ url('/singleproduct') }}>Skeyndor</a></h4>
-                            <p>Skeyndor Timeless Prodigy–For middle aged & mature skins, dry and very dry skin.</p>
-                            <h3><i class="fa fa-rupee"> ₹ 11020</i></h3>
-                            <a class="btn btn-primary" href={{ url('/singleproduct') }}>View Details</a>
-                    </div>
-                </div></a>
+            
 
         <a href="/accessories">
             <div class="row">
@@ -355,11 +316,11 @@
                             <h6 class="d-inline-block text-primary text-uppercase bg-light py-1 px-2">About Us</h6>
                             <h1 class="mb-4" style="color:rgb(0, 0, 0);">Your Best Spa, Beauty & Skin Care Center
                             </h1>
-                            <p class="pl-4 border-left border-primary">Dolores lorem lorem ipsum sit et ipsum. Sadip sea
-                                amet diam
-                                dolore sed et. Sit rebum labore sit sit ut vero no sit. Et elitr stet dolor sed sit et sed
-                                ipsum et
-                                kasd erat duo eos et erat</p>
+                            <p class="pl-4 border-left border-primary">At Spa Center, we have been on a mission to make selfcare a priority rather than a treat 
+                                since 2021, when we first opened our doors at the quaint spa in the idyllic Himalayan hills of Manali.
+
+                                We believe that in the hustle and bustle of urban life, a few moments of self care, woven into your daily regimen, 
+                                have the potential to help you unwind and reconnect with yourself. Bring the Spa like serenity & tranquility in your daily lives.</p>
                             <div class="row pt-3">
                                 <div class="col-6">
                                     <div class="bg-light text-center p-4">
@@ -396,9 +357,8 @@
                         <div class="hours-text bg-light p-4 p-lg-5 my-lg-5">
                             <h6 class="d-inline-block text-white text-uppercase bg-primary py-1 px-2">Open Hours</h6>
                             <h1 class="mb-4" style="color:rgb(0, 0, 0);">Best Relax And Spa Zone</h1>
-                            <p>Dolores lorem lorem ipsum sit et ipsum. Sadip sea amet diam dolore sed et. Sit rebum labore
-                                sit sit ut vero no sit. Et elitr stet dolor sed sit et sed ipsum et kasd ut. Erat duo eos et
-                                erat sed diam duo</p>
+                            <p>We Provide our best services as much as we can to the people who love their healthy body.
+                                And we are happy to serve you guys with full hearty pleasure. welcome to our Spa Center...  </p>
                             <ul class="list-inline">
                                 <li class="h6 py-1"><i class="far fa-circle text-primary mr-3"></i>Mon – Fri : 9:00
                                     AM - 7:00 PM</li>
@@ -434,7 +394,7 @@
                         <div class="col-lg-6 pt-5 pb-lg-5">
                             <div class="contact-form bg-light p-4 p-lg-5 my-lg-5">
                                 <h6 class="d-inline-block text-white text-uppercase bg-primary py-1 px-2">Contact</h6>
-                                <h1 class="mb-4">Contact For Any Query</h1>
+                                <h1 class="mb-4" style="color:rgb(0, 0, 0);">Contact For Any Query</h1>
                                 <div id="success"></div>
                                 <form name="sentMessage" id="contactForm" novalidate="novalidate">
                                     <div class="form-row">

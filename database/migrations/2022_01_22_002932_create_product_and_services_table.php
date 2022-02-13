@@ -29,7 +29,7 @@ class CreateProductAndServicesTable extends Migration
             $table->string('mrp')->nullable();
             $table->string('rack_number')->nullable();
             $table->string('time')->nullable();
-            
+            $table->string('quantity')->nullable();
             $table->bigInteger('categories_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
 

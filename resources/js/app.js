@@ -42,9 +42,6 @@ import 'datatables.net-buttons/js/buttons.colVis.js'
 window.JSZip = jsZip;
 
 
-//multiple image upload
-import VueLazyload from 'vue-lazyload'
-Vue.use(VueLazyload)
 
 
 // This line was the one missing

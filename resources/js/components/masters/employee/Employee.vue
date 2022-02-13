@@ -23,132 +23,114 @@
     >
       <div class="modal-body">
         <div class="card-body">
-
-<div class="row">
-<div class="col">
-      <div class="form-group">
-            <label for="employeeName" class="required">Employee Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="name"
-              placeholder="Enter Employee Name"
-              v-model="employees.name"
-              :disabled="edit"
-            />
-            <small class="text-danger" v-if="errors.name">{{
-              errors.name[0]
-            }}</small>
-          </div>
-</div>
-<div class="col">
-      <div class="form-group">
-            <label for="email" class="">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              name="email"
-              placeholder="Enter email "
-              v-model="employees.email"
-            />
-            <small class="text-danger" v-if="errors.email">{{
-              errors.email[0]
-            }}</small>
-          </div>
-</div>
-
-</div>
-        <div class="row">
-
-
+          <div class="row">
             <div class="col">
-  <div class="form-group">
-            <label for="mobile" class="">Mobile</label>
-            <input
-              type="number"
-              class="form-control"
-              name="mobile"
-              placeholder="Enter Mobile Number"
-              v-model="employees.mobile"
-            />
-            <small class="text-danger" v-if="errors.mobile">{{
-              errors.mobile[0]
-            }}</small>
-          </div>
+              <div class="form-group">
+                <label for="employeeName" class="required">Employee Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  placeholder="Enter Employee Name"
+                  v-model="employees.name"
+                  :disabled="edit"
+                />
+                <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
+              </div>
             </div>
             <div class="col">
-
-          <div class="form-group">
-            <label for="category" class="required">Select Designation</label>
-            <select
-              class="form-control"
-              name="designation_id"
-              v-model="employees.designation_id"
-            >
-              <option value="">Select Designation</option>
-              <option
-                v-for="designation in designations"
-                :key="designation.id"
-                v-bind:value="designation.id"
-              >
-                {{ designation.name }}
-              </option>
-            </select>
-            <small class="text-danger" v-if="errors.designation_id">{{
-              errors.designation_id[0]
-            }}</small>
-          </div>
+              <div class="form-group">
+                <label for="email" class="">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  placeholder="Enter email "
+                  v-model="employees.email"
+                />
+                <small class="text-danger" v-if="errors.email">{{
+                  errors.email[0]
+                }}</small>
+              </div>
             </div>
-        </div>
-
-        
-<div class="row">
-     <div class="col">
-          <div class="form-group">
-            <label >Address 1</label>
-            <input
-              type="text"
-              class="form-control"
-          
-              placeholder="Enter Address 1"
-              name="address_1"
-              v-model="employees.address_1"
-            />
-                  <small class="text-danger" v-if="errors.address_1">{{
-              errors.address_1[0]
-            }}</small>
           </div>
-        </div>
-
-        <div class="col">
-          <div class="form-group">
-            <label >Address 2</label>
-            <input
-              type="text"
-              class="form-control"
-           
-              placeholder="Enter Address 2"
-              name="address_2"
-              v-model="employees.address_2"
-            />
-                  <small class="text-danger" v-if="errors.address_2">{{
-              errors.address_2[0]
-            }}</small>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="mobile" class="">Mobile</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="mobile"
+                  placeholder="Enter Mobile Number"
+                  v-model="employees.mobile"
+                />
+                <small class="text-danger" v-if="errors.mobile">{{
+                  errors.mobile[0]
+                }}</small>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="category" class="required">Select Designation</label>
+                <select
+                  class="form-control"
+                  name="designation_id"
+                  v-model="employees.designation_id"
+                >
+                  <option value="">Select Designation</option>
+                  <option
+                    v-for="designation in designations"
+                    :key="designation.id"
+                    v-bind:value="designation.id"
+                  >
+                    {{ designation.name }}
+                  </option>
+                </select>
+                <small class="text-danger" v-if="errors.designation_id">{{
+                  errors.designation_id[0]
+                }}</small>
+              </div>
+            </div>
           </div>
-        </div>
 
-</div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Address 1</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Address 1"
+                  name="address_1"
+                  v-model="employees.address_1"
+                />
+                <small class="text-danger" v-if="errors.address_1">{{
+                  errors.address_1[0]
+                }}</small>
+              </div>
+            </div>
 
-
-
+            <div class="col">
+              <div class="form-group">
+                <label>Address 2</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Address 2"
+                  name="address_2"
+                  v-model="employees.address_2"
+                />
+                <small class="text-danger" v-if="errors.address_2">{{
+                  errors.address_2[0]
+                }}</small>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button
-          type="submit"
-          class="btn btn-primary rounded-pill"
-          :disabled="loading"
-        >
+        <button type="submit" class="btn btn-primary rounded-pill" :disabled="loading">
           {{ button_title }}
           <i class="fas fa-spinner fa-spin fa-fw" v-if="loading == true"></i>
         </button>
@@ -178,9 +160,9 @@ export default {
         name: "",
         mobile: "",
         designation_id: "",
-        email:'',
-        address_1:'',
-        address_2:'',
+        email: "",
+        address_1: "",
+        address_2: "",
       },
     };
   },
@@ -208,7 +190,7 @@ export default {
         _this.employees.name = employee.name;
         _this.employees.email = employee.email;
         _this.employees.address_1 = employee.address_1;
-         _this.employees.address_2 = employee.address_2;
+        _this.employees.address_2 = employee.address_2;
         _this.employees.mobile = employee.mobile;
       });
     }

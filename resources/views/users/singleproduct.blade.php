@@ -76,7 +76,14 @@
                     <div class="reviews_title"><a href="#">Reviews <span>(1)</span></a></div>
                 </div>
                 <div class="description_text">
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Phasellus id nisi quis justo tempus mollis sed et dui. In hac habitasse platea dictumst. Suspendisse ultrices mauris diam. Nullam sed aliquet elit. Mauris consequat nisi ut mauris efficitur lacinia.</p>
+                    <p>TRESemmé Hair Fall Defense Shampoo works best on damaged and breakage-prone hair. It helps reinforce hair strength and prevents hair fall due to breakage giving you longer and stronger hair.
+                        Enriched with Keratin protein, TRESemmé Hair Fall Defense Shampoo gives upto 97% less hair breakage after one wash. Its advance quality ingredients and scientifically constituted formula will leave you with longer, stronger and manageable hair.
+                        This range has been carefully selected for its advanced formula.
+                        It is extremely beneficial for damaged hair prone to easy breakage.
+                        The Keratin in this hair shampoo helps in strengthening your hair and provides hydration as well as elasticity to your hair.
+                        TRESemmé Hair Fall Defense Shampoo is especially formulated for Indian hair and is suitable for use in conjunction with oil treatments.
+                        Give your hair a luscious, confident bounce and salon quality smoothness without the salon price tag! Buy now to control hair breakage and prevent hair fall happening due to breakage.
+                        For best results, use this shampoo along with the TRESemmé Hair Fall Defense Conditioner. Shampoo for men and women.</p>
                 </div>
             </div>
         </div>

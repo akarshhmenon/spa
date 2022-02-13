@@ -1,0 +1,45 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreatePurchaseItemsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('purchase_items', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('purchase_id')->unsigned();
+            $table->bigInteger('product_id')->unsigned();
+            $table->string('purchase_qty');
+            $table->string('rate_per_qty');
+            $table->string('taxable_amount');
+            $table->string('gst_percentage');
+            $table->string('amount');
+            $table->timestamps();
+        });
+    }
+    
+    
+   
+    
+    
+   
+   
+    
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('purchase_items');
+    }
+}

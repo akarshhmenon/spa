@@ -15,6 +15,16 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('vendor_id')->unsigned(); 
+            $table->date('purchase_date');
+            $table->string('purchase_invoice_no');
+            $table->string('total_products');
+            $table->string('total_qty');
+            $table->string('total_taxable_amount');
+            $table->string('total_tax');
+            $table->string('total_amount');
+            $table->text('remarks');
             $table->timestamps();
         });
     }
@@ -29,3 +39,14 @@ class CreatePurchasesTable extends Migration
         Schema::dropIfExists('purchases');
     }
 }
+
+
+
+
+
+
+
+
+
+
+
