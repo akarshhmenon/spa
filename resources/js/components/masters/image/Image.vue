@@ -80,11 +80,11 @@ export default {
       url: "/images/nofilechoosen.png",
       loading: false,
       image_errors: "",
-upload:{
-      item_id: "",
-      type: "",
-      image: "",
-      }
+      upload: {
+        item_id: "",
+        type: "",
+        image: "",
+      },
     };
   },
 
@@ -142,13 +142,24 @@ upload:{
         image.onload = function () {
           var height = this.height;
           var width = this.width;
-          if (height < 320 || (height > 350 && width < 520) || width > 550) {
-            vm.image_errors = "Image has invalid image dimension";
+          console.log(vm.upload.type);
+          if (vm.upload.type == "service") {
+            if (height < 598 || (height > 602 && width < 498) || width > 502) {
+              vm.image_errors =
+                "Invalid image dimension! recomended (500 * 600)";
 
-            return false;
-          } else {
-            vm.upload.image = e.target.files[0];
+              return false;
+            }
           }
+          if (vm.upload.type == "product") {
+            if (height < 247 || (height > 253 && width < 247) || width > 253) {
+              vm.image_errors =
+                "Invalid image dimension! recomended (250 * 250)";
+
+              return false;
+            }
+          }
+          vm.upload.image = e.target.files[0];
         };
       };
     },

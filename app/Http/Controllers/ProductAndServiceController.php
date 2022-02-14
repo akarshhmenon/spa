@@ -35,8 +35,8 @@ class ProductAndServiceController extends Controller
         $service->categories_id = $request->category_id;
         $service->description = $request->description;
         $service->mrp = $request->rate;
-        $service->opening_quantity =1;
-          $service->quantity =1;
+        $service->opening_quantity = 1;
+        $service->quantity = 1;
         $service->time = $request->time;
         $service->save();
 
@@ -106,7 +106,7 @@ class ProductAndServiceController extends Controller
         $request->validate([
 
             'name' => "required|min:3|max:255|unique:product_and_services,name,$request->id",
-            'opening_quantity'=>"required",
+            'opening_quantity' => "required",
 
         ]);
 
@@ -133,8 +133,8 @@ class ProductAndServiceController extends Controller
         $product->exp_date = $request->exp_date;
         $product->rack_number = $request->rack_no;
         $product->gst = $request->gst;
- $product->quantity = $request->opening_quantity;
-$product->opening_quantity = $request->opening_quantity;
+        $product->quantity = $request->opening_quantity;
+        $product->opening_quantity = $request->opening_quantity;
         $product->save();
 
 
@@ -193,6 +193,33 @@ $product->opening_quantity = $request->opening_quantity;
         return ProductAndService::with('category')->orderBy('id', 'desc')->get();
     }
 
+    public function addToHome(Request $request)
+    {
 
 
+        if ($request->id) {
+            $product_and_service = ProductAndService::find($request->id);
+            $product_and_service->add_to_home = 1;
+            $product_and_service->save();
+            return 'success';
+        } else {
+
+            return "failed";
+        }
+    }
+
+    public function removeFromHome(Request $request)
+    {
+
+
+        if ($request->id) {
+            $product_and_service = ProductAndService::find($request->id);
+            $product_and_service->add_to_home = 0;
+            $product_and_service->save();
+            return 'success';
+        } else {
+
+            return "failed";
+        }
+    }
 }

@@ -329,7 +329,7 @@ export default {
   methods: {
     //image
     chooseProduct(e) {
-      console.log(e);
+      
       var vm = this;
 
       vm.image_error = "";
