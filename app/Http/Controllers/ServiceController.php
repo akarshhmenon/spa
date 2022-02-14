@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
+use App\Models\ProductAndService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +13,9 @@ class serviceController extends Controller
 
 
   public function servicePage(){
-    return view('users.services');
+
+    $services=ProductAndService::with('images')->where('type','=','service')->get();
+    return view('users.services',compact('services'));
 
   }
 

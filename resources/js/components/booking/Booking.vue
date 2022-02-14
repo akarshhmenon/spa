@@ -1,4 +1,9 @@
 <template>
+<div>
+
+
+<front-loader v-if="loading"></front-loader>
+
   <div class="container-fluid py-5">
     <div class="container py-5">
       <div class="row mx-0 justify-content-center text-center">
@@ -27,7 +32,9 @@
                   <input
                     type="text"
                     class="form-control bg-transparent p-4"
-                    :class="booking.name==''?'field-null' :'field-not-null' "
+                    :class="
+                      booking.name == '' ? 'field-null' : 'field-not-null'
+                    "
                     placeholder="Your Name"
                     required="required"
                     v-model="booking.name"
@@ -42,7 +49,9 @@
                   <input
                     type="email"
                     class="form-control bg-transparent p-4"
-                    :class="booking.email==''?'field-null' :'field-not-null' "
+                    :class="
+                      booking.email == '' ? 'field-null' : 'field-not-null'
+                    "
                     placeholder="Your Email"
                     required="required"
                     v-model="booking.email"
@@ -59,7 +68,9 @@
                   <input
                     type="phone"
                     class="form-control bg-transparent p-4"
-                    :class="booking.mobile==''?'field-null' :'field-not-null' "
+                    :class="
+                      booking.mobile == '' ? 'field-null' : 'field-not-null'
+                    "
                     placeholder="Your Mobile"
                     required="required"
                     v-model="booking.mobile"
@@ -73,8 +84,10 @@
                 <div class="form-group">
                   <input
                     type="date"
-                    class="form-control bg-transparent p-4 "
-                    :class="booking.date==''?'field-null' :'field-not-null' "
+                    class="form-control bg-transparent p-4"
+                    :class="
+                      booking.date == '' ? 'field-null' : 'field-not-null'
+                    "
                     placeholder="date"
                     name="date"
                     required="required"
@@ -86,12 +99,14 @@
                 </div>
               </div>
             </div>
-            <div class="form-row test" >
+            <div class="form-row test">
               <div class="col-sm-6">
                 <div class="form-group">
                   <select
                     class="form-control custom-select bg-transparent px-4"
-                    :class="booking.service_id==''?'field-null' :'field-not-null' "
+                    :class="
+                      booking.service_id == '' ? 'field-null' : 'field-not-null'
+                    "
                     style="height: 47px"
                     name="service_id"
                     v-model="booking.service_id"
@@ -114,11 +129,14 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <select
-                    class="form-control custom-select bg-transparent px-4 "
-                    :class="booking.employee_id==''?'field-null' :'field-not-null' "
+                    class="form-control custom-select bg-transparent px-4"
+                    :class="
+                      booking.employee_id == ''
+                        ? 'field-null'
+                        : 'field-not-null'
+                    "
                     style="height: 47px"
                     name="employee_id"
-               
                     v-model="booking.employee_id"
                   >
                     <option value="">Select Employee</option>
@@ -137,22 +155,20 @@
               </div>
             </div>
 
-
-<!-- radio buttons  -->
-
+            <!-- radio buttons  -->
 
             <div class="form-row">
               <div class="col" align="center">
                 <input
                   type="radio"
                   class="btn btn-check"
-                  name="10:00am"
-                  id="ten"
-                  value="10:00am"
+                  name="10"
+                  id="10"
+                  value="10"
                   v-model="booking.time"
                   autocomplete="off"
                 />
-                <label class="btn btn-outline-primary" for="ten"
+                <label class="btn btn-outline-primary" for="10"
                   >10:00 am</label
                 >
               </div>
@@ -160,9 +176,9 @@
                 <input
                   type="radio"
                   class="btn btn-check"
-                  name="11.00"
+                  name="11"
                   id="11"
-                  value="11:00am"
+                  value="11"
                   v-model="booking.time"
                   autocomplete="off"
                 /><label class="btn btn-outline-primary" for="11"
@@ -173,7 +189,7 @@
                 <input
                   type="radio"
                   class="btn btn-check"
-                  name="12.00"
+                  name="12"
                   id="12"
                   value="12"
                   v-model="booking.time"
@@ -250,15 +266,15 @@
               </div>
             </div>
 
-
-<!-- radio buttons ends -->
+            <!-- radio buttons ends -->
 
             <div class="form-row">
               <div class="col" align="center">
                 <button
                   class="btn btn-bg btn-block mt-3"
-                  @click="addBooking()"
+                  @click="sendOtp()"
                   style="height: 47px; width: 200px"
+                  :disabled="loading"
                 >
                   Make Appointment
                 </button>
@@ -268,7 +284,79 @@
         </div>
       </div>
     </div>
+
+    <!-- otp modal -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="otpModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="otpModalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="otpModalTitle"></h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              ref="otpModalClose"
+              @click="cancelBooking()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row mb-2">
+                <div class="col">
+                  <span
+                    >OTP has been sent to your E-mail id -
+                    {{ booking.email }}</span
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-center">
+                  <div class="form-group" align="center">
+                    <h6>Please Enter Your OTP</h6>
+                    <div class="otpMaxWidth mt-1">
+                      <input
+                        class="form-control"
+                        placeholder="4 digit number"
+                        name="otp"
+                        v-model="booking.otp"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mb-2">
+              <button
+                type="button"
+                class="btn btn-primary"
+                :disabled="loading"
+                @click="addBooking()"
+
+              >
+                Confirm OTP
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- otp modal -->
   </div>
+
+</div>
+
 </template>
 
 <script>
@@ -276,6 +364,7 @@ export default {
   data() {
     return {
       toastTitle: "Booking Added",
+      loading:false,
       services: {},
       employees: {},
       errors: {},
@@ -288,6 +377,7 @@ export default {
         employee_id: "",
         date: "",
         time: [],
+        otp: "",
       },
     };
   },
@@ -306,20 +396,47 @@ export default {
         this.employees = response.data;
       });
     },
-    addBooking() {
+    sendOtp() {
+      if (this.booking.time.length == 0) {
+        Toast.fire({
+          icon: "warning",
+          title: "Please select a time slot",
+        });
 
+        return false;
+      }
 
-if(this.booking.time.length==0){
-
-   Toast.fire({
-              icon: "warning",
-              title: 'Please select a time slot',
+      this.loading = true;
+      axios
+        .post("get-otp", this.booking)
+        .then((response) => {
+          if (response.data == "success") {
+            $("#otpModal").modal("show");
+          } else {
+            Toast.fire({
+              icon: "error",
+              title: "something went wrong, please try again !",
             });
 
-return false;
-}
+            this.clear_form_data();
+          }
+          this.loading = false;
+        })
+        .catch((err) => {
+          this.loading = false;
+          this.errors = err.response.data.errors;
+        });
+    },
 
+    addBooking() {
+      if (this.booking.otp == "") {
+        Toast.fire({
+          icon: "warning",
+          title: "Please enter your otp",
+        });
 
+        return false;
+      }
 
       this.loading = true;
       axios
@@ -330,10 +447,20 @@ return false;
               icon: "success",
               title: this.toastTitle,
             });
-
+            this.$refs.otpModalClose.click();
             this.clear_form_data();
             bus.$emit("booking-added");
           }
+
+          if (response.data == "wrongOtp") {
+            Toast.fire({
+              icon: "error",
+              title: "OTP does not match, please try again !",
+            });
+            this.$refs.otpModalClose.click();
+            this.clear_form_data();
+          }
+
           this.loading = false;
         })
         .catch((err) => {
@@ -341,7 +468,28 @@ return false;
           this.errors = err.response.data.errors;
         });
     },
+    cancelBooking() {
+      // Swal.fire({
+      //   title: "Are you sure?",
+      //   icon: "warning",
+      //   showCancelButton: true,
+      //   confirmButtonColor: "#3085d6",
+      //   cancelButtonColor: "#d33",
+      //   confirmButtonText: "Yes, delete it!",
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
 
+      //   }
+      // });
+
+      this.$refs.otpModalClose.click();
+      this.clear_form_data();
+    },
+
+
+
+
+    
     clear_form_data() {
       for (let item in this.booking) {
         this.booking[item] = "";
@@ -387,17 +535,20 @@ input[type="radio"]:checked + label {
   color: #f9a392 !important;
 }
 
-.field-null::placeholder{
+.field-null::placeholder {
   color: #f9a392 !important;
 }
 
-
-.btn-bg{
+.btn-bg {
   background-color: #0d0908;
 }
 
-.btn-bg:hover{
-color: rgb(250, 250, 250)
+.btn-bg:hover {
+  color: rgb(250, 250, 250);
+}
+
+.otpMaxWidth {
+  max-width: 200px;
 }
 
 </style>

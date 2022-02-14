@@ -16,13 +16,12 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             
-            $table->string('name');
-            $table->string('email');
-            $table->string('mobile');
+            $table->bigInteger('customer_id')->unsigned();
             $table->string('date');
             $table->string('time');
             $table->bigInteger('service_id')->unsigned()->nullable();
             $table->bigInteger('employee_id')->unsigned()->nullable();
+            $table->string('status')->default(0); //booking status 0= pending 1=completed 2= cancelled
             $table->timestamps();
         });
     }

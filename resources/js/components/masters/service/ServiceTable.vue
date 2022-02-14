@@ -1,5 +1,5 @@
 <template>
-    <!-- DataTable with Hover -->
+  <!-- DataTable with Hover -->
   <pre-loader v-if="preLoader"></pre-loader>
   <div class="main" v-else>
     <!-- DataTable with Hover -->
@@ -37,31 +37,35 @@
               <tr>
                 <th>Index</th>
                 <th>Name</th>
-                <th>Description</th>
-                <th>category</th>
+
+                <th>Category</th>
+                <th>Rate</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tfoot>
-              <tr>
-                <th>Index</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Actions</th>
-              </tr>
-            </tfoot>
+
             <tbody>
-              <tr
-                v-for="(service, index) in service_details"
-                :key="service.id"
-              >
+              <tr v-for="(service, index) in service_details" :key="service.id">
                 <td>{{ index + 1 }}</td>
                 <td>{{ service.name }}</td>
-                <td>{{ service.description }}</td>
-                <td>{{ service.category.name }}</td>
 
+                <td>{{ service.category.name }}</td>
+                <td>{{ service.mrp }}</td>
                 <td class="pl-3">
+                  <button
+                    v-if="service.add_to_home == 0"
+                    class="btn btn-primary btn-sm"
+                    @click="addToHome(service)"
+                  >
+                    <i class="far fa-star fafw" title="To Home"></i>
+                  </button>
+                  <button
+                    v-else
+                    class="btn btn-primary btn-sm"
+                    @click="removeFromHome(service)"
+                  >
+                    <i class="fas fa-star fafw" title="To Home"></i>
+                  </button>
                   <button
                     class="btn btn-primary btn-sm"
                     data-toggle="modal"
@@ -72,7 +76,6 @@
                   </button>
 
                   <button
-                    
                     class="btn btn-danger btn-sm ml-1"
                     @click="deleteService(service)"
                   >
@@ -123,8 +126,7 @@
 
       <!--------------Add-Employee-Modal---------------->
     </div>
-  </div> 
-
+  </div>
 </template>
 
 
@@ -135,13 +137,11 @@ export default {
   props: ["user"],
   data() {
     return {
-    
-      preLoader: false,  
+      preLoader: false,
       service_details: {},
     };
   },
   created() {
-  
     this.getService();
     var _this = this;
     bus.$on("service-added", function () {
@@ -174,33 +174,106 @@ export default {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.post("delete-service",{
+          axios
+            .post("delete-service", {
+              id: service.id,
+            })
+            .then((response) => {
+              if (response.data == "success") {
+                this.getService();
+                Toast.fire({
+                  icon: "error",
+                  title: "Record Deleted successfully",
+                });
+              }
 
-              id:service.id,
-          } ).then((response) => {
-            if (response.data == "success") {
-              this.getService();
-              Toast.fire({
-                icon: "error",
-                title: "Record Deleted successfully",
-              });
-            }
+              if (response.data == "failed") {
+                Toast.fire({
+                  icon: "error",
+                  title: "Some Error Occurred,Please Try Again Later",
+                });
 
-            if (response.data == "failed") {
-              Toast.fire({
-                icon: "error",
-                title: "Some Error Occurred,Please Try Again Later",
-              });
-
-              this.getService();
-            }
-          });
+                this.getService();
+              }
+            });
         }
       });
     },
 
     editService(service) {
       bus.$emit("edit-service", service);
+    },
+
+    addToHome(service) {
+      Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, mark it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .post("add-to-home", {
+              id: service.id,
+            })
+            .then((response) => {
+              if (response.data == "success") {
+                this.getService();
+                Toast.fire({
+                  icon: "success",
+                  title: "Added successfully",
+                });
+              }
+
+              if (response.data == "failed") {
+                Toast.fire({
+                  icon: "error",
+                  title: "Some Error Occurred,Please Try Again Later",
+                });
+
+                this.getService();
+              }
+            });
+        }
+      });
+    },
+
+    removeFromHome() {
+      Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, remove!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .post("remove-from-home", {
+              id: product.id,
+            })
+            .then((response) => {
+              if (response.data == "success") {
+                this.getService();
+                Toast.fire({
+                  icon: "success",
+                  title: "Removed successfully",
+                });
+              }
+
+              if (response.data == "failed") {
+                Toast.fire({
+                  icon: "error",
+                  title: "Some Error Occurred,Please Try Again Later",
+                });
+
+                this.getService();
+              }
+            });
+        }
+      });
     },
   },
 

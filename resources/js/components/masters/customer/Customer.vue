@@ -18,6 +18,9 @@
 
     <div class="modal-body">
       <div class="card-body">
+
+
+
         <div class="col">
           <div class="form-group">
             <label for="customerName" class="required">Name</label>
@@ -67,6 +70,9 @@
             />
           </div>
         </div>
+
+
+        
       </div>
     </div>
     <div class="modal-footer">

@@ -39,6 +39,7 @@ $user= Auth::user();
           <router-link class="collapse-item" to="/category">Category</router-link>
           <router-link class="collapse-item" to="/designation">Designation</router-link>
           <router-link class="collapse-item" to="/images">Images</router-link>
+          
           <!-- <a class="collapse-item" href="form_advanceds.html">Reward Settings</a> -->
         </div>
       </div>
@@ -70,7 +71,7 @@ $user= Auth::user();
             <h6 class="collapse-header">Reports</h6>
 
             <router-link class="collapse-item" to= "attendance-report" >Attendance Report</router-link>
-         
+         <router-link class="collapse-item" to= "/payment-report" >Payment Report</router-link>
           </div>
         </div>
       </li>

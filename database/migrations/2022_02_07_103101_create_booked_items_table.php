@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateBookedItemsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('booked_items', function (Blueprint $table) {
+            $table->id();
+
+            $table->bigInteger('booking_id')->unsigned();
+        
+            $table->bigInteger('product_service_id')->unsigned();
+            $table->string('type'); //service or product
+            $table->string('quantity');
+            $table->float('rate');
+            $table->string('total_amount');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('booked_items');
+    }
+}

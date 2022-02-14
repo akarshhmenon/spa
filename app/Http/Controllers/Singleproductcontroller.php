@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductAndService;
 use Illuminate\Http\Request;
 
 class Singleproductcontroller extends Controller
@@ -12,9 +13,14 @@ class Singleproductcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function singleProductPage()
+    public function singleProductPage($id)
     {
-        return view('users.singleproduct');
+
+
+
+        $product=ProductAndService::with('images')->where('id','=',$id)->first();
+
+        return view('users.singleproduct',compact('product'));
     }
     
     
@@ -25,7 +31,8 @@ class Singleproductcontroller extends Controller
      */
     public function productPage()
     {
-        return view('users.products');
+        $products=ProductAndService::with('images')->where('type','=','product')->get();
+        return view('users.products',compact('products'));
     }
     
 }
