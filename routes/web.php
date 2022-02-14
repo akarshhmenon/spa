@@ -121,7 +121,10 @@ Route::get('get-dashboard', [DashboardController::class, 'getDashboard']);
 
 Route::get('/',[UserController::class,'index']);
 Route::get('/products',[Singleproductcontroller::class,'productPage']);
-Route::get('/singleproduct',[Singleproductcontroller::class,'singleProductPage']);
+Route::get('/singleproduct/{id}',[Singleproductcontroller::class,'singleProductPage']);
+
+
+
 Route::get('/services',[ServiceController::class,'servicePage']);
 
 //boooking

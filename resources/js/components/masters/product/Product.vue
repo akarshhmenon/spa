@@ -43,13 +43,16 @@
             <div class="col">
               <div class="form-group">
                 <label for="description" class="">description</label>
-                <input
-                  type="textarea"
-                  class="form-control"
+                <small>{{ remaincharactersText }} </small>
+
+                <textarea
+                  class="form-control form-height item shadow-sm"
                   name="description"
-                  placeholder="Enter description "
                   v-model="product.description"
-                />
+                  @keyup="remaincharCount()"
+                >
+                </textarea>
+
                 <small class="text-danger" v-if="errors.description">{{
                   errors.description[0]
                 }}</small>
@@ -63,8 +66,8 @@
                   type="number"
                   class="form-control"
                   name="mrp"
-                   min="1"
-                              oninput="validity.valid||(value='');"
+                  min="1"
+                  oninput="validity.valid||(value='');"
                   placeholder="Enter mrp "
                   v-model="product.mrp"
                 />
@@ -196,16 +199,15 @@
               </div>
             </div>
 
-
-     <div class="col">
+            <div class="col">
               <div class="form-group">
                 <label>Quantity In Stock</label>
                 <input
                   type="text"
                   class="form-control"
                   placeholder="Enter Quantity"
-                   min="1"
-                              oninput="validity.valid||(value='');"
+                  min="1"
+                  oninput="validity.valid||(value='');"
                   name="opening_quantity"
                   v-model="product.opening_quantity"
                 />
@@ -214,12 +216,6 @@
                 }}</small>
               </div>
             </div>
-
-
-
-
-
-
 
             <div class="col" v-if="!this.edit">
               <div class="form-group">
@@ -271,6 +267,10 @@ export default {
       loading: false,
       category: {},
 
+      maxcharacter: 420,
+      mincharecter: 210,
+      remaincharactersText: "Min 210 characters.",
+
       product: {
         id: "",
         name: "",
@@ -285,7 +285,7 @@ export default {
         rack_no: "",
         gst: "",
         image: "",
-        opening_quantity:'',
+        opening_quantity: "",
       },
     };
   },
@@ -321,7 +321,7 @@ export default {
         _this.product.mrp = product.mrp;
         _this.product.rack_no = product.rack_no;
         _this.product.gst = product.gst;
-_this.product.opening_quantity = product.opening_quantity;
+        _this.product.opening_quantity = product.opening_quantity;
       });
     }
   },
@@ -357,8 +357,8 @@ _this.product.opening_quantity = product.opening_quantity;
         image.onload = function () {
           var height = this.height;
           var width = this.width;
-          if (height < 240 || (height > 260 && width < 240) || width > 260) {
-            vm.image_error = "Image has invalid image dimension";
+          if (height < 247 || (height > 253 && width < 247) || width > 253) {
+            vm.image_error = "Invalid image dimension! recomended (250 * 250)";
 
             return false;
           } else {
@@ -395,7 +395,7 @@ _this.product.opening_quantity = product.opening_quantity;
       upload.append("gst", this.product.gst);
       upload.append("category_id", this.product.category_id);
       upload.append("type", this.product.type);
-       upload.append("opening_quantity", this.product.opening_quantity);
+      upload.append("opening_quantity", this.product.opening_quantity);
       upload.append("image", this.product.image);
       if (this.product.image == "" && !this.edit) {
         this.image_error = "this field required";
@@ -406,7 +406,6 @@ _this.product.opening_quantity = product.opening_quantity;
       axios
         .post("add-product", upload)
         .then((response) => {
-          
           this.loading = false;
           if (response.data == "success") {
             Toast.fire({
@@ -447,9 +446,24 @@ _this.product.opening_quantity = product.opening_quantity;
       this.product.type = "product";
       this.image_error = "";
     },
+
+    remaincharCount() {
+      var remainCharacters =
+        this.mincharecter - this.product.description.length;
+      if (this.product.description.length > this.maxcharacter) {
+        this.remaincharactersText = " Exceeded limit. ";
+      } else if (this.product.description.length < this.mincharecter) {
+        this.remaincharactersText = remainCharacters + " characters needed. ";
+      } else {
+        this.remaincharactersText = "Max 420 charecters";
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+.form-height {
+  height: 43px;
+}
 </style>
