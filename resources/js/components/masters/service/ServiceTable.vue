@@ -240,7 +240,7 @@ export default {
       });
     },
 
-    removeFromHome() {
+    removeFromHome(service) {
       Swal.fire({
         title: "Are you sure?",
         icon: "warning",
@@ -252,7 +252,7 @@ export default {
         if (result.isConfirmed) {
           axios
             .post("remove-from-home", {
-              id: product.id,
+              id: service.id,
             })
             .then((response) => {
               if (response.data == "success") {

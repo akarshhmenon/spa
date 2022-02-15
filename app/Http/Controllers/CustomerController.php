@@ -26,7 +26,7 @@ class CustomerController extends Controller
         } else
 
             $Customer = new Customer;
-        // $Customer->user_id = Auth::user()->id;
+        
         $Customer->name = strtoupper($request->name);
         $Customer->mobile = $request->mobile;
         $Customer->email = $request->email;

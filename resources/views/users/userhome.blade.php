@@ -24,7 +24,7 @@
                                 therapist)
                                 manipulates the soft tissues of your body — muscle, connective tissue, tendons, ligaments
                                 and skin.</p>
-                            <a class="btn btn-outline-light py-3 px-4 mt-3 animate_animated animate_fadeInUp" href="#">Make
+                            <a class="btn btn-outline-light py-3 px-4 mt-3 animate_animated animate_fadeInUp" href="/booking">Make
                                 Appointment</a>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                             <p class="mx-md-5 px-5">A facial is a beautifying skin treatment that cleanses pores,
                                 exfoliates dead skin cells, hydrates and moisturises the skin, and treats common skin
                                 concerns with a custom regime.</p>
-                            <a class="btn btn-outline-light py-3 px-4 mt-3 animate_animated animate_fadeInUp" href="#">Make
+                            <a class="btn btn-outline-light py-3 px-4 mt-3 animate_animated animate_fadeInUp" href="/booking">Make
                                 Appointment</a>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             <h3 class="display-3 text-capitalize text-white mb-3">Cellulite Treatment</h3>
                             <p class="mx-md-5 px-5">During one minimally invasive laser treatment called Cellulaze™,
                                 a tiny laser fiber is inserted beneath your skin.</p>
-                            <a class="btn btn-outline-light py-3 px-4 mt-3 animate_animated animate_fadeInUp" href="#">Make
+                            <a class="btn btn-outline-light py-3 px-4 mt-3 animate_animated animate_fadeInUp" href="/booking">Make
                                 Appointment</a>
                         </div>
                     </div>

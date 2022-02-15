@@ -3,6 +3,7 @@
 @section('content')
 
     <!-- product Start -->
+    
     <div class="container-fluid px-0 py-5 my-5">
         <div class="row mx-0 justify-content-center text-center">
             <div class="col-lg-6">
@@ -11,6 +12,9 @@
             </div>
         </div>
         <section id="services" class="services">
+
+            
+
             <div class="container" data-aos="fade-up">
 
 
@@ -26,7 +30,7 @@
 
                                     <img src="{{ URL::asset('uploads/' . $product['images'][0]->image_name) }}"
                                         style="object-fit: cover;">
-                                    <h4><a href={{ url('/singleproduct') }}>{{ $product->name }}</a></h4>
+                                     
                                     <p>  {{ Str::limit($product->description, 40) }}.. </p>
                                     <h3><i class="fa fa-rupee"> ₹ {{ $product->mrp }} </i></h3>
                                     <a class="btn btn-primary" href={{ url('/singleproduct/'.$product->id) }}>View Details</a>
