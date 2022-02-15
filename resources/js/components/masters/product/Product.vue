@@ -43,7 +43,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="description" class="">description</label>
-                <small>{{ remaincharactersText }} </small>
+                <small :class="dangerclass">{{ remaincharactersText }} </small>
 
                 <textarea
                   class="form-control form-height item shadow-sm"
@@ -270,7 +270,7 @@ export default {
       maxcharacter: 420,
       mincharecter: 210,
       remaincharactersText: "Min 210 characters.",
-
+dangerclass:'',
       product: {
         id: "",
         name: "",
@@ -380,6 +380,16 @@ export default {
     },
 
     addProduct() {
+
+
+
+if(this.product.description.length >this.maxcharacter || this.product.description.length <this.mincharecter){
+
+this.dangerclass='text-danger';
+return false;
+}
+
+
       let upload = new FormData();
       if (this.edit) {
         upload.append("id", this.service.id);
@@ -448,14 +458,17 @@ export default {
     },
 
     remaincharCount() {
+      this.dangerclass='';
       var remainCharacters =
         this.mincharecter - this.product.description.length;
       if (this.product.description.length > this.maxcharacter) {
+         this.dangerclass='text-danger';
         this.remaincharactersText = " Exceeded limit. ";
       } else if (this.product.description.length < this.mincharecter) {
         this.remaincharactersText = remainCharacters + " characters needed. ";
       } else {
-        this.remaincharactersText = "Max 420 charecters";
+        this.dangerclass='text-warning';
+        this.remaincharactersText = " Max 420 charecters";
       }
     },
   },

@@ -20,6 +20,13 @@ class serviceController extends Controller
   }
 
 
+  public function singleServicePage($id){
+    $service=ProductAndService::with('images')->where('id','=',$id)->first();
+    return view('users.singleservice',compact('service'));
+
+  }
+
+    
 
 
 
