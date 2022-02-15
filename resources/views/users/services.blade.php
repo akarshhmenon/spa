@@ -34,10 +34,10 @@
                                 <h4 class="u-custom-font u-font-oswald u-text u-text-palette-1-base u-text-3">{{$service->name}} </h4>
                                 <h6 class="u-text u-text-4"><b style="">INR {{$service->mrp}}/</b> - 1 Hour
                                 </h6>
-                                <p class="u-text u-text-grey-50 u-text-5">{{$service->description}}.&nbsp;</p>
-                                <a href="/booking"
-                                    class="u-border-none u-btn u-btn-rectangle u-button-style u-custom-color-1 u-btn-1">book
-                                    now</a>
+                                <p class="u-text u-text-grey-50 u-text-5">{{ Str::limit($service->description, 50) }}...&nbsp;</p>
+                                <a href={{ url('/singleservice/'.$service->id) }}
+                                    class="u-border-none u-btn u-btn-rectangle u-button-style u-custom-color-1 u-btn-1">know more..
+                                    </a>
                             </div>
                         </div>
                     </div>

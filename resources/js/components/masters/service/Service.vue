@@ -171,9 +171,9 @@ export default {
 
       loading: false,
       category: {},
- maxcharacter: 75,
-      mincharecter: 35,
-      remaincharactersText: "Min 35 characters.",
+ maxcharacter: 420,
+      mincharecter: 210,
+      remaincharactersText: "Min 210 characters.",
       service: {
         id: "",
         name: "",
@@ -336,7 +336,7 @@ export default {
       } else if (this.service.description.length < this.mincharecter) {
         this.remaincharactersText = remainCharacters + " characters needed. ";
       } else {
-        this.remaincharactersText = "Max 75 charecters";
+        this.remaincharactersText = "Max 420 charecters";
       }
     },
   },

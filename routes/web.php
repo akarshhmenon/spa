@@ -127,6 +127,7 @@ Route::get('/singleproduct/{id}', [Singleproductcontroller::class, 'singleProduc
 
 
 Route::get('/services', [ServiceController::class, 'servicePage']);
+Route::get('/singleservice/{id}', [ServiceController::class, 'singleServicePage']);
 
 //boooking
 Route::post('get-otp', [BookingController::class, 'sendOtp']);

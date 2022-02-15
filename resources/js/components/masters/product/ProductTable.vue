@@ -242,7 +242,7 @@ export default {
       });
     },
 
-    removeFromHome() {
+    removeFromHome(product) {
       Swal.fire({
         title: "Are you sure?",
         icon: "warning",
