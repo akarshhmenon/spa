@@ -42,7 +42,7 @@
             </div>
             <div class="col">
               <div class="form-group">
-                <label for="description" class="">description</label><small>{{ remaincharactersText }} </small>
+                <label for="description" class="">description </label><small :class="dangerclass">{{ remaincharactersText }} </small>
 
 
 
@@ -173,7 +173,8 @@ export default {
       category: {},
  maxcharacter: 420,
       mincharecter: 210,
-      remaincharactersText: "Min 210 characters.",
+      remaincharactersText: " Min 210 characters.",
+      dangerclass:'',
       service: {
         id: "",
         name: "",
@@ -269,6 +270,13 @@ export default {
     },
 
     addService() {
+
+
+      if(this.service.description.length >this.maxcharacter || this.service.description.length <this.mincharecter){
+
+this.dangerclass='text-danger';
+return false;
+}
       let upload = new FormData();
       if (this.edit) {
         upload.append("id", this.service.id);
@@ -329,14 +337,17 @@ export default {
       this.image_error = "";
     },
         remaincharCount() {
+          this.dangerclass='';
       var remainCharacters =
         this.mincharecter - this.service.description.length;
       if (this.service.description.length > this.maxcharacter) {
+          this.dangerclass='text-danger';
         this.remaincharactersText = " Exceeded limit. ";
       } else if (this.service.description.length < this.mincharecter) {
-        this.remaincharactersText = remainCharacters + " characters needed. ";
+        this.remaincharactersText =' '+ remainCharacters + " char left. ";
       } else {
-        this.remaincharactersText = "Max 420 charecters";
+        this.dangerclass='text-warning';
+        this.remaincharactersText = " Max 420 charecters";
       }
     },
   },
