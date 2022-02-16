@@ -198,13 +198,13 @@ export default {
     },
 
     editSale(sales) {
-      this.card_title = "Edit sales";
+      this.card_title = "Edit Sale";
       this.showAddCard = true;
       this.showTable = false;
       bus.$emit("edit-sale", sales);
     },
     showAddComponent() {
-      this.card_title = "Add sale";
+      this.card_title = "Add Sale";
       this.showAddCard = true;
       this.showTable = false;
       this.showEdit = false;
