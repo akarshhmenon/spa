@@ -19,7 +19,7 @@ class CreatePurchaseItemsTable extends Migration
             $table->bigInteger('product_id')->unsigned();
             $table->string('purchase_qty');
             $table->string('rate_per_qty');
-            $table->string('taxable_amount');
+            $table->string('total_tax_amount');
             $table->string('gst_percentage');
             $table->string('amount');
             $table->timestamps();

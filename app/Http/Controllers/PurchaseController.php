@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductAndService;
 use App\Models\Purchase;
 use App\Models\Purchase_item;
 use Illuminate\Http\Request;
@@ -12,15 +13,7 @@ class PurchaseController extends Controller
     public function addPurchase(Request $request)
     {
 
-        foreach ($request->items as $item) {
-            if ($item['purchase_qty'] == null) {
-                return 'items_error';
-            }
-        }
 
-        if ($request->items == []) {
-            return "items_array_error";
-        }
 
         $request->validate([
 
@@ -30,39 +23,61 @@ class PurchaseController extends Controller
         ]);
 
 
+
         if ($request->id) {
 
             $Purchase = Purchase::find($request->id);
-            $purchase_items = PurchaseItem::where('purchase_id', $purchase->id)->get();
+            $Purchase_item=Purchase_item::where('purchase_id','=',$Purchase->id)->get();
+
+
+            foreach ($Purchase_item as $item) {
+
+$product=ProductAndService::where('id','=',$item['product_id'])->first();
+$product->quantity=$product->quantity-$item['purchase_qty'];
+
+$product->save();
+
+$item->delete();
+            }
+         
+
+
         } else
 
             $Purchase = new Purchase;
         $Purchase->user_id = Auth::user()->id;
         $Purchase->vendor_id = $request->vendor_id;
-        $Purchase->bill_type = $request->billtype;
-        $Purchase->purchase_date= $request->purchasedate;
-        $Purchase->pay_type = $request->paytype;
+        $Purchase->purchase_date = $request->purchasedate;
         $Purchase->purchase_invoice_no = $request->purchase_invoice_no;
-        $Purchase->total_products = $request->totalproduct;
-        $Purchase->total_qty = $request-> totalquantity;
-        $Purchase->total_taxable_amount = $request->totaltaxableamount;
-        $Purchase->total_tax = $request->totaltax;
-        $Purchase->total_amount = $request->totalamount;
         $Purchase->remarks = $request->remarks;
-        $Purchase->save();
-        $Purchase_item = new Purchase_item;
-        $purchase_item->purchase_qty = $item['purchase_qty'];
-            $purchase_item->rate_per_qty = $item['rate_per_qty'];
-            $purchase_item->gst_percentage = $item['gst_percentage'];
-            $purchase_item->taxable_amount = $item['taxable_amount'];
-            $purchase_item->tax = $item['tax'];
-            $purchase_item->amount = $item['amount'];
-            $purchase_item->created_at = $request->purchase_date;
 
-            //Product table quantity updation
-            $product = Product::FindOrFail($purchase_item->product_id);
-            $product->quantity = $product->quantity + $purchase_item->purchase_qty;
+
+
+        $Purchase->total_products=count($request->items);
+
+
+        $Purchase->total_amount = $request->total_amount;
+        $Purchase->save();
+
+        foreach ($request->items as $item) {
+
+            $Purchase_item = new Purchase_item;
+            $Purchase_item->purchase_id = $Purchase->id;
+            $Purchase_item->product_id = $item['product_id'];
+            $Purchase_item->purchase_qty = $item['purchase_qty'];
+            $Purchase_item->rate_per_qty = $item['rate_per_qty'];
+            $Purchase_item->total_tax_amount = $item['total_tax_amount'];
+            $Purchase_item->gst_percentage = $item['gst_percentage'];
+            $Purchase_item->amount = $item['amount'];
+            $Purchase_item->save();
+
+            $product = ProductAndService::find($item['product_id']);
+            $product->quantity = $product->quantity + $item['purchase_qty'];
             $product->save();
+        }
+
+
+
 
 
         return 'success';
@@ -73,14 +88,14 @@ class PurchaseController extends Controller
     {
 
 
-        return Purchase::with('vendors')-> orderBy('id','desc')->get();
+        return Purchase::with('vendors','purchase_items')->orderBy('id', 'desc')->get();
     }
 
 
     public function deletePurchase(Request $request)
     {
         if ($request->id) {
-            $Purchase= Purchase::find($request->id);
+            $Purchase = Purchase::find($request->id);
             $Purchase->delete();
             return 'success';
         } else {
@@ -88,5 +103,4 @@ class PurchaseController extends Controller
             return "failed";
         }
     }
-
 }

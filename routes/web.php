@@ -74,7 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'preventB
     Route::post('delete-category', [CategoryController::class, 'deleteCategory']);
    //purchase
    Route::post('add-purchase', [PurchaseController::class, 'addPurchase']);
-   Route::get('get-purchase', [PurchaseController::class, 'getPurchases']);
+   Route::get('get-purchases', [PurchaseController::class, 'getPurchases']);
    Route::post('delete-purchase', [PurchaseController::class, 'deletePurchase']);
 
 
@@ -103,6 +103,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'preventB
     Route::post('add-customer', [CustomerController::class, 'addCustomer']);
     Route::get('get-customers', [CustomerController::class, 'getCustomers']);
     Route::post('delete-customer', [CustomerController::class, 'deleteCustomer']);
+
+     //vendors
+     Route::post('add-vendor', [VendorController::class, 'addVendor']);
+     Route::get('get-vendors', [VendorController::class, 'getVendors']);
+     Route::post('delete-vendor', [VendorController::class, 'deleteVendor']);
+    
 
     // images
     Route::post('add-image', [ImageController::class, 'addImage']);

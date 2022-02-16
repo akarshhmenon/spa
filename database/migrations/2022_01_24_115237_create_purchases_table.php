@@ -20,9 +20,9 @@ class CreatePurchasesTable extends Migration
             $table->date('purchase_date');
             $table->string('purchase_invoice_no');
             $table->string('total_products');
-            $table->string('total_qty');
-            $table->string('total_taxable_amount');
-            $table->string('total_tax');
+        
+            
+       
             $table->string('total_amount');
             $table->text('remarks');
             $table->timestamps();

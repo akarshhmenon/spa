@@ -6,7 +6,7 @@
           <label for="Vendor" class="required">Select Vendor</label>
           <multiselect
             v-model="select_item"
-            placeholder="Search for a item"
+            placeholder="Search.."
             label="name"
             :options="vendors"
             track-by="id"
@@ -34,7 +34,7 @@
           }}</small>
         </div>
       </div>
-    
+
       <div class="col">
         <div class="form-group">
           <label for="purchase_invoice_no" class="">Purchase Invoice No:</label>
@@ -65,11 +65,10 @@
           }}</small>
         </div>
       </div>
-
     </div>
-<hr>
- <div class="row">
-         <div class="col-6">
+    <hr />
+    <div class="row">
+      <div class="col-6">
         <div class="form-group">
           <label for="Vendor" class="required">Select Product</label>
           <multiselect
@@ -102,7 +101,6 @@
           }}</small>
         </div>
       </div>
-
     </div>
     <div class="row">
       <div class="col-6">
@@ -112,8 +110,8 @@
             type="number"
             class="form-control"
             name="purchase_qty"
-                     min="1"
-                  oninput="validity.valid||(value='');"
+            min="1"
+            oninput="validity.valid||(value='');"
             placeholder="Enter Purchase_qty "
             v-model="purchase_qty"
           />
@@ -133,8 +131,8 @@
             type="number"
             class="form-control"
             name="rate_per_qty"
-                     min="1"
-                  oninput="validity.valid||(value='');"
+            min="1"
+            oninput="validity.valid||(value='');"
             placeholder="Enter Rate Per   QTY "
             v-model="rate_per_qty"
           />
@@ -145,15 +143,13 @@
       </div>
     </div>
 
-   
-
     <div class="row">
       <div class="col-12">
         <div class="form-group">
           <br /><br />
           <span class="input-group-btn float-right mr-4">
             <button class="btn btn-dark btn-sm" @click.prevent="addNewRow()">
-              Add To List<i class="fas fa-plus-circle fa-fw"></i>
+              Add To List <i class="fas fa-plus-circle fa-fw"></i>
             </button>
           </span>
         </div>
@@ -165,7 +161,13 @@
         <div class="table-responsive mt-3">
           <table
             id="myTable"
-            class="table align-items-center table-flush table-hover display text-center"
+            class="
+              table
+              align-items-center
+              table-flush table-hover
+              display
+              text-center
+            "
           >
             <thead>
               <tr>
@@ -174,7 +176,7 @@
                 <th>Quantity</th>
                 <th>Rate Per Quantity</th>
                 <th>Gst%</th>
-                
+
                 <th>Total Tax Amount</th>
                 <th>Total Amount</th>
                 <th>Actions</th>
@@ -202,9 +204,9 @@
                 <td>
                   {{ data.gst_percentage }}
                 </td>
-              
+
                 <td>
-                  {{ data.totalTaxAmount }}
+                  {{ data.total_tax_amount }}
                 </td>
                 <td>
                   {{ data.amount }}
@@ -220,11 +222,10 @@
               </tr>
             </tbody>
             <tfoot>
-
-<tr>
-  <td colspan="7" class="text-right">Total</td><td>{{amountTotal}}</td>
-</tr>
-
+              <tr>
+                <td colspan="7" class="text-right">Total</td>
+                <td><strong>{{ amountTotal }}/-</strong></td>
+              </tr>
             </tfoot>
           </table>
         </div>
@@ -267,6 +268,7 @@ export default {
       select_product: [],
       loading: false,
       vendors: [],
+      edit_vendor_id: "",
       products: [],
       product_id: "",
       purchase_qty: "1",
@@ -280,15 +282,10 @@ export default {
         items: [],
         id: "",
         vendor_id: "",
-        billtype: "",
-        paytype: "",
+
         purchasedate: "",
         purchase_invoice_no: "",
-        totalproduct: "",
-        totalquantity: "",
-        totaltaxableamount: "",
-        totaltax: "",
-        totalamount: "",
+        total_amount: "",
         remarks: "",
       },
     };
@@ -297,25 +294,21 @@ export default {
   computed: {
     button_title() {
       if (this.loading == true) {
-        return "Saving  ";
+        return "processing..  ";
       } else {
-        return "Save Changes";
+        return "Add Purchase";
       }
     },
 
-amountTotal: function(){
+    amountTotal: function () {
+      let total = 0;
 
-  let total =0;
+      this.purchase.items.forEach((e) => {
+        total +=parseFloat( e.amount); // the value of the current key.
+      });
 
-this.purchase.items.forEach((e) => {
-      total+=e.amount; // the value of the current key.
-  });
-
-  return total;
-
-}
-
-
+      return parseFloat(total).toFixed(2);
+    },
   },
   created() {
     this.getVendors();
@@ -328,17 +321,16 @@ this.purchase.items.forEach((e) => {
       bus.$on("edit-purchase", function (purchase) {
         _this.clear_form_data();
         console.log(purchase);
-        _this.purchase.vendor_id = purchase.vendor_id;
-        _this.purchase.billtype = purchase.billtype;
-        _this.purchase.paytype = purchase.paytype;
-        _this.purchase.purchasedate = purchase.purchasedate;
+        _this.purchase.id = purchase.id;
+        _this.purchase.items = purchase.purchase_items;
+        _this.edit_vendor_id = purchase.vendor_id;
+
+        _this.purchase.purchasedate = purchase.purchase_date;
         _this.purchase.purchase_invoice_no = purchase.purchase_invoice_no;
-        _this.purchase.totalproduct = purchase.totalproduct;
-        _this.purchase.totalquantity = purchase.totalquantity;
-        _this.purchase.totaltaxableamount = purchase.totaltaxableamount;
-        _this.purchase.totaltax = purchase.totaltax;
-        _this.purchase.totalamount = purchase.totalamount;
+
         _this.purchase.remarks = purchase.remarks;
+        _this.getVendors();
+        _this.getproducts();
       });
     }
   },
@@ -349,6 +341,14 @@ this.purchase.items.forEach((e) => {
         .get("get-vendors")
         .then((response) => {
           this.vendors = response.data;
+
+          if (this.edit == true) {
+            this.select_item = this.vendors.find(
+              (vendor) => vendor.id == this.edit_vendor_id
+            );
+          } else {
+            this.vendors = [];
+          }
         })
         .catch((err) => {});
     },
@@ -361,11 +361,12 @@ this.purchase.items.forEach((e) => {
         .catch((err) => {});
     },
     addPurchase() {
+      this.purchase.total_amount = parseFloat(this.amountTotal);
+
       this.loading = true;
       axios
         .post("add-purchase", this.purchase)
         .then((response) => {
-          this.loading = false;
           if (response.data == "success") {
             Toast.fire({
               icon: "success",
@@ -382,6 +383,7 @@ this.purchase.items.forEach((e) => {
               title: "Some Error Occurred,Please Try Again Later",
             });
           }
+          this.loading = false;
         })
         .catch((err) => {
           this.loading = false;
@@ -391,31 +393,37 @@ this.purchase.items.forEach((e) => {
               icon: "error",
               title: "Try Again !",
             });
+            this.loading = false;
           }
         });
     },
 
     //add product
     addNewRow() {
-
-if(this.product_id==''||this.purchase_qty==''||this.rate_per_qty==''||this.gst_percentage==''){
-
-alert('fields are empty');
-return false;
-}
-var totalTaxAmount=(this.rate_per_qty*this.gst_percentage/100)*this.purchase_qty;
+      if (
+        this.product_id == "" ||
+        this.purchase_qty == "" ||
+        this.rate_per_qty == "" ||
+        this.gst_percentage == ""
+      ) {
+        alert("fields are empty");
+        return false;
+      }
+      var totalTaxAmount =
+        ((this.rate_per_qty * this.gst_percentage) / 100) * this.purchase_qty;
       this.purchase.items.push({
         product_id: this.product_id,
         purchase_qty: this.purchase_qty,
         rate_per_qty: this.rate_per_qty,
-        gst_percentage:this.gst_percentage,
-        totalTaxAmount:totalTaxAmount,
-        amount:(this.rate_per_qty*this.purchase_qty)+totalTaxAmount,
+        gst_percentage: this.gst_percentage,
+        total_tax_amount: totalTaxAmount,
+        amount: this.rate_per_qty * this.purchase_qty + totalTaxAmount,
       });
       this.new_product = false;
 
       this.product_id = "";
-      this.products = [];
+      this.select_product = [];
+
       this.purchase_qty = "1";
 
       this.rate_per_qty = "";
@@ -433,7 +441,7 @@ var totalTaxAmount=(this.rate_per_qty*this.gst_percentage/100)*this.purchase_qty
       for (let item in this.purchase) {
         this.purchase[item] = "";
         this.products = [];
-         this.purchase_qty = "1";
+        this.purchase_qty = "1";
       }
       this.products = [];
       for (let err in this.errors) {

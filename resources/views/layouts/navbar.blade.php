@@ -55,6 +55,7 @@ $user= Auth::user();
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Operations</h6>
           <router-link class="collapse-item" to="/purchase">Add Purchase</router-link>
+          <router-link class="collapse-item" to="/sales">Add Sales</router-link> 
        <router-link class="collapse-item" to="/attendance">Attendance</router-link>
         </div>
       </div>
