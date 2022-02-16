@@ -77,6 +77,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'preventB
    Route::get('get-purchases', [PurchaseController::class, 'getPurchases']);
    Route::post('delete-purchase', [PurchaseController::class, 'deletePurchase']);
 
+ //sales
+ Route::post('add-sale', [salesController::class, 'addSale']);
+ Route::get('get-saless', [salesController::class, 'getSales']);
+ Route::post('delete-sale', [salesController::class, 'deleteSale']);
+
+
 
     // employee 
     Route::post('add-employee', [EmployeeController::class, 'addEmployee']);

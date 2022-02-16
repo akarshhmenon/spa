@@ -3,7 +3,7 @@
     <pre-loader v-if="preLoader"></pre-loader>
 
     <div class="main-div">
-      <div class="col-lg-12 add-purchase" v-show="showAddCard">
+      <div class="col-lg-12 add-sales" v-show="showAddCard">
         <div class="card mb-4">
           <div
             class="
@@ -26,7 +26,7 @@
             </button>
           </div>
           <!-- add designation component  -->
-          <add-purchase :edit="showEdit"> </add-purchase>
+          <add-sales :edit="showEdit"> </add-sales>
           <!-- add designation component  end -->
         </div>
       </div>
@@ -56,33 +56,33 @@
           <div class="table-responsive p-3">
             <table
               class="table align-items-center table-flush table-hover"
-              id="purchaseTable"
-              ref="purchaseTable"
+              id="salesTable"
+              ref="salesTable"
             >
               <thead class="thead-light">
                 <tr>
                   <th>Index</th>
 
-                  <th>Vendor Name</th>
-                  <th>remarks</th>
+                  <th>Customer Name</th>
+                  <th>Remarks</th>
                   <th>Actions</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr
-                  v-for="(purchase, index) in purchase_details"
-                  :key="purchase.id"
+                  v-for="(sales, index) in sales_details"
+                  :key="sales.id"
                 >
                   <td>{{ index + 1 }}</td>
-                  <td>{{ purchase.vendors.name }}</td>
-                  <td>{{ purchase.remarks }}</td>
+                  <td>{{ sales.customer.name }}</td>
+                  <td>{{ sales.remarks }}</td>
                   
                   <td>
                     <button
                       type="button"
                       class="btn btn-sm btn-primary"
-                      @click="editPurchase(purchase)"
+                      @click="editSale(sales)"
                     >
                       <i class="fas fa-edit fa-fw"></i>
                     </button>
@@ -91,7 +91,7 @@
                       type="button"
                       class="btn btn-sm btn-danger"
                       name=""
-                      @click="deletePurchase(purchase)"
+                      @click="deleteSale(sales)"
                     >
                       <i class="fas fa-trash"></i>
                     </button>
@@ -119,7 +119,7 @@ export default {
     return {
       preLoader: false,
       card_title: "",
-      purchase_details: {},
+      sales_details: {},
       errors: {},
       edit: false,
       showTable: true,
@@ -128,23 +128,23 @@ export default {
     };
   },
   created() {
-    this.getPurchases();
+    this.getSales();
     var _this = this;
-    bus.$on("purchase-added", function () {
+    bus.$on("sale-added", function () {
       _this.showAddCard = false;
       _this.showTable = true;
       _this.showEdit = true;
-      _this.getPurchases();
+      _this.getSales();
     });
   },
 
   methods: {
-    getPurchases() {
+    getSales() {
       this.preLoader = true; //the loading begin
       axios
-        .get("get-purchases")
+        .get("get-sales")
         .then((res) => {
-          this.purchase_details = res.data;
+          this.sales_details = res.data;
           this.preLoader = false; //the loading end
         })
         .catch((err) => {
@@ -153,7 +153,7 @@ export default {
         });
     },
 
-    deletePurchase(purchase) {
+    deleteSales(sales) {
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -165,8 +165,8 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .post("delete-purchase", {
-              id: purchase.id,
+            .post("delete-sale", {
+              id: sales.id,
             })
             .then((response) => {
               if (response.data == "success") {
@@ -175,7 +175,7 @@ export default {
                   title: " Deleted successfully ",
                 });
 
-                this.getPurchases();
+                this.getSales();
               }
 
               if (response.data == "failed") {
@@ -184,7 +184,7 @@ export default {
                   title: "Some Error Occurred,Please Try Again Later",
                 });
 
-                this.getPurchases();
+                this.getSales();
               }
             })
             .catch((err) => {
@@ -197,14 +197,14 @@ export default {
       });
     },
 
-    editPurchase(purchase) {
-      this.card_title = "Edit Purchase";
+    editSale(sales) {
+      this.card_title = "Edit sales";
       this.showAddCard = true;
       this.showTable = false;
-      bus.$emit("edit-purchase", purchase);
+      bus.$emit("edit-sale", sales);
     },
     showAddComponent() {
-      this.card_title = "Add Purchase";
+      this.card_title = "Add sale";
       this.showAddCard = true;
       this.showTable = false;
       this.showEdit = false;
@@ -220,10 +220,10 @@ export default {
   },
 
   watch: {
-    purchase_details(val) {
+    sales_details(val) {
       this.dt.destroy();
       this.$nextTick(() => {
-        this.dt = $(this.$refs.purchaseTable).DataTable({
+        this.dt = $(this.$refs.salesTable).DataTable({
           pageLength: 5,
       lengthMenu: [
         [5, 10, 25, 50, -1],
@@ -236,7 +236,7 @@ export default {
   },
 
   mounted() {
-    this.dt = $(this.$refs.purchaseTable).DataTable({
+    this.dt = $(this.$refs.salesTable).DataTable({
     pageLength: 5,
       lengthMenu: [
         [5, 10, 25, 50, -1],

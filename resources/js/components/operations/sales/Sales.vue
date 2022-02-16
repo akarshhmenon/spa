@@ -3,53 +3,39 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <label for="Vendor" class="required">Select Vendor</label>
+          <label for="Vendor" class="required">Select Customer</label>
           <multiselect
-            v-model="select_item"
+            v-model="select_customer"
             placeholder="Search for a item"
             label="name"
-            :options="vendors"
+            :options="customers"
             track-by="id"
             :options-limit="4"
           ></multiselect>
 
-          <small class="text-danger" v-if="errors.vendor_id">{{
-            errors.vendor_id[0]
+          <small class="text-danger" v-if="errors.customer_id">{{
+            errors.customer_id[0]
           }}</small>
         </div>
       </div>
 
       <div class="col">
         <div class="form-group">
-          <label for="purchasedate" class="">Purhase Date</label>
+          <label  class="">Invoice Date</label>
           <input
             type="date"
             class="form-control"
-            name="purchasedate"
-            placeholder="purchase date"
-            v-model="purchase.purchasedate"
+            name="invoice_date"
+            placeholder="invoice date"
+            v-model="sale.invoice_date"
           />
-          <small class="text-danger" v-if="errors.purchasedate">{{
-            errors.purchasedate[0]
+          <small class="text-danger" v-if="errors.invoice_date">{{
+            errors.invoice_date[0]
           }}</small>
         </div>
       </div>
     
-      <div class="col">
-        <div class="form-group">
-          <label for="purchase_invoice_no" class="">Purchase Invoice No:</label>
-          <input
-            type="text"
-            class="form-control"
-            name="purchase_invoice_no"
-            placeholder="Enter Purchase_Invoice_No "
-            v-model="purchase.purchase_invoice_no"
-          />
-          <small class="text-danger" v-if="errors.purchase_invoice_no">{{
-            errors.purchase_invoice_no[0]
-          }}</small>
-        </div>
-      </div>
+
       <div class="col">
         <div class="form-group">
           <label for="totaltax" class="">Remarks</label>
@@ -58,7 +44,7 @@
             class="form-control"
             name="remarks"
             placeholder="Enter Remarks"
-            v-model="purchase.remarks"
+            v-model="sale.remarks"
           />
           <small class="text-danger" v-if="errors.remarks">{{
             errors.remarks[0]
@@ -107,35 +93,35 @@
     <div class="row">
       <div class="col-6">
         <div class="form-group">
-          <label for="totalamount" class="">Purchase_qty</label>
+          <label for="taxable_amount" class="">Sale Quantity</label>
           <input
             type="number"
             class="form-control"
-            name="purchase_qty"
+            name="sale_quantity"
                      min="1"
                   oninput="validity.valid||(value='');"
-            placeholder="Enter Purchase_qty "
-            v-model="purchase_qty"
+            placeholder="Enter sale_quantity "
+            v-model="sale_quantity"
           />
-          <small class="text-danger" v-if="errors.purchase_qty">{{
-            errors.purchase_qty[0]
+          <small class="text-danger" v-if="errors.sale_quantity">{{
+            errors.sale_quantity[0]
           }}</small>
         </div>
 
-        <small class="text-danger" v-if="errors.purchase_qty">
-          {{ errors.purchase_qty[0] }}</small
+        <small class="text-danger" v-if="errors.sale_quantity">
+          {{ errors.sale_quantity[0] }}</small
         >
       </div>
       <div class="col-6">
         <div class="form-group">
-          <label for="totaltax" class="">Rate Per Qty</label>
+          <label  class="">Rate Per Qty</label>
           <input
             type="number"
             class="form-control"
             name="rate_per_qty"
                      min="1"
                   oninput="validity.valid||(value='');"
-            placeholder="Enter Rate Per   QTY "
+            placeholder="Enter Rate Per QTY "
             v-model="rate_per_qty"
           />
           <small class="text-danger" v-if="errors.rate_per_qty">{{
@@ -180,13 +166,13 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tr v-if="this.purchase.items.length == 0">
+            <tr v-if="this.sale.items.length == 0">
               <td colspan="9">
                 <p class="text-center light-danger p-2">No products added.</p>
               </td>
             </tr>
-            <tbody v-for="(data, index) in purchase.items" :key="index">
-              <tr v-if="purchase.items.length != 0">
+            <tbody v-for="(data, index) in sale.items" :key="index">
+              <tr v-if="sale.items.length != 0">
                 <td>
                   {{ index + 1 }}
                 </td>
@@ -194,7 +180,7 @@
                   {{ data.product_id }}
                 </td>
                 <td>
-                  {{ data.purchase_qty }}
+                  {{ data.sale_quantity }}
                 </td>
                 <td>
                   {{ data.rate_per_qty }}
@@ -235,7 +221,7 @@
       <div class="col">
         <button
           type="button"
-          @click="addPurchase()"
+          @click="addSale()"
           class="btn btn-primary rounded-pill"
           :disabled="loading"
         >
@@ -263,32 +249,29 @@ export default {
       title: "Add Sales",
       toastTitle: "Sales added successfully",
       errors: {},
-      select_item: [],
+      select_customer: [],
       select_product: [],
       loading: false,
-      vendors: [],
+      customers: [],
       products: [],
       product_id: "",
-      purchase_qty: "1",
+      sale_quantity: "1",
       rate_per_qty: "",
       taxable_amount: "",
       gst_percentage: "",
       tax: "",
       amount: "",
 
-      purchase: {
+      sale: {
         items: [],
         id: "",
-        vendor_id: "",
-        billtype: "",
+        customer_id: "",
+     
         paytype: "",
-        purchasedate: "",
-        purchase_invoice_no: "",
-        totalproduct: "",
-        totalquantity: "",
-        totaltaxableamount: "",
-        totaltax: "",
-        totalamount: "",
+        invoice_date: "",
+    
+        taxable_amount: "",
+       
         remarks: "",
       },
     };
@@ -299,7 +282,7 @@ export default {
       if (this.loading == true) {
         return "Saving  ";
       } else {
-        return "Save Changes";
+        return "Add Sale";
       }
     },
 
@@ -307,7 +290,7 @@ amountTotal: function(){
 
   let total =0;
 
-this.purchase.items.forEach((e) => {
+this.sale.items.forEach((e) => {
       total+=e.amount; // the value of the current key.
   });
 
@@ -318,41 +301,37 @@ this.purchase.items.forEach((e) => {
 
   },
   created() {
-    this.getVendors();
-    this.getproducts();
+    this.getCustomers();
+    this.getProducts();
 
     if (this.edit) {
       var _this = this;
-      _this.title = "Edit purchase";
-      _this.toastTitle = "purhase data Updated successfully";
-      bus.$on("edit-purchase", function (purchase) {
+      _this.title = "Edit sale";
+      _this.toastTitle = "Data Updated successfully";
+      bus.$on("edit-sale", function (sale) {
         _this.clear_form_data();
-        console.log(purchase);
-        _this.purchase.vendor_id = purchase.vendor_id;
-        _this.purchase.billtype = purchase.billtype;
-        _this.purchase.paytype = purchase.paytype;
-        _this.purchase.purchasedate = purchase.purchasedate;
-        _this.purchase.purchase_invoice_no = purchase.purchase_invoice_no;
-        _this.purchase.totalproduct = purchase.totalproduct;
-        _this.purchase.totalquantity = purchase.totalquantity;
-        _this.purchase.totaltaxableamount = purchase.totaltaxableamount;
-        _this.purchase.totaltax = purchase.totaltax;
-        _this.purchase.totalamount = purchase.totalamount;
-        _this.purchase.remarks = purchase.remarks;
+        console.log(sale);
+        _this.sale.customer_id = sale.customer_id;
+       
+        _this.sale.paytype = sale.paytype;
+        _this.sale.invoice_date = sale.invoice_date;
+       
+        _this.sale.taxable_amount = sale.taxable_amount;
+        _this.sale.remarks = sale.remarks;
       });
     }
   },
 
   methods: {
-    getVendors() {
+    getCustomers() {
       axios
-        .get("get-vendors")
+        .get("get-customers")
         .then((response) => {
-          this.vendors = response.data;
+          this.customers = response.data;
         })
         .catch((err) => {});
     },
-    getproducts() {
+    getProducts() {
       axios
         .get("get-product")
         .then((response) => {
@@ -360,10 +339,10 @@ this.purchase.items.forEach((e) => {
         })
         .catch((err) => {});
     },
-    addPurchase() {
+    addSale() {
       this.loading = true;
       axios
-        .post("add-purchase", this.purchase)
+        .post("add-sale", this.sale)
         .then((response) => {
           this.loading = false;
           if (response.data == "success") {
@@ -373,7 +352,7 @@ this.purchase.items.forEach((e) => {
             });
 
             this.clear_form_data();
-            bus.$emit("purchase-added");
+            bus.$emit("sale-added");
           }
 
           if (response.data == "failed") {
@@ -398,25 +377,25 @@ this.purchase.items.forEach((e) => {
     //add product
     addNewRow() {
 
-if(this.product_id==''||this.purchase_qty==''||this.rate_per_qty==''||this.gst_percentage==''){
+if(this.product_id==''||this.sale_quantity==''||this.rate_per_qty==''||this.gst_percentage==''){
 
 alert('fields are empty');
 return false;
 }
-var totalTaxAmount=(this.rate_per_qty*this.gst_percentage/100)*this.purchase_qty;
-      this.purchase.items.push({
+var totalTaxAmount=(this.rate_per_qty*this.gst_percentage/100)*this.sale_quantity;
+      this.sale.items.push({
         product_id: this.product_id,
-        purchase_qty: this.purchase_qty,
+        sale_quantity: this.sale_quantity,
         rate_per_qty: this.rate_per_qty,
         gst_percentage:this.gst_percentage,
         totalTaxAmount:totalTaxAmount,
-        amount:(this.rate_per_qty*this.purchase_qty)+totalTaxAmount,
+        amount:(this.rate_per_qty*this.sale_quantity)+totalTaxAmount,
       });
       this.new_product = false;
 
       this.product_id = "";
       this.products = [];
-      this.purchase_qty = "1";
+      this.sale_quantity = "1";
 
       this.rate_per_qty = "";
       this.gst_percentage = "";
@@ -426,28 +405,28 @@ var totalTaxAmount=(this.rate_per_qty*this.gst_percentage/100)*this.purchase_qty
     },
 
     deleteRow(index) {
-      this.purchase.items.splice(index, 1);
+      this.sale.items.splice(index, 1);
     },
 
     clear_form_data() {
-      for (let item in this.purchase) {
-        this.purchase[item] = "";
+      for (let item in this.sale) {
+        this.sale[item] = "";
         this.products = [];
-         this.purchase_qty = "1";
+         this.sale_quantity = "1";
       }
       this.products = [];
       for (let err in this.errors) {
         this.errors[err] = "";
       }
 
-      this.title = "Add Purchase";
+      this.title = "Add sale";
       this.toastTitle = "Added successfully";
     },
   },
   watch: {
-    select_item: function () {
-      if (this.select_item != null) {
-        this.purchase.vendor_id = this.select_item.id;
+    select_customer: function () {
+      if (this.select_customer != null) {
+        this.sale.customer_id = this.select_customer.id;
       }
     },
     select_product: function () {

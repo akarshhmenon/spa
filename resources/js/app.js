@@ -101,7 +101,7 @@ const routes = [
      { path: "/attendance", component: require("./components/operations/attendance/AttendanceTable.vue").default },
      { path: "/attendance-report", component: require("./components/reports/AttendanceReport.vue").default },
      { path: "/purchase", component: require("./components/operations/purchase/PurchaseTable.vue").default },
-
+     { path: "/sales", component: require("./components/operations/sales/SalesTable.vue").default },
      { path: "/images", component: require("./components/masters/image/ImageTable.vue").default },
      { path: "/booking", component: require("./components/booking/BookingTable.vue").default },
      { path: "/payment-report", component: require("./components/reports/PaymentReport.vue").default },
@@ -158,6 +158,8 @@ Vue.component("booking-receipt", require("./components/receipts/BookingPaymentRe
 Vue.component("add-employee-attendance", require("./components/operations/attendance/Attendance.vue").default);
 Vue.component("add-purchase", require("./components/operations/purchase/Purchase.vue").default);
 Vue.component("add-image", require("./components/masters/image/Image.vue").default);
+
+Vue.component("add-sales", require("./components/operations/sales/Sales.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
