@@ -62,6 +62,7 @@ class PurchaseController extends Controller
             $Purchase_item = new Purchase_item;
             $Purchase_item->purchase_id = $Purchase->id;
             $Purchase_item->product_id = $item['product_id'];
+                     $Purchase_item->product_name = $item['product_name'];
             $Purchase_item->purchase_qty = $item['purchase_qty'];
             $Purchase_item->rate_per_qty = $item['rate_per_qty'];
             $Purchase_item->total_tax_amount = $item['total_tax_amount'];
@@ -109,6 +110,8 @@ class PurchaseController extends Controller
             }
 
             $Purchase->delete();
+
+            return "success";
         }
     }
 

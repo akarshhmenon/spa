@@ -326,12 +326,12 @@ export default {
 
     amountTotal: function () {
       let total = 0;
-
+if(this.sale.items.length != 0){
       this.sale.items.forEach((e) => {
         total += parseFloat(e.net_total); // the value of the current key.
       });
 
-      return parseFloat(total).toFixed(2);
+      return parseFloat(total).toFixed(2);}
     },
     taxableAmountTotal: function () {
       let total = 0;
@@ -346,14 +346,17 @@ export default {
   created() {
     this.getCustomers();
     this.getProducts();
-
+var _this = this;
+    bus.$on("clear-field", function () {
+      _this.clear_form_data();
+    });
     if (this.edit) {
       var _this = this;
       _this.title = "Edit sale";
       _this.toastTitle = "Data Updated successfully";
       bus.$on("edit-sale", function (sale) {
         _this.clear_form_data();
-        console.log(sale);
+   
         _this.sale.id = sale.id;
         _this.edit_customer_id = sale.customer_id;
 
@@ -489,9 +492,22 @@ export default {
       for (let item in this.sale) {
         this.sale[item] = "";
       }
-      this.products = [];
+     
       this.sale.total_discount = "0";
-      this.sale_quantity = "1";
+       this.sale.items = [];
+     
+     this. select_customer= [];
+      this.select_product= [];
+
+  this.edit_customer_id="";
+      this.product_id="";
+      this.sale_quantity="1";
+      this.rate_per_qty="";
+      this.taxable_amount="";
+      this.gst_percentage="";
+
+
+
       for (let err in this.errors) {
         this.errors[err] = "";
       }

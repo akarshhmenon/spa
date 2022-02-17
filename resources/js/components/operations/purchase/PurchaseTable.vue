@@ -25,9 +25,9 @@
               Purchase Table<i class="fas fa-table fa-fw"></i>
             </button>
           </div>
-          <!-- add designation component  -->
+          <!-- add purchase component  -->
           <add-purchase :edit="showEdit"> </add-purchase>
-          <!-- add designation component  end -->
+          <!-- add purchase component  end -->
         </div>
       </div>
 

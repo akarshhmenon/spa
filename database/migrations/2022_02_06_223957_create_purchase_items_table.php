@@ -17,6 +17,7 @@ class CreatePurchaseItemsTable extends Migration
             $table->id();
             $table->bigInteger('purchase_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
+             $table->string('product_name');
             $table->string('purchase_qty');
             $table->string('rate_per_qty');
             $table->string('total_tax_amount');

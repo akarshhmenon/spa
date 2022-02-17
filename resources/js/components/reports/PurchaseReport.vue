@@ -138,8 +138,9 @@
           </div>
 
           <div class="modal-body">
-            <div class="card-body" v-if="this.purchase_details.length != 0">
-            ****
+            <div class="card-body">
+
+           <add-purchase :edit="true" :viewOnly="true"> </add-purchase>
            
             </div>
           </div>
@@ -208,7 +209,7 @@ item_list:[],
     },
     viewOnly(purchase) {
     
-
+ bus.$emit("edit-purchase", purchase);
         
       
     },

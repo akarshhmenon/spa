@@ -11,6 +11,7 @@
             :options="vendors"
             track-by="id"
             :options-limit="4"
+            :disabled="viewOnly"
           ></multiselect>
 
           <small class="text-danger" v-if="errors.vendor_id">{{
@@ -28,6 +29,7 @@
             name="purchasedate"
             placeholder="purchase date"
             v-model="purchase.purchasedate"
+            :disabled="viewOnly"
           />
           <small class="text-danger" v-if="errors.purchasedate">{{
             errors.purchasedate[0]
@@ -44,6 +46,7 @@
             name="purchase_invoice_no"
             placeholder="Enter Purchase_Invoice_No "
             v-model="purchase.purchase_invoice_no"
+            :disabled="viewOnly"
           />
           <small class="text-danger" v-if="errors.purchase_invoice_no">{{
             errors.purchase_invoice_no[0]
@@ -53,13 +56,14 @@
       <div class="col">
         <div class="form-group">
           <label for="totaltax" class="">Remarks</label>
-          <input
-            type="textarea"
-            class="form-control"
+
+          <textarea
+            class="form-control form-height item shadow-sm"
             name="remarks"
-            placeholder="Enter Remarks"
             v-model="purchase.remarks"
-          />
+          >
+          </textarea>
+
           <small class="text-danger" v-if="errors.remarks">{{
             errors.remarks[0]
           }}</small>
@@ -67,7 +71,7 @@
       </div>
     </div>
     <hr />
-    <div class="row">
+    <div class="row" v-if="viewOnly != true">
       <div class="col-6">
         <div class="form-group">
           <label for="Vendor" class="required">Select Product</label>
@@ -102,7 +106,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="viewOnly != true">
       <div class="col-6">
         <div class="form-group">
           <label for="totalamount" class="">Purchase_qty</label>
@@ -143,7 +147,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" v-if="viewOnly != true">
       <div class="col-12">
         <div class="form-group">
           <br /><br />
@@ -193,7 +197,7 @@
                   {{ index + 1 }}
                 </td>
                 <td>
-                  {{ data.product_id }}
+                  {{ data.product_name }}
                 </td>
                 <td>
                   {{ data.purchase_qty }}
@@ -215,16 +219,19 @@
                   <button
                     class="btn btn-danger btn-sm"
                     @click.prevent="deleteRow(index)"
+                    :disabled="viewOnly"
                   >
                     <i title="Delete" class="fas fa-trash fafw"></i>
                   </button>
                 </td>
               </tr>
             </tbody>
-            <tfoot>
+            <tfoot v-if="purchase.items.length != 0">
               <tr>
-                <td colspan="7" class="text-right">Total</td>
-                <td><strong>{{ amountTotal }}/-</strong></td>
+                <td colspan="6" class="text-right">Total</td>
+                <td>
+                  <strong>{{ amountTotal }}/-</strong>
+                </td>
               </tr>
             </tfoot>
           </table>
@@ -232,7 +239,10 @@
       </div>
     </div>
 
-    <div class="row text-center pb-3">
+    <div
+      class="row text-center pb-3"
+      v-if="viewOnly != true && purchase.items.length != 0"
+    >
       <div class="col">
         <button
           type="button"
@@ -257,7 +267,7 @@ export default {
   components: {
     ModelListSelect,
   },
-  props: ["edit"],
+  props: ["edit", "viewOnly"],
 
   data() {
     return {
@@ -273,10 +283,8 @@ export default {
       product_id: "",
       purchase_qty: "1",
       rate_per_qty: "",
-      taxable_amount: "",
+
       gst_percentage: "",
-      tax: "",
-      amount: "",
 
       purchase: {
         items: [],
@@ -302,17 +310,23 @@ export default {
 
     amountTotal: function () {
       let total = 0;
+      if (this.purchase.items.length != 0) {
+        this.purchase.items.forEach((e) => {
+          total += parseFloat(e.amount); // the value of the current key.
+        });
 
-      this.purchase.items.forEach((e) => {
-        total +=parseFloat( e.amount); // the value of the current key.
-      });
-
-      return parseFloat(total).toFixed(2);
+        return parseFloat(total).toFixed(2);
+      }
     },
   },
   created() {
     this.getVendors();
     this.getproducts();
+
+    var _this = this;
+    bus.$on("clear-field", function () {
+      _this.clear_form_data();
+    });
 
     if (this.edit) {
       var _this = this;
@@ -320,8 +334,9 @@ export default {
       _this.toastTitle = "purhase data Updated successfully";
       bus.$on("edit-purchase", function (purchase) {
         _this.clear_form_data();
-        console.log(purchase);
+
         _this.purchase.id = purchase.id;
+
         _this.purchase.items = purchase.purchase_items;
         _this.edit_vendor_id = purchase.vendor_id;
 
@@ -412,7 +427,8 @@ export default {
       var totalTaxAmount =
         ((this.rate_per_qty * this.gst_percentage) / 100) * this.purchase_qty;
       this.purchase.items.push({
-        product_id: this.product_id,
+        product_id: this.select_product.id,
+        product_name: this.select_product.name,
         purchase_qty: this.purchase_qty,
         rate_per_qty: this.rate_per_qty,
         gst_percentage: this.gst_percentage,
@@ -428,9 +444,6 @@ export default {
 
       this.rate_per_qty = "";
       this.gst_percentage = "";
-      this.taxable_amount = "";
-      this.tax = "";
-      this.amount = "";
     },
 
     deleteRow(index) {
@@ -440,10 +453,16 @@ export default {
     clear_form_data() {
       for (let item in this.purchase) {
         this.purchase[item] = "";
-        this.products = [];
-        this.purchase_qty = "1";
       }
-      this.products = [];
+      this.purchase.items = [];
+      this.purchase_qty = "1";
+      this.product_id = "";
+      this.purchase_qty = "1";
+      this.rate_per_qty = "";
+      this.edit_vendor_id = "";
+      this.gst_percentage = "";
+      this.select_item = [];
+      this.select_product = [];
       for (let err in this.errors) {
         this.errors[err] = "";
       }
@@ -468,4 +487,7 @@ export default {
 </script>
 
 <style scoped>
+.form-height {
+  height: 43px;
+}
 </style>

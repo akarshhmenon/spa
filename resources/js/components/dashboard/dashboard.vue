@@ -3,7 +3,7 @@
   <div class="container-fluid" id="container-wrapper" v-else>
     <div class="d-sm-flex align-items-center justify-content-between mb-2">
       <h4 class="h4 mb-0 pb-1 text-gray-800">Dashboard</h4>
-      <div class="pb-1">
+      <!-- <div class="pb-1">
         <select
           id="inputState"
           class="btn btn-sm btn-primary arrow active px-0"
@@ -41,7 +41,7 @@
             v-if="printLoading == true"
           ></i>
         </button>
-      </div>
+      </div> -->
     </div>
 
     <div class="mb-4" v-if="dateCustom">
@@ -66,12 +66,10 @@
       </div>
     </div>
     <div>
-     
-
       <div class="container-fluid px-0">
         <!----------DASHBOARD-NEW-STYLE-TEST-START-------------------------------------------------------------------->
 
-    <div class="card mb-3">
+        <div class="card mb-3">
           <div
             class="
               card-header
@@ -85,36 +83,39 @@
             <h6 class="m-0 font-weight-bold text-primary">Booking Details</h6>
           </div>
           <div class="card-body">
-
-
             <div class="row mb-3">
-              
               <div class="col-md-4 col-lg-4 mb-4">
-
-             <router-link class="collapse-item text-decoration-none " to="/booking"> <div class="card h-100">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col mr-2">
-                        <div
-                          class="text-xs font-weight-bold text-uppercase mb-1 text-dark"
-                        >
-                         Booking
+                <router-link
+                  class="collapse-item text-decoration-none"
+                  to="/booking"
+                >
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="row align-items-center">
+                        <div class="col mr-2">
+                          <div
+                            class="
+                              text-xs
+                              font-weight-bold
+                              text-uppercase
+                              mb-1
+                              text-dark
+                            "
+                          >
+                            Booking
+                          </div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ todays_booking }}
+                          </div>
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          {{todays_booking}} 
+                        <div class="col-auto">
+                          <i class="far fa-address-book fa-2x text-warning"></i>
                         </div>
                       </div>
-                      <div class="col-auto">
-                        <i class="far fa-address-book fa-2x text-warning"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div></router-link>
-
-
+                    </div></div
+                ></router-link>
               </div>
 
-          
               <div class="col-md-4 col-lg-4 mb-4">
                 <div class="card h-100">
                   <div class="card-body">
@@ -128,7 +129,6 @@
                         <div
                           class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
                         >
-                     
                           {{ completed_booking }}
                         </div>
                       </div>
@@ -139,7 +139,7 @@
                   </div>
                 </div>
               </div>
-       
+
               <div class="col-md-4 col-lg-4 mb-4">
                 <div class="card h-100">
                   <div class="card-body">
@@ -151,25 +151,21 @@
                           Cancelled Booking
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                        
                           {{ cancelled_booking }}
                         </div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-times  fa-2x text-danger"></i>
+                        <i class="fas fa-times fa-2x text-danger"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
 
-
-<!-- 
+        <!-- 
         <div class="row">
           <div class="col-md-4 col-lg-4">
             <div class="card mb-3 pb-4">
@@ -464,8 +460,6 @@
 
         </div> -->
 
-
-        
         <!---3diffrentcards sectionend------------------------------>
 
         <!----------DASHBOARD-NEW-STYLE-TEST-END--------------------------------------------------------------->
@@ -483,13 +477,17 @@
           >
             <h6 class="m-0 font-weight-bold text-primary">Sales Details</h6>
           </div>
+
+          
           <div class="card-body">
-
-
             <div class="row mb-3">
-              
               <div class="col-md-4 col-lg-4 mb-4">
                 <div class="card h-100">
+
+  <router-link
+                  class="collapse-item text-decoration-none"
+                  to="/sales-report"
+                >
                   <div class="card-body">
                     <div class="row align-items-center">
                       <div class="col mr-2">
@@ -499,7 +497,7 @@
                           Number Of Sales
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          {{  }}
+                          {{ todays_sales }}
                         </div>
                       </div>
                       <div class="col-auto">
@@ -507,10 +505,11 @@
                       </div>
                     </div>
                   </div>
+  </router-link>
+
                 </div>
               </div>
 
-          
               <div class="col-md-4 col-lg-4 mb-4">
                 <div class="card h-100">
                   <div class="card-body">
@@ -519,13 +518,13 @@
                         <div
                           class="text-xs font-weight-bold text-uppercase mb-1"
                         >
-                          Total Sale Amount
+                          Total Cash Sale Amount
                         </div>
                         <div
                           class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
                         >
                           <i class="fas fa-rupee-sign fa-fw"></i>
-                          {{ parseFloat().toFixed(2) }}
+                          {{ parseFloat(total_cash_sales).toFixed(2) }}
                         </div>
                       </div>
                       <div class="col-auto">
@@ -535,7 +534,7 @@
                   </div>
                 </div>
               </div>
-       
+
               <div class="col-md-4 col-lg-4 mb-4">
                 <div class="card h-100">
                   <div class="card-body">
@@ -544,11 +543,11 @@
                         <div
                           class="text-xs font-weight-bold text-uppercase mb-1"
                         >
-                          Todays Sales Amount
+                          Total Bank Sales Amount
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                           <i class="fas fa-rupee-sign fa-fw"></i>
-                          {{ parseFloat().toFixed(2) }}
+                          {{ parseFloat(total_bank_sales).toFixed(2) }}
                         </div>
                       </div>
                       <div class="col-auto">
@@ -559,12 +558,9 @@
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
 
-        
         <!--end-row-->
       </div>
 
@@ -613,26 +609,20 @@ export default {
       to_date: "",
       print_date: "",
 
-     
-
       dashBoardData: {},
 
-todays_booking:'',
-completed_booking:'',
-cancelled_booking:'',
-
-
-
+      todays_booking: "",
+      completed_booking: "",
+      cancelled_booking: "",
+      todays_sales: "",
+      total_cash_sales: "",
+      total_bank_sales: "",
     };
   },
 
-
-created(){
-
-this.getDashboard();
-
-},
-
+  created() {
+    this.getDashboard();
+  },
 
   mounted() {
     this.dt = $(this.$refs.creditTableDash).DataTable({
@@ -656,32 +646,31 @@ this.getDashboard();
   },
 
   methods: {
+    getDashboard() {
+      this.preLoader = true;
+      axios
+        .get("get-dashboard")
+        .then((response) => {
+          this.dashBoardData = response.data;
+          this.todays_booking = response.data[0].todays_booking;
+          this.completed_booking = response.data[0].completed_booking;
+          this.cancelled_booking = response.data[0].cancelled_booking;
 
+          this.todays_sales = response.data[0].todays_sales;
+          this.total_cash_sales = response.data[0].total_cash_sales;
+          this.total_bank_sales = response.data[0].total_bank_sales;
 
-   getDashboard(){
-this.preLoader=true;
-axios.get('get-dashboard').then((response) => {
-  
-this.dashBoardData=response.data;
-this.todays_booking=response.data[0].todays_booking;
-this.completed_booking=response.data[0].completed_booking;
-this.cancelled_booking=response.data[0].cancelled_booking;
-
-this.preLoader=false;
-}).catch((err) => {
-  this.preLoader=false;
-  console.log(err);
-});
-
-
-   },
-
-
-
-    getformatteddate(date) {
-      return moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
+          this.preLoader = false;
+        })
+        .catch((err) => {
+          this.preLoader = false;
+          console.log(err);
+        });
     },
 
+    getformatteddate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
 
     dateFilter(event) {
       //value-0 =Today
@@ -768,8 +757,6 @@ this.preLoader=false;
       }
     },
   },
-
-
 };
 </script>
 
