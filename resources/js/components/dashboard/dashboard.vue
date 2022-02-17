@@ -81,6 +81,7 @@
             "
           >
             <h6 class="m-0 font-weight-bold text-primary">Booking Details</h6>
+            <small>(Today)</small>
           </div>
           <div class="card-body">
             <div class="row mb-3">
@@ -476,37 +477,35 @@
             "
           >
             <h6 class="m-0 font-weight-bold text-primary">Sales Details</h6>
+            <small>(Today)</small>
           </div>
 
-          
           <div class="card-body">
             <div class="row mb-3">
               <div class="col-md-4 col-lg-4 mb-4">
                 <div class="card h-100">
-
-  <router-link
-                  class="collapse-item text-decoration-none"
-                  to="/sales-report"
-                >
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col mr-2">
-                        <div
-                          class="text-xs font-weight-bold text-uppercase mb-1"
-                        >
-                          Number Of Sales
+                  <router-link
+                    class="collapse-item text-decoration-none"
+                    to="/sales-report"
+                  >
+                    <div class="card-body">
+                      <div class="row align-items-center">
+                        <div class="col mr-2">
+                          <div
+                            class="text-xs font-weight-bold text-uppercase mb-1"
+                          >
+                            Number Of Sales
+                          </div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ todays_sales }}
+                          </div>
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          {{ todays_sales }}
+                        <div class="col-auto">
+                          <i class="far fa-handshake fa-2x text-success"></i>
                         </div>
-                      </div>
-                      <div class="col-auto">
-                        <i class="far fa-handshake fa-2x text-success"></i>
                       </div>
                     </div>
-                  </div>
-  </router-link>
-
+                  </router-link>
                 </div>
               </div>
 
