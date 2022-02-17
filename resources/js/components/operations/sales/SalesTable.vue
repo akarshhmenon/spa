@@ -25,9 +25,9 @@
               Sales Table<i class="fas fa-table fa-fw"></i>
             </button>
           </div>
-          <!-- add designation component  -->
+          <!-- add sale component  -->
           <add-sales :edit="showEdit"> </add-sales>
-          <!-- add designation component  end -->
+          <!-- add sale component  end -->
         </div>
       </div>
 
@@ -64,7 +64,9 @@
                   <th>Index</th>
 
                   <th>Customer Name</th>
-                  <th>Remarks</th>
+                  <th>Amount</th>
+                  <th>Discount</th>
+                  <th>Payable Amount</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -76,8 +78,9 @@
                 >
                   <td>{{ index + 1 }}</td>
                   <td>{{ sales.customer.name }}</td>
-                  <td>{{ sales.remarks }}</td>
-                  
+                  <td>{{parseFloat( sales.total_amount ).toFixed(2)}}</td>
+                   <td>{{parseFloat( sales.total_discount ).toFixed(2)}}</td>
+                    <td>{{parseFloat( sales.total_pay_amount ).toFixed(2)}}</td>
                   <td>
                     <button
                       type="button"

@@ -15,6 +15,26 @@ class CreateSaleItemsTable extends Migration
     {
         Schema::create('sale_items', function (Blueprint $table) {
             $table->id();
+
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('sale_id')->unsigned();
+            $table->bigInteger('product_id')->unsigned();
+            $table->string('product_name');
+            $table->string('quantity');
+
+            $table->float('rate');
+           
+            $table->float('total_rate');
+            $table->float('taxable_value');
+            $table->float('gst');
+            $table->float('cgst');
+            $table->float('sgst');
+            $table->float('cess');
+            
+            
+            $table->float('net_total');
+         
+
             $table->timestamps();
         });
     }

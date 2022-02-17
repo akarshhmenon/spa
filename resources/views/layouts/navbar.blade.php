@@ -54,8 +54,9 @@ $user= Auth::user();
       <div id="collapseOperations" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Operations</h6>
-          <router-link class="collapse-item" to="/purchase">Add Purchase</router-link>
           <router-link class="collapse-item" to="/sales">Add Sales</router-link> 
+          <router-link class="collapse-item" to="/purchase">Add Purchase</router-link>
+          
        <router-link class="collapse-item" to="/attendance">Attendance</router-link>
         </div>
       </div>
@@ -73,6 +74,8 @@ $user= Auth::user();
 
             <router-link class="collapse-item" to= "attendance-report" >Attendance Report</router-link>
          <router-link class="collapse-item" to= "/payment-report" >Payment Report</router-link>
+         <router-link class="collapse-item" to= "/sales-report" >Sales Report</router-link>
+         <router-link class="collapse-item" to= "/purchase-report" >Purchase Report</router-link>
           </div>
         </div>
       </li>

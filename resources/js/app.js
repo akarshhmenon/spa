@@ -105,6 +105,8 @@ const routes = [
      { path: "/images", component: require("./components/masters/image/ImageTable.vue").default },
      { path: "/booking", component: require("./components/booking/BookingTable.vue").default },
      { path: "/payment-report", component: require("./components/reports/PaymentReport.vue").default },
+     { path: "/purchase-report", component: require("./components/reports/PurchaseReport.vue").default },
+     { path: "/sales-report", component: require("./components/reports/SalesReport.vue").default },
 ];
 
 const router = new VueRouter({

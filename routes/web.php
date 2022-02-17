@@ -18,6 +18,7 @@ use App\Http\Controllers\PurchaseController;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -72,16 +73,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'preventB
     Route::post('add-category', [CategoryController::class, 'addCategory']);
     Route::get('get-categories', [CategoryController::class, 'getCategory']);
     Route::post('delete-category', [CategoryController::class, 'deleteCategory']);
+
    //purchase
    Route::post('add-purchase', [PurchaseController::class, 'addPurchase']);
    Route::get('get-purchases', [PurchaseController::class, 'getPurchases']);
    Route::post('delete-purchase', [PurchaseController::class, 'deletePurchase']);
+   Route::get('get-purchase-report', [PurchaseController::class, 'getPurchaseReport']);
 
  //sales
- Route::post('add-sale', [salesController::class, 'addSale']);
- Route::get('get-sales', [salesController::class, 'getSales']);
- Route::post('delete-sale', [salesController::class, 'deleteSale']);
-
+ Route::post('add-sale', [SaleController::class, 'addSale']);
+ Route::get('get-sales', [SaleController::class, 'getSales']);
+ Route::post('delete-sale', [SaleController::class, 'deleteSale']);
+Route::get('get-sales-report', [SaleController::class, 'getSalesReport']);
 
 
     // employee 

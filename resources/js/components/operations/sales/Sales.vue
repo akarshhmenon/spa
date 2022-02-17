@@ -6,11 +6,13 @@
           <label for="Vendor" class="required">Select Customer</label>
           <multiselect
             v-model="select_customer"
-            placeholder="Search for a item"
+            placeholder="Search for customer"
             label="name"
+            name="customer_id"
             :options="customers"
             track-by="id"
             :options-limit="4"
+            :disabled="viewOnly"
           ></multiselect>
 
           <small class="text-danger" v-if="errors.customer_id">{{
@@ -21,41 +23,24 @@
 
       <div class="col">
         <div class="form-group">
-          <label  class="">Invoice Date</label>
+          <label class="">Invoice Date</label>
           <input
             type="date"
             class="form-control"
             name="invoice_date"
             placeholder="invoice date"
             v-model="sale.invoice_date"
+            :disabled="viewOnly"
           />
           <small class="text-danger" v-if="errors.invoice_date">{{
             errors.invoice_date[0]
           }}</small>
         </div>
       </div>
-    
-
-      <div class="col">
-        <div class="form-group">
-          <label for="totaltax" class="">Remarks</label>
-          <input
-            type="textarea"
-            class="form-control"
-            name="remarks"
-            placeholder="Enter Remarks"
-            v-model="sale.remarks"
-          />
-          <small class="text-danger" v-if="errors.remarks">{{
-            errors.remarks[0]
-          }}</small>
-        </div>
-      </div>
-
     </div>
-<hr>
- <div class="row">
-         <div class="col-6">
+    <hr />
+    <div class="row" v-if="viewOnly != true">
+      <div class="col-6">
         <div class="form-group">
           <label for="Vendor" class="required">Select Product</label>
           <multiselect
@@ -88,9 +73,8 @@
           }}</small>
         </div>
       </div>
-
     </div>
-    <div class="row">
+    <div class="row" v-if="viewOnly != true">
       <div class="col-6">
         <div class="form-group">
           <label for="taxable_amount" class="">Sale Quantity</label>
@@ -98,8 +82,8 @@
             type="number"
             class="form-control"
             name="sale_quantity"
-                     min="1"
-                  oninput="validity.valid||(value='');"
+            min="1"
+            oninput="validity.valid||(value='');"
             placeholder="Enter sale_quantity "
             v-model="sale_quantity"
           />
@@ -114,14 +98,14 @@
       </div>
       <div class="col-6">
         <div class="form-group">
-          <label  class="">Rate Per Qty</label>
+          <label class="">Mrp Per Qty</label>
           <input
             type="number"
             class="form-control"
             name="rate_per_qty"
-                     min="1"
-                  oninput="validity.valid||(value='');"
-            placeholder="Enter Rate Per QTY "
+            min="1"
+            oninput="validity.valid||(value='');"
+            placeholder="Enter Mrp Per QTY "
             v-model="rate_per_qty"
           />
           <small class="text-danger" v-if="errors.rate_per_qty">{{
@@ -131,9 +115,7 @@
       </div>
     </div>
 
-   
-
-    <div class="row">
+    <div class="row" v-if="viewOnly != true">
       <div class="col-12">
         <div class="form-group">
           <br /><br />
@@ -151,23 +133,31 @@
         <div class="table-responsive mt-3">
           <table
             id="myTable"
-            class="table align-items-center table-flush table-hover display text-center"
+            class="
+              table
+              align-items-center
+              table-flush table-hover
+              display
+              text-center
+            "
           >
             <thead>
               <tr>
                 <th>Sl.no</th>
                 <th>Item</th>
                 <th>Quantity</th>
-                <th>Rate Per Quantity</th>
-                <th>Gst%</th>
-                
-                <th>Total Tax Amount</th>
-                <th>Total Amount</th>
+                <th>Rate/Item</th>
+                <th>Total Rate</th>
+                <th>GST %</th>
+
+                <th>Taxable Value</th>
+
+                <th>Net Total</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tr v-if="this.sale.items.length == 0">
-              <td colspan="9">
+              <td colspan="10">
                 <p class="text-center light-danger p-2">No products added.</p>
               </td>
             </tr>
@@ -177,26 +167,30 @@
                   {{ index + 1 }}
                 </td>
                 <td>
-                  {{ data.product_id }}
+                  {{ data.product_name }}
                 </td>
                 <td>
-                  {{ data.sale_quantity }}
+                  {{ data.quantity }}
                 </td>
                 <td>
-                  {{ data.rate_per_qty }}
+                  {{ data.rate }}
                 </td>
                 <td>
-                  {{ data.gst_percentage }}
+                  {{ parseFloat(data.total_rate).toFixed(2) }}
                 </td>
-              
+
                 <td>
-                  {{ data.totalTaxAmount }}
+                  {{ data.gst }}
                 </td>
                 <td>
-                  {{ data.amount }}
+                  {{ data.taxable_value }}
+                </td>
+                <td>
+                  {{ data.net_total }}
                 </td>
                 <td class="pl-4">
                   <button
+                    :disabled="viewOnly"
                     class="btn btn-danger btn-sm"
                     @click.prevent="deleteRow(index)"
                   >
@@ -205,24 +199,68 @@
                 </td>
               </tr>
             </tbody>
-            <tfoot>
+            <tfoot v-if="this.sale.items.length != 0">
+              <tr>
+                <td colspan="7" class="text-right">Grand Total :</td>
+                <td>
+                  <strong>{{ amountTotal }}.</strong>
+                </td>
+              </tr>
 
-<tr>
-  <td colspan="7" class="text-right">Total</td><td>{{amountTotal}}</td>
-</tr>
+              <tr>
+                <td colspan="7" class="text-right">Round Off :</td>
+                <td>
+                  <input
+                    type="number"
+                    class="form-control text-center"
+                    name="total_discount"
+                    min="0"
+                    :max="(amountTotal * 50) / 100"
+                    oninput="validity.valid||(value='');"
+                    v-model="sale.total_discount"
+                    :disabled="viewOnly"
+                  />
+                </td>
+              </tr>
 
+              <tr>
+                <td colspan="7" class="text-right">Pay Type :</td>
+                <td>
+                  <select
+                    class="form-control"
+                    name="pay_type"
+                    v-model="sale.pay_type"
+                    :disabled="viewOnly"
+                  >
+                    <option value="">Pay Type</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Bank">Bank</option>
+                  </select>
+                  <small class="text-danger" v-if="errors.pay_type">{{
+                    errors.pay_type[0]
+                  }}</small>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="7" class="text-right">
+                  <strong>Payable Amount :</strong>
+                </td>
+                <td>
+                  <strong>{{ amountTotal - sale.total_discount }}/-</strong>
+                </td>
+              </tr>
             </tfoot>
           </table>
         </div>
       </div>
     </div>
 
-    <div class="row text-center pb-3">
-      <div class="col">
+    <div class="row text-center pb-3 pt-3" v-if="this.sale.items.length != 0">
+      <div class="col" v-if="viewOnly != true">
         <button
           type="button"
           @click="addSale()"
-          class="btn btn-primary rounded-pill"
+          class="btn btn-primary rounded-pill px-4"
           :disabled="loading"
         >
           {{ button_title }}
@@ -242,7 +280,7 @@ export default {
   components: {
     ModelListSelect,
   },
-  props: ["edit"],
+  props: ["edit", "viewOnly"],
 
   data() {
     return {
@@ -254,25 +292,25 @@ export default {
       loading: false,
       customers: [],
       products: [],
+      edit_customer_id: "",
       product_id: "",
       sale_quantity: "1",
       rate_per_qty: "",
       taxable_amount: "",
       gst_percentage: "",
-      tax: "",
-      amount: "",
 
       sale: {
         items: [],
         id: "",
         customer_id: "",
-     
-        paytype: "",
+
+        pay_type: "",
         invoice_date: "",
-    
-        taxable_amount: "",
-       
-        remarks: "",
+
+        total_amount: "",
+        total_discount: "0",
+        total_taxable_amount: "",
+        total_pay_amount: "",
       },
     };
   },
@@ -286,19 +324,24 @@ export default {
       }
     },
 
-amountTotal: function(){
+    amountTotal: function () {
+      let total = 0;
 
-  let total =0;
+      this.sale.items.forEach((e) => {
+        total += parseFloat(e.net_total); // the value of the current key.
+      });
 
-this.sale.items.forEach((e) => {
-      total+=e.amount; // the value of the current key.
-  });
+      return parseFloat(total).toFixed(2);
+    },
+    taxableAmountTotal: function () {
+      let total = 0;
 
-  return total;
+      this.sale.items.forEach((e) => {
+        total += parseFloat(e.taxable_value); // the value of the current key.
+      });
 
-}
-
-
+      return parseFloat(total).toFixed(2);
+    },
   },
   created() {
     this.getCustomers();
@@ -311,13 +354,16 @@ this.sale.items.forEach((e) => {
       bus.$on("edit-sale", function (sale) {
         _this.clear_form_data();
         console.log(sale);
-        _this.sale.customer_id = sale.customer_id;
-       
-        _this.sale.paytype = sale.paytype;
+        _this.sale.id = sale.id;
+        _this.edit_customer_id = sale.customer_id;
+
+        _this.sale.total_discount = sale.total_discount;
+        _this.sale.pay_type = sale.pay_type;
         _this.sale.invoice_date = sale.invoice_date;
-       
-        _this.sale.taxable_amount = sale.taxable_amount;
-        _this.sale.remarks = sale.remarks;
+
+        _this.sale.items = sale.sale_items;
+        _this.getCustomers();
+        _this.getProducts();
       });
     }
   },
@@ -328,6 +374,14 @@ this.sale.items.forEach((e) => {
         .get("get-customers")
         .then((response) => {
           this.customers = response.data;
+
+          if (this.edit == true) {
+            this.select_customer = this.customers.find(
+              (customer) => customer.id == this.edit_customer_id
+            );
+          } else {
+            this.customers = [];
+          }
         })
         .catch((err) => {});
     },
@@ -340,6 +394,18 @@ this.sale.items.forEach((e) => {
         .catch((err) => {});
     },
     addSale() {
+      if (this.sale.items.length == 0) {
+        Toast.fire({
+          icon: "warning",
+          title: "No products added",
+        });
+      }
+      this.sale.total_amount = this.amountTotal;
+      this.sale.total_taxable_amount = this.taxableAmountTotal;
+      this.sale.total_pay_amount = parseFloat(
+        this.amountTotal - this.sale.total_discount
+      ).toFixed(2);
+
       this.loading = true;
       axios
         .post("add-sale", this.sale)
@@ -376,31 +442,42 @@ this.sale.items.forEach((e) => {
 
     //add product
     addNewRow() {
-
-if(this.product_id==''||this.sale_quantity==''||this.rate_per_qty==''||this.gst_percentage==''){
-
-alert('fields are empty');
-return false;
-}
-var totalTaxAmount=(this.rate_per_qty*this.gst_percentage/100)*this.sale_quantity;
+      if (
+        this.product_id == "" ||
+        this.sale_quantity == "" ||
+        this.rate_per_qty == "" ||
+        this.gst_percentage == ""
+      ) {
+        alert("fields are empty");
+        return false;
+      }
+      var rate =
+        this.rate_per_qty - (this.rate_per_qty * this.gst_percentage) / 100;
+      var taxable_value =
+        (this.rate_per_qty * this.sale_quantity * this.gst_percentage) / 100;
       this.sale.items.push({
+        product_name: this.select_product.name,
         product_id: this.product_id,
-        sale_quantity: this.sale_quantity,
-        rate_per_qty: this.rate_per_qty,
-        gst_percentage:this.gst_percentage,
-        totalTaxAmount:totalTaxAmount,
-        amount:(this.rate_per_qty*this.sale_quantity)+totalTaxAmount,
+        quantity: this.sale_quantity,
+        rate: rate,
+        total_rate: this.sale_quantity * rate,
+        gst: this.gst_percentage,
+        taxable_value: taxable_value,
+        net_total: parseFloat(
+          taxable_value + this.sale_quantity * rate
+        ).toFixed(2),
+        //  gross_amount:,
       });
       this.new_product = false;
 
       this.product_id = "";
-      this.products = [];
+      this.select_product = [];
       this.sale_quantity = "1";
 
       this.rate_per_qty = "";
       this.gst_percentage = "";
       this.taxable_amount = "";
-      this.tax = "";
+
       this.amount = "";
     },
 
@@ -411,10 +488,10 @@ var totalTaxAmount=(this.rate_per_qty*this.gst_percentage/100)*this.sale_quantit
     clear_form_data() {
       for (let item in this.sale) {
         this.sale[item] = "";
-        this.products = [];
-         this.sale_quantity = "1";
       }
       this.products = [];
+      this.sale.total_discount = "0";
+      this.sale_quantity = "1";
       for (let err in this.errors) {
         this.errors[err] = "";
       }

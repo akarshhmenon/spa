@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductAndService;
 use App\Models\Purchase;
 use App\Models\Purchase_item;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,21 +28,18 @@ class PurchaseController extends Controller
         if ($request->id) {
 
             $Purchase = Purchase::find($request->id);
-            $Purchase_item=Purchase_item::where('purchase_id','=',$Purchase->id)->get();
+            $Purchase_item = Purchase_item::where('purchase_id', '=', $Purchase->id)->get();
 
 
             foreach ($Purchase_item as $item) {
 
-$product=ProductAndService::where('id','=',$item['product_id'])->first();
-$product->quantity=$product->quantity-$item['purchase_qty'];
+                $product = ProductAndService::where('id', '=', $item['product_id'])->first();
+                $product->quantity = $product->quantity - $item['purchase_qty'];
 
-$product->save();
+                $product->save();
 
-$item->delete();
+                $item->delete();
             }
-         
-
-
         } else
 
             $Purchase = new Purchase;
@@ -53,7 +51,7 @@ $item->delete();
 
 
 
-        $Purchase->total_products=count($request->items);
+        $Purchase->total_products = count($request->items);
 
 
         $Purchase->total_amount = $request->total_amount;
@@ -88,19 +86,52 @@ $item->delete();
     {
 
 
-        return Purchase::with('vendors','purchase_items')->orderBy('id', 'desc')->get();
+        return Purchase::with('vendors', 'purchase_items')->orderBy('id', 'desc')->get();
     }
 
 
     public function deletePurchase(Request $request)
     {
         if ($request->id) {
-            $Purchase = Purchase::find($request->id);
-            $Purchase->delete();
-            return 'success';
-        } else {
 
-            return "failed";
+            $Purchase = Purchase::find($request->id);
+            $Purchase_item = Purchase_item::where('purchase_id', '=', $Purchase->id)->get();
+
+
+            foreach ($Purchase_item as $item) {
+
+                $product = ProductAndService::where('id', '=', $item['product_id'])->first();
+                $product->quantity = $product->quantity - $item['purchase_qty'];
+
+                $product->save();
+
+                $item->delete();
+            }
+
+            $Purchase->delete();
         }
     }
+
+
+public function getPurchaseReport(Request $request){
+
+    $purchase = Purchase::with('vendors', 'purchase_items')->orderBy('id', 'desc');
+
+    if ($request->from_date) {
+
+        $purchase->where('purchase_date', '>=', $request->from_date);
+    }
+    if ($request->to_date) {
+
+        $purchase->where('purchase_date', '<=', $request->to_date);
+    }
+    if (!$request->from_date && !$request->to_date) {
+        $purchase->where('purchase_date',  Carbon::now()->toDateString());
+    }
+
+    return $purchase->get();
+
+}
+
+
 }
