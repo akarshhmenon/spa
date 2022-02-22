@@ -135,7 +135,7 @@ class BookingController extends Controller
                 $booking->customer_id=  $customer ->id;
             $booking->service_id = $request->service_id;
             $booking->employee_id = $request->employee_id;
-            $booking->date = $request->date;
+            $booking->date =$request->date; 
             $booking->time = $request->time;
 
 

@@ -82,6 +82,8 @@
 
               <div class="col-sm-6">
                 <div class="form-group">
+
+<!-- 
                   <input
                     type="date"
                     class="form-control bg-transparent p-4"
@@ -92,7 +94,12 @@
                     name="date"
                     required="required"
                     v-model="booking.date"
-                  />
+                  /> -->
+<datepicker  :input-class="date == '' ? 'field-null form-control bg-transparent p-4' : 'field-not-null form-control bg-transparent p-4'
+                    " v-model='date' name="date" :format="customFormat" value="dd/MM/yyyy"
+                    :disabled-dates="disabledDates" placeholder="Choose Date"></datepicker>
+
+
                   <small class="text-danger" v-if="errors.date">{{
                     errors.date[0]
                   }}</small>
@@ -360,7 +367,12 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
+import moment from 'moment'
 export default {
+    components: {
+    Datepicker
+  },
   data() {
     return {
       toastTitle: "Booking Added",
@@ -368,6 +380,7 @@ export default {
       services: {},
       employees: {},
       errors: {},
+      date:'',
       booking: {
         id: "",
         name: "",
@@ -375,10 +388,17 @@ export default {
         mobile: "",
         service_id: "",
         employee_id: "",
-        date: "",
+        date:'',
         time: [],
         otp: "",
       },
+
+ disabledDates: {
+    // Disable all dates up to specific date
+   to: moment().toDate(),
+      // Disable all dates after specific date
+    days: [6, 0],}
+
     };
   },
   created() {
@@ -396,6 +416,14 @@ export default {
         this.employees = response.data;
       });
     },
+
+customFormat(date){
+
+return moment(this.date).format('DD-MM-YYYY');
+
+},
+
+
     sendOtp() {
       if (this.booking.time.length == 0) {
         Toast.fire({
@@ -406,6 +434,16 @@ export default {
         return false;
       }
 
+    if (this.date == '') {
+        Toast.fire({
+          icon: "warning",
+          title: "Please select Date",
+        });
+
+        return false;
+      }
+
+this.convertDate(this.date);
       this.loading = true;
       axios
         .post("get-otp", this.booking)
@@ -437,7 +475,7 @@ export default {
 
         return false;
       }
-
+this.convertDate(this.date);
       this.loading = true;
       axios
         .post("new-booking", this.booking)
@@ -487,7 +525,9 @@ export default {
     },
 
 
-
+  convertDate(date){
+      this.booking.date= moment(date).format('YYYY-MM-DD')
+    },
 
     
     clear_form_data() {
@@ -502,6 +542,8 @@ export default {
       }
     },
   },
+
+
 };
 </script>
 
