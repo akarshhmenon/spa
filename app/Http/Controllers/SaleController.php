@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use App\Models\ProductAndService;
 use App\Models\Sale;
 use App\Models\SaleItem;
@@ -43,6 +44,11 @@ class SaleController extends Controller
 
                 $item->delete();
             }
+
+$payment =Payment::where('sale_id','=',$sale->id)->first();
+$payment->delete();
+
+
         } else
 
             $sale = new Sale;
@@ -86,8 +92,32 @@ class SaleController extends Controller
         }
 
 
+        $payment = new Payment;
 
-        return 'success';
+        $payment->customer_id = $request->customer_id;
+
+        $payment->sale_id = $sale->id;
+        $payment->total_price = $request->total_amount;
+        $payment->total_discount = $request->total_discount;
+        $payment->payable_amount = $request->total_pay_amount;
+
+        $payment->date = Carbon::now()->toDateString();
+        $payment->type   = $request->pay_type;
+
+        $payment->save();
+
+       
+        $message = [
+
+            'message' => 'success',
+            'id' => $payment->id,
+
+        ];
+
+
+        return [
+            'return' => $message,
+        ];
     }
     public function getSales()
     {

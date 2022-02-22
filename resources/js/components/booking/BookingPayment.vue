@@ -229,7 +229,7 @@ export default {
         .post("booking-payment", this.payment)
         .then((response) => {
           this.loading = false;
-console.log(response.data.return.message);
+
           if (response.data.return.message == "success") {
             Toast.fire({
               icon: "success",

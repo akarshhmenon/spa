@@ -1,5 +1,8 @@
 <template>
+<div>
   <div class="px-2">
+
+
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -267,15 +270,46 @@
           <i class="fas fa-spinner fa-spin fa-fw" v-if="loading == true"></i>
         </button>
       </div>
+
+
+
+
+      
+    </div>
+
+
+
+    
+  </div>
+<!-- receipt modL -->
+<button type="button" class="btn btn-primary hide-modal-button" ref="openModal" data-toggle="modal" data-target=".sale-payment-receipt"></button>
+
+<div class="modal fade sale-payment-receipt" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Invoice Receipt</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="receiptModalClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+ <div class="modal-body">
+   <sale-receipt  :billDetails='bill_details' :items='sale.items' v-if="bill_details.length !=0"></sale-receipt>
+ </div>
+      
     </div>
   </div>
+</div>
 
-  <!--added-->
+<!-- receipt modL -->
+</div>
+ 
 </template>
 
 
 <script>
 import { ModelListSelect } from "vue-search-select";
+import moment from "moment";
 export default {
   components: {
     ModelListSelect,
@@ -298,6 +332,7 @@ export default {
       rate_per_qty: "",
       taxable_amount: "",
       gst_percentage: "",
+      bill_details:[],
 
       sale: {
         items: [],
@@ -353,7 +388,7 @@ var _this = this;
     if (this.edit) {
       var _this = this;
       _this.title = "Edit sale";
-      _this.toastTitle = "Data Updated successfully";
+      _this.toastTitle = "sale Updated successfully";
       bus.$on("edit-sale", function (sale) {
         _this.clear_form_data();
    
@@ -414,14 +449,25 @@ var _this = this;
         .post("add-sale", this.sale)
         .then((response) => {
           this.loading = false;
-          if (response.data == "success") {
+        if (response.data.return.message == "success") {
             Toast.fire({
               icon: "success",
               title: this.toastTitle,
             });
 
-            this.clear_form_data();
-            bus.$emit("sale-added");
+
+
+this.bill_details.push({
+
+name:this.select_customer.name,
+mobile:this.select_customer.mobile,
+discount:this.sale.total_discount,
+invoice:response.data.return.id,
+date:moment().format("DD/MM/YYYY"),
+});
+
+
+            this.$refs.openModal.click();
           }
 
           if (response.data == "failed") {
@@ -441,6 +487,11 @@ var _this = this;
             });
           }
         });
+    },
+
+    receiptModalClose(){
+bus.$emit('sale-added');
+
     },
 
     //add product
@@ -532,4 +583,7 @@ var _this = this;
 </script>
 
 <style scoped>
+.hide-modal-button{
+  display: none;
+}
 </style>
