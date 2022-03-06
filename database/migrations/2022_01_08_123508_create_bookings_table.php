@@ -23,6 +23,7 @@ class CreateBookingsTable extends Migration
             $table->bigInteger('employee_id')->unsigned()->nullable();
             $table->string('status')->default(0); //booking status 0= pending 1=completed 2= cancelled
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

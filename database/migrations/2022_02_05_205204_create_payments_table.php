@@ -25,7 +25,7 @@ class CreatePaymentsTable extends Migration
             $table->string('date');
             $table->string('type'); //bank or cash
             $table->string('status')->default(0);
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

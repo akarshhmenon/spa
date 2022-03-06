@@ -34,7 +34,7 @@ class CreateSaleItemsTable extends Migration
             
             $table->float('net_total');
          
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -28,6 +28,7 @@ class CreateSalesTable extends Migration
             $table->float('total_pay_amount');
             $table->string('pay_type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

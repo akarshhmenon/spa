@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Booking extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     public function service()
     {
         return $this->belongsTo(ProductAndService::class, 'service_id', 'id');

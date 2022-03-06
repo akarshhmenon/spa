@@ -20,6 +20,7 @@ class CreateAttendancesTable extends Migration
             $table->date('date');
             $table->boolean('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

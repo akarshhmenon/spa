@@ -24,6 +24,7 @@ class CreateEmployeesTable extends Migration
             $table->text('address_2')->nullable();
             $table->boolean('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
