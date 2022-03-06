@@ -36,6 +36,7 @@ class CreateProductAndServicesTable extends Migration
 $table->string('add_to_home')->default(0);
 $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
