@@ -36,6 +36,7 @@ class CreateSaleItemsTable extends Migration
          
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

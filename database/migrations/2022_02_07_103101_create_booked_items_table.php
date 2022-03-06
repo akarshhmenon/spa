@@ -24,6 +24,7 @@ class CreateBookedItemsTable extends Migration
             $table->float('rate');
             $table->string('total_amount');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

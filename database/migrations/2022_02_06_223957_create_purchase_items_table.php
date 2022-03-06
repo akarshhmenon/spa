@@ -24,6 +24,7 @@ class CreatePurchaseItemsTable extends Migration
             $table->string('gst_percentage');
             $table->string('amount');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
     

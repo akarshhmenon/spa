@@ -26,6 +26,7 @@ class CreatePurchasesTable extends Migration
             $table->string('total_amount');
             $table->text('remarks');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

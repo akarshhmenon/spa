@@ -25,6 +25,7 @@ class CreateVendorsTable extends Migration
             $table->text('state')->nullable();
             $table->string('pincode');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -21,6 +21,7 @@ class CreateImagesTable extends Migration
             $table->string('image_name');
             $table->boolean('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
